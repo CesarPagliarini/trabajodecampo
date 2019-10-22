@@ -1,6 +1,6 @@
 <?php
 
-use App\Entities\User;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             RolesTableSeeder::class,
             PermissionsTableSeeder::class,
+            ModulesTableSeeder::class,
             FormsTableSeeder::class,
 
 

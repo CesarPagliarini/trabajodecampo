@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Console\Commands\ModelMakeCommand;
+use App\Entities\Module;
 use App\Entities\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;

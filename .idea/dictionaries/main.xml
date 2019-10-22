@@ -4,11 +4,16 @@
       <w>accion</w>
       <w>authenticable</w>
       <w>authenticatable</w>
+      <w>configuraciones</w>
       <w>fillable</w>
       <w>footable</w>
+      <w>formularios</w>
       <w>inspinia</w>
+      <w>permisos</w>
+      <w>responsable</w>
       <w>retval</w>
       <w>slimscroll</w>
+      <w>usuarios</w>
     </words>
   </dictionary>
 </component>

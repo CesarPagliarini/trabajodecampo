@@ -15,12 +15,16 @@ class CreateTableForms extends Migration
     {
         Schema::create('forms', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('parent_id')->default(0);
+            $table->unsignedBigInteger('module_id');
             $table->string('name');
             $table->string('key');
             $table->string('target');
             $table->string('icon')->default('fa-th-large');
 
+            //relationships
+            $table->foreign('module_id')->references('id')
+                ->on('modules')->onDelete('cascade')
+                ->onUpdate('cascade');
 
             $table->timestamps();
         });

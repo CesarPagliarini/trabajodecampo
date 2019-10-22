@@ -2,13 +2,14 @@
 
 namespace App\Entities;
 
+use App\Entities\interfaces\ComponentInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class Form extends Model
+class Form extends Model implements ComponentInterface
 {
     protected $fillable = [
-        'parent_id',
+        'module_id',
         'name',
         'key',
         'target',
@@ -23,6 +24,10 @@ class Form extends Model
     {
         return $this->belongsToMany(Role::class, 'role_permissions_forms' , 'permission_id' );
     }
+    public function module()
+    {
+        return $this->belongsTo(Module::class, 'id','module_id');
+    }
 
     public function getUsersAttribute()
     {
@@ -30,15 +35,21 @@ class Form extends Model
         foreach($this->roles as $rol){
             $filtered->push($rol->users->unique());
         }
-
         return $filtered;
     }
 
 
 
-
-
-
-
-
+    public function render()
+    {
+        return '
+             <li class="active">
+                <a href="'.url($this->target).'"><i class="'.$this->icon.'"></i> 
+                    <span class="nav-label">
+                        '.$this->name.'
+                    </span>
+                </a>
+            </li>
+        ';
+    }
 }

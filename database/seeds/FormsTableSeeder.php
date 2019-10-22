@@ -1,6 +1,6 @@
 <?php
 
-use App\Entities\Form;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +14,7 @@ class FormsTableSeeder extends Seeder
     public function run()
     {
         DB::table('forms')->insert([
-            'parent_id' => 0,
+            'module_id' => 1,
             'name' => 'Usuarios',
             'key' => 'users',
             'target' => 'admin/users',
@@ -22,7 +22,7 @@ class FormsTableSeeder extends Seeder
         ]);
 
         DB::table('forms')->insert([
-            'parent_id' => 0,
+            'module_id' => 1,
             'name' => 'Roles',
             'key' => 'roles',
             'target' => 'admin/roles',
@@ -30,7 +30,7 @@ class FormsTableSeeder extends Seeder
         ]);
 
         DB::table('forms')->insert([
-            'parent_id' => 0,
+            'module_id' => 1,
             'name' => 'Formularios',
             'key' => 'forms',
             'target' => 'admin/forms',
@@ -38,7 +38,7 @@ class FormsTableSeeder extends Seeder
         ]);
 
         DB::table('forms')->insert([
-            'parent_id' => 0,
+            'module_id' => 1,
             'name' => 'Permisos',
             'key' => 'permissions',
             'target' => 'admin/permissions',

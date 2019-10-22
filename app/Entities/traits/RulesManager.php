@@ -16,12 +16,14 @@ trait RulesManager
 
     public function hasAnyRole(array $params, string $key = 'name'): bool
     {
-        if(is_array($params))
+        $roles = $this->roles;
+
+        if(is_array($params) && $roles->count() )
         {
             $retval = false;
             foreach($params as $role)
             {
-                if($this->roles->where($key, '===', $role)->count())
+                if($roles->where($key, '===', $role)->count())
                 {
                     $retval = true;
                 }
@@ -32,18 +34,18 @@ trait RulesManager
 
     public function can($permission)
     {
+        $forms = $this->forms;
         $searched = explode('.',$permission);
-        try{
+        if(!is_null($forms)) {
             $collection = $this->forms->where('key', $searched[0])
                 ->first()->permissions->pluck('action');
-
-            if($collection->contains('all'))
+            if ($collection->contains('all'))
                 return true;
-            return $collection->contains($searched[1] );
-        }catch(\Exception $e){
+            return $collection->contains($searched[1]);
+        }else{
             return false;
         }
-
     }
+
 
 }
