@@ -4,7 +4,10 @@
 namespace App\Core;
 
 
-use App\Entities\interfaces\ComponentInterface;
+
+
+
+use App\Core\interfaces\ComponentInterface;
 
 class MenuResponsable implements ComponentInterface
 {
@@ -20,11 +23,17 @@ class MenuResponsable implements ComponentInterface
 
     public function render()
     {
+
         $element = '';
         foreach($this->componentList as $component){
           $element .=  $component->render();
         }
+         echo $element;
+    }
 
-        return $element;
+
+    public function checkActive()
+    {
+        // TODO: Implement checkActive() method.
     }
 }

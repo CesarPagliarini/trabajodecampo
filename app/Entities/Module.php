@@ -2,8 +2,10 @@
 
 namespace App\Entities;
 
-use App\Entities\interfaces\ComponentInterface;
+
+use App\Core\interfaces\ComponentInterface;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Route;
 
 class Module extends Model implements ComponentInterface
 {
@@ -20,12 +22,13 @@ class Module extends Model implements ComponentInterface
     {
         return $this->hasMany(Form::class, 'module_id','id');
     }
+
     public function render()
     {
 
         $element =  '
-       <li>
-            <a href="#"><i class="'.$this->icon.'"></i> <span class="nav-label">'.$this->name.'</span> <span class="fa arrow"></span></a>
+       <li class="'.$this->checkActive().'">
+            <a href="#" ><i class="'.$this->icon.'"></i> <span class="nav-label">'.$this->name.'</span> <span class="fa arrow"></span></a>
             <ul class="nav nav-second-level collapse">';
             foreach($this->forms as $form){
 
@@ -37,4 +40,14 @@ class Module extends Model implements ComponentInterface
         return $element;
     }
 
+    public function checkActive()
+    {
+        foreach($this->forms as $form){
+            if($form->checkActive() === 'active'){
+                return 'active';
+                break;
+            }
+        }
+        return '';
+    }
 }

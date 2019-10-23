@@ -1,10 +1,11 @@
 <?php
 
 
-namespace App\Entities\interfaces;
+namespace App\Core\interfaces;
 
 
 interface ComponentInterface
 {
     public function render();
+    public function checkActive();
 }

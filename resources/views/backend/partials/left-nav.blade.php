@@ -18,6 +18,16 @@
 
             <li>
 
+
+            @php
+                use App\Entities\Module;
+                $a = new \App\Core\MenuResponsable(new Module);
+                    $a->render();
+            @endphp
+
+
+
+
             </li>
         </ul>
     </div>
