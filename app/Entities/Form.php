@@ -6,6 +6,7 @@ namespace App\Entities;
 use App\Core\interfaces\ComponentInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 class Form extends Model implements ComponentInterface
@@ -44,7 +45,7 @@ class Form extends Model implements ComponentInterface
 
     public function render()
     {
-        return '
+            return '
              <li class="'.$this->checkActive().'">
                 <a href="'.url($this->target).'"><i class="'.$this->icon.'"></i> 
                     <span class="nav-label">
@@ -58,5 +59,11 @@ class Form extends Model implements ComponentInterface
     public function checkActive()
     {
         return Route::current()->uri === $this->target ? 'active' : '';
+    }
+
+    public function userCanActive(){
+
+        $collection = Auth::user()->forms->find($this);
+        return count($collection) ? true : false;
     }
 }

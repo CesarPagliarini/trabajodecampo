@@ -21,12 +21,12 @@ class Role extends Model
 
     public function permissions()
     {
-        return $this->belongsToMany(Permission::class, 'role_permissions_forms' , 'role_id' );
+        return $this->belongsToMany(Permission::class, 'role_permissions_forms' , 'role_id','permission_id' );
     }
 
     public function forms()
     {
-        return $this->belongsToMany(Form::class, 'role_permissions_forms' , 'form_id' );
+        return $this->belongsToMany(Form::class, 'role_permissions_forms' , 'role_id', 'form_id' );
     }
 
 

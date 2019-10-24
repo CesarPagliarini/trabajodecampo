@@ -16,7 +16,7 @@ class ModulesTableSeeder extends Seeder
             'name' => 'Configuraciones',
             'description' => 'admin/roles',
             'internal_handler' => 'configModule',
-            'icon' => 'fa fa-th-large',
+            'icon' => 'fa fa-cog',
         ]);
     }
 }

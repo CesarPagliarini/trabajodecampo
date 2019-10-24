@@ -17,32 +17,32 @@ class FormsTableSeeder extends Seeder
             'module_id' => 1,
             'name' => 'Usuarios',
             'key' => 'users',
-            'target' => 'admin/users',
-            'icon' => 'fa fa-th-large',
+            'target' => 'panel/users',
+            'icon' => 'fa fa-user-o',
         ]);
 
         DB::table('forms')->insert([
             'module_id' => 1,
             'name' => 'Roles',
             'key' => 'roles',
-            'target' => 'admin/roles',
-            'icon' => 'fa fa-th-large',
+            'target' => 'panel/roles',
+            'icon' => 'fa fa-tachometer',
         ]);
 
         DB::table('forms')->insert([
             'module_id' => 1,
             'name' => 'Formularios',
             'key' => 'forms',
-            'target' => 'admin/forms',
-            'icon' => 'fa fa-th-large',
+            'target' => 'panel/forms',
+            'icon' => 'fa fa-address-book-o',
         ]);
 
         DB::table('forms')->insert([
             'module_id' => 1,
             'name' => 'Permisos',
             'key' => 'permissions',
-            'target' => 'admin/permissions',
-            'icon' => 'fa fa-th-large',
+            'target' => 'panel/permissions',
+            'icon' => 'fa fa-handshake-o',
         ]);
     }
 }

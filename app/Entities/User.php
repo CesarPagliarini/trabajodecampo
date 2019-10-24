@@ -66,8 +66,11 @@ class User extends Model implements Authenticatable
     {
         $filtered = new Collection();
         foreach($this->roles as $rol){
+
+
            $filtered->push($rol->forms->unique());
         }
+
         return $filtered->first();
     }
     public function roleList()

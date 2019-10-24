@@ -25,18 +25,24 @@ class Module extends Model implements ComponentInterface
 
     public function render()
     {
-
+        $cants = 0;
         $element =  '
        <li class="'.$this->checkActive().'">
             <a href="#" ><i class="'.$this->icon.'"></i> <span class="nav-label">'.$this->name.'</span> <span class="fa arrow"></span></a>
             <ul class="nav nav-second-level collapse">';
             foreach($this->forms as $form){
 
-                $element .= $form->render();
+                if($form->userCanActive()){
+                    $element .= $form->render();
+                }else{
+                    $cants++;
+                }
+
             }
             $element .= '</ul>
         </li>';
-
+         if(count($this->forms) === $cants)
+             return '';
         return $element;
     }
 
