@@ -38,7 +38,13 @@ trait RulesManager
         $searched = explode('.',$permission);
         if(!is_null($forms)) {
             $collection = $this->forms->where('key', $searched[0])
-                ->first()->permissions->pluck('action');
+                ->first();
+            if(is_null($collection)){
+                return false;
+            }else{
+               $collection =  $collection->permissions->pluck('action');
+            }
+
             if ($collection->contains('all'))
                 return true;
             return $collection->contains($searched[1]);
