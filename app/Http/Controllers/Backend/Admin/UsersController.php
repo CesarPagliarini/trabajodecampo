@@ -55,8 +55,8 @@ class UsersController extends BaseController implements ControllerContract
     {
         DB::beginTransaction();
         try{
-            $stmt = $request->password === '' ? $request->except('password') : $request->all();
-            $user->update();
+            $stmt = $request->password == '' ? $request->except('password') : $request->all();
+            $user->update($stmt);
             $user->roles()->sync($request->roles);
             $user->save();
 

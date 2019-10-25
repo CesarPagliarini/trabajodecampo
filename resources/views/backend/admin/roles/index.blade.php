@@ -4,6 +4,11 @@
 @endsection
 @section('content')
 
+    @create('roles')
+    <a href="{{ route('roles.create') }}"
+       class="btn btn-primary">Nuevo
+    </a>
+    @endcreate
     @delete('roles')
     <button data-placement="bottom"
             title="Borrar"
@@ -14,11 +19,6 @@
     </button>
     @enddelete
 
-    @create('roles')
-    <a href="{{ route('roles.create') }}"
-       class="btn btn-primary">Nuevo
-    </a>
-    @endcreate
     <div class="hidden" id="page-loader">
         <span class="preloader-interior"></span>
     </div>

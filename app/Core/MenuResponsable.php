@@ -2,7 +2,7 @@
 
 
 namespace App\Core;
-
+use App\Entities\Module;
 
 
 
@@ -16,9 +16,11 @@ class MenuResponsable implements ComponentInterface
 
     public function __construct(ComponentInterface $componentList)
     {
-
         $this->componentList = $componentList->all();
+    }
 
+    public static function make(){
+        return new static(new Module());
     }
 
     public function render()
