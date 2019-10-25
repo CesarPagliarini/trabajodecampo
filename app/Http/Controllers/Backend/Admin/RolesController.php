@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers\Backend\Admin;
 
+use App\Core\Controllers\BaseController;
+use App\Core\interfaces\ControllerContract;
+use App\Entities\Role;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
-class RolesController extends Controller
+class RolesController extends BaseController implements ControllerContract
 {
+    public function __construct(){
+        $this->model = new Role;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,8 @@ class RolesController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::all();
+        return view('backend.admin.roles.index', compact('roles'));
     }
 
     /**
@@ -24,18 +31,28 @@ class RolesController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.admin.roles.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try{
+            $rol = Role::create($request->all());
+            DB::commit();
+            $request->session()->flash('flash_message', 'El rol se ha creado exitosamente!');
+            return redirect()->route('roles.index');
+        }catch (\Exception $e){
+            DB::rollBack();
+            $request->session()->flash('flash_error', 'El usuario no se pudo crear!');
+            return redirect()->route('roles.index');
+        }
     }
 
     /**
@@ -52,12 +69,12 @@ class RolesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Role $role
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
+        return view('backend.admin.roles.edit', compact('role'));
     }
 
     /**
@@ -67,9 +84,22 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        //
+
+        DB::beginTransaction();
+        try{
+            $role->update($request->all());
+            DB::commit();
+            $request->session()->flash('flash_message', 'El Rol se ha actualizado exitosamente!');
+            return redirect()->route('roles.index');
+
+        }catch (\Exception $e){
+            DB::rollBack();
+            $request->session()->flash('flash_error', 'El Rol no se pudo actualizar!');
+            return redirect()->route('roles.index');
+        }
+
     }
 
     /**
@@ -82,4 +112,5 @@ class RolesController extends Controller
     {
         //
     }
+
 }

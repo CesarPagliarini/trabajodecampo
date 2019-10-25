@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Core\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PanelController extends Controller
+class PanelController extends BaseController
 {
     /**
      * Create a new controller instance.

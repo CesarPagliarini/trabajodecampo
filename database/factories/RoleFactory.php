@@ -15,5 +15,6 @@ $factory->define(Role::class, function (Faker $faker) {
     ];
     return [
         'name'=>$faker->unique()->randomElement($names),
+        'description'=>$faker->sentence(3),
     ];
 });

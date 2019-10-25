@@ -1,15 +1,20 @@
 <?php
 
 namespace App\Http\Controllers\Backend\Admin;
+use App\Core\Controllers\BaseController;
+use App\Core\interfaces\ControllerContract;
 use App\Entities\Role;
 use App\Entities\User;
-use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-class UsersController extends Controller
+class UsersController extends BaseController implements ControllerContract
 {
+    public function __construct(){
+        $this->model = new User;
+    }
 
     public function index()
     {
@@ -50,45 +55,22 @@ class UsersController extends Controller
     {
         DB::beginTransaction();
         try{
-            $user->fill($request->all());
+            $stmt = $request->password === '' ? $request->except('password') : $request->all();
+            $user->update();
             $user->roles()->sync($request->roles);
+            $user->save();
+
             DB::commit();
             $request->session()->flash('flash_message', 'El usuario se ha actualizado exitosamente!');
             return redirect()->route('users.index');
 
         }catch (\Exception $e){
             DB::rollBack();
-            $request->session()->flash('flash_error', 'El usuario no se pudo actualizar!');
+            $request->session()->flash('flash_error', $e->getMessage());
             return redirect()->route('users.index');
         }
 
     }
 
-    public function bulkDelete(Request $request)
-    {
-        $failedUsers = new Collection();
-        $usersList = User::whereIn('id', $request->ids)->get();
 
-        foreach($usersList as $user)
-        {
-            try{
-                $user->state = '0';
-                $user->save();
-            }
-            catch(\Exception $e){
-                $failedUsers->push($user->name);
-            }
-        }
-        if($failedUsers->count()){
-            return response()->json([
-                'error' => true,
-                'failed' => $failedUsers
-            ]);
-        }else{
-            return response()->json([
-                'error' => false,
-                'failed' => ''
-            ]);
-        }
-    }
 }

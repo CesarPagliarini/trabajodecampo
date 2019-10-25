@@ -1,11 +1,11 @@
 $('button[data-action=show]').click(function(e) {
     e.preventDefault();
     $("#resultado").html("");
-    $('#deleteUser').modal('show');
+    $('#deleteRoles').modal('show');
 });
 $('button[data-action=delete]').click(function(e) {
     e.preventDefault();
-    const ids = $('[name="users_ids[]"]:checked').map(function () {
+    const ids = $('[name="roles_ids[]"]:checked').map(function () {
         return this.value;
     }).get();
     console.log(ids);
@@ -16,15 +16,15 @@ $('button[data-action=delete]').click(function(e) {
     });
     $.ajax({
         type: "POST",
-        url: "users/bulk-delete",
-        data: {'ids':ids, _method:'POST','soft':true},
+        url: "roles/bulk-delete",
+        data: {'ids':ids, _method:'POST'},
         beforeSend: function () {
             $("#resultado").html("Procesando, espere por favor...");
         },
         success:  function (response) {
-            $('#deleteUser').modal('toggle');
+            $('#deleteRoles').modal('toggle');
             if(response.error){
-                toastr.error('Los siguientes usuarios no se han eliminado: '+response.failed);
+                toastr.error('Los siguientes roles no se han eliminado: '+response.failed);
 
             }else{
                 toastr.success('Se han eliminado correctamente');

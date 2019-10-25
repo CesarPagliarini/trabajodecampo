@@ -37,3 +37,4 @@ mix.styles([
 ], 'public/js/panel.js');
 
 mix.js('resources/js/ajax-forms/admin/users.js', 'public/js/requests/user-form.js');
+mix.js('resources/js/ajax-forms/admin/roles.js', 'public/js/requests/role-form.js');
