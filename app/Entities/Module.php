@@ -15,6 +15,7 @@ class Module extends BaseEntity implements ComponentInterface
         'description',
         'internal_handler',
         'icon',
+        'state'
     ];
     //
 

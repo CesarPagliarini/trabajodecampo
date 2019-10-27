@@ -44,5 +44,12 @@ class FormsTableSeeder extends Seeder
             'target' => 'panel/permissions',
             'icon' => 'fa fa-handshake-o',
         ]);
+        DB::table('forms')->insert([
+            'module_id' => 1,
+            'name' => 'Modulos',
+            'key' => 'modules',
+            'target' => 'panel/modules',
+            'icon' => 'fa fa-folder-open',
+        ]);
     }
 }

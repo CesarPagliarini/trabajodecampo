@@ -19,6 +19,7 @@ class CreateModulesTable extends Migration
             $table->string('description');
             $table->string('internal_handler');
             $table->string('icon')->default('fa fa-th-large');
+            $table->enum('state', [1,0])->default(1);
             $table->timestamps();
         });
     }

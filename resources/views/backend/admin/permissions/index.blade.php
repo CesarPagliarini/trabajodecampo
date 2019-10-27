@@ -102,7 +102,7 @@
     <script>
         const bulkConfig = {
             'model': 'permission',
-            'soft':false,
+            'soft':true,
             'modalName':'deletePermission'
         }
     </script>

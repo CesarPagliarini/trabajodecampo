@@ -1,15 +1,15 @@
 @extends('layouts.content-panel')
 @section('page-name')
-    Roles
+    Modulos
 @endsection
 @section('content')
 
-    @create('roles')
-    <a href="{{ route('roles.create') }}"
+    @create('forms')
+    <a href="{{ route('modules.create') }}"
        class="btn btn-primary">Nuevo
     </a>
     @endcreate
-    @delete('roles')
+    @delete('permissions')
     <button data-placement="bottom"
             title="Borrar"
             type="button"
@@ -35,44 +35,50 @@
                 <input type="checkbox" class="i-checks todo">
             </td>
             <th>Nombre</th>
-            <th>Descripcion</th>
-            <th>Acciones</th>
-            <th class="pull-right">Estado</th>
+            <th>Descripción</th>
+            <th>Relacion interna</th>
+            <th>Icono</th>
+            <th>Estado</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($roles as $role)
+        @foreach($modules as $module)
         <tr>
             <td valign="top" class="check-mail">
                 <input type="checkbox"
                        class="i-checks"
-                       value="{{$role->id}}"
+                       value="{{$module->id}}"
                        name="ids[]">
             </td>
-           <td>
+
+            <td>
                 <a class="accion"
-                   @update('roles') href="{{route('roles.edit', ['id'=>$role->id])}}" @endif >
-                    {{$role->name}}
+                   @update('modules') href="{{route('modules.edit', ['id'=>$module->id])}}" @endif >
+                {{$module->name}}
                 </a>
             </td>
             <td>
                 <a class="accion"
-                   @update('roles') href="{{route('roles.edit', ['id'=>$role->id])}}" @endif >
-                    {{$role->description}}
+                   @update('modules') href="{{route('modules.edit', ['id'=>$module->id])}}" @endif >
+                {{$module->description}}
                 </a>
             </td>
             <td>
-                <a class="accion "
-                   @update('roles') href="{{route('roles.show', ['id'=>$role->id])}}" @endif >
-                <div class="col-md-2 offset-1">
-                    <i class="fa fa-key" aria-hidden="true"></i>
-                </div>
+                <a class="accion"
+                   @update('modules') href="{{route('modules.edit', ['id'=>$module->id])}}" @endif >
+                {{$module->internal_handler}}
+                </a>
+            </td>
+            <td>
+                <a class="accion"
+                   @update('modules') href="{{route('modules.edit', ['id'=>$module->id])}}" @endif >
+                    <i class="{{$module->icon}}" aria-hidden="true"></i>
 
                 </a>
             </td>
             <td>
-                <a href="{{route('users.edit', [$role->id])}}" class="accion">
-                    @if(($role->state)==0)
+                <a href="{{route('forms.edit', [$module->id])}}" class="accion">
+                    @if(($module->state)==0)
                         <span class="label label-danger pull-right ">Inactivo</span>
                     @else
                         <span class="label label-primary pull-right ">Activo</span>
@@ -93,10 +99,10 @@
     </table>
     @component('backend.modals.sure-delete')
         @slot('modelToDelete')
-            deleteRoles
+            deleteModule
         @endslot
         @slot('question')
-            ¿Esta seguro de eliminar este rol?
+            ¿Esta seguro de eliminar este modulo, esta accion es irreversible?
         @endslot
     @endcomponent
 
@@ -105,9 +111,9 @@
 @section('custom-scripts')
     <script>
         const bulkConfig = {
-            'model': 'role',
+            'model': 'module',
             'soft':true,
-            'modalName':'deleteRoles'
+            'modalName':'deleteModule'
         }
     </script>
     <script src="{{asset('js/requests/bulk-delete.js')}}"></script>

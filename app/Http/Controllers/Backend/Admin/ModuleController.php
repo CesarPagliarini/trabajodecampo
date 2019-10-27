@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Backend\Admin;
 
 use App\Core\Controllers\BaseController;
 use App\Core\interfaces\ControllerContract;
-use App\Entities\Role;
+use App\Entities\Module;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
-class RolesController extends BaseController implements ControllerContract
+class ModuleController extends BaseController implements ControllerContract
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +18,8 @@ class RolesController extends BaseController implements ControllerContract
      */
     public function index()
     {
-
-        $roles = Role::all();
-        return view('backend.admin.roles.index', compact('roles'));
+        $modules = Module::all();
+        return view('backend.admin.modules.index', compact('modules'));
     }
 
     /**
@@ -30,27 +29,28 @@ class RolesController extends BaseController implements ControllerContract
      */
     public function create()
     {
-        return view('backend.admin.roles.create');
+        return view('backend.admin.modules.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         DB::beginTransaction();
         try{
-            $rol = Role::create($request->all());
+            $module = Module::create($request->all());
             DB::commit();
-            $request->session()->flash('flash_message', 'El rol se ha creado exitosamente!');
-            return redirect()->route('roles.index');
+            $request->session()->flash('flash_message', 'El módulo se ha creado exitosamente!');
+            return redirect()->route('modules.index');
         }catch (\Exception $e){
+            dd($e->getMessage());
             DB::rollBack();
-            $request->session()->flash('flash_error', 'El rol no se pudo crear!');
-            return redirect()->route('roles.index');
+            $request->session()->flash('flash_error', 'El módulo no se pudo crear!');
+            return redirect()->route('modules.index');
         }
     }
 
@@ -60,20 +60,20 @@ class RolesController extends BaseController implements ControllerContract
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show($id)
     {
-        return view('backend.admin.roles.permission-synchronization', compact('role'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Role $role
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit(Module $module)
     {
-        return view('backend.admin.roles.edit', compact('role'));
+        return view('backend.admin.modules.edit', compact('module'));
     }
 
     /**
@@ -83,22 +83,20 @@ class RolesController extends BaseController implements ControllerContract
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, Module $module)
     {
-
         DB::beginTransaction();
         try{
-            $role->update($request->all());
+            $module->update($request->all());
             DB::commit();
-            $request->session()->flash('flash_message', 'El Rol se ha actualizado exitosamente!');
-            return redirect()->route('roles.index');
+            $request->session()->flash('flash_message', 'El Módulo se ha actualizado exitosamente!');
+            return redirect()->route('modules.index');
 
         }catch (\Exception $e){
             DB::rollBack();
-            $request->session()->flash('flash_error', 'El Rol no se pudo actualizar!');
-            return redirect()->route('roles.index');
+            $request->session()->flash('flash_error', 'El Módulo no se pudo actualizar!');
+            return redirect()->route('modules.index');
         }
-
     }
 
     /**
@@ -111,5 +109,4 @@ class RolesController extends BaseController implements ControllerContract
     {
         //
     }
-
 }

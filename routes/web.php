@@ -26,6 +26,7 @@ Route::middleware('auth')->prefix('panel')->group(function () {
         Route::resource('users', 'UsersController');
         Route::resource('roles', 'RolesController');
         Route::resource('forms', 'FormsController');
+        Route::resource('modules', 'ModuleController');
         Route::resource('permissions', 'PermissionsController');
     });
 
