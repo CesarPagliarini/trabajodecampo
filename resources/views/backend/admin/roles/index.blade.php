@@ -37,38 +37,49 @@
             <th>Nombre</th>
             <th>Descripcion</th>
             <th>Acciones</th>
+            <th class="pull-right">Estado</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($roles as $rol)
+        @foreach($roles as $role)
         <tr>
             <td valign="top" class="check-mail">
                 <input type="checkbox"
                        class="i-checks"
-                       value="{{$rol->id}}"
+                       value="{{$role->id}}"
                        name="ids[]">
             </td>
            <td>
                 <a class="accion"
-                   @update('roles') href="{{route('roles.edit', ['id'=>$rol->id])}}" @endif >
-                    {{$rol->name}}
+                   @update('roles') href="{{route('roles.edit', ['id'=>$role->id])}}" @endif >
+                    {{$role->name}}
                 </a>
             </td>
             <td>
                 <a class="accion"
-                   @update('roles') href="{{route('roles.edit', ['id'=>$rol->id])}}" @endif >
-                    {{$rol->description}}
+                   @update('roles') href="{{route('roles.edit', ['id'=>$role->id])}}" @endif >
+                    {{$role->description}}
                 </a>
             </td>
             <td>
                 <a class="accion "
-                   @update('roles') href="{{route('roles.edit', ['id'=>$rol->id])}}" @endif >
-                <div class="col-md-3 offset-1">
+                   @update('roles') href="{{route('roles.edit', ['id'=>$role->id])}}" @endif >
+                <div class="col-md-2 offset-1">
                     <i class="fa fa-key" aria-hidden="true"></i>
                 </div>
 
                 </a>
             </td>
+            <td>
+                <a href="{{route('users.edit', [$role->id])}}" class="accion">
+                    @if(($role->state)==0)
+                        <span class="label label-danger pull-right ">Inactivo</span>
+                    @else
+                        <span class="label label-primary pull-right ">Activo</span>
+                    @endif
+                </a>
+            </td>
+
         </tr>
             @endforeach
     </tbody>
@@ -95,7 +106,7 @@
     <script>
         const bulkConfig = {
             'model': 'role',
-            'soft':false,
+            'soft':true,
             'modalName':'deleteRoles'
         }
     </script>

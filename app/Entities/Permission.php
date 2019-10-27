@@ -2,14 +2,16 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\Entities\BaseEntity;
 
-class Permission extends Model
+
+class Permission extends BaseEntity
 {
     protected $fillable = [
         'action',
         'icon',
         'description',
+        'name'
     ];
 
     public function roles()

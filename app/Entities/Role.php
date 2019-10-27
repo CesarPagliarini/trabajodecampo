@@ -2,16 +2,19 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\Entities\BaseEntity;
+
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends Model
+class Role extends BaseEntity
 {
     use SoftDeletes;
+
 
     protected $fillable = [
         'name',
         'description',
+        'state'
     ];
 
 

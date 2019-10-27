@@ -3,13 +3,17 @@
 namespace App\Entities;
 
 
+use App\Core\Entities\BaseEntity;
 use App\Core\interfaces\ComponentInterface;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 
-class Form extends Model implements ComponentInterface
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
+
+class Form extends BaseEntity implements ComponentInterface
 {
     protected $fillable = [
         'module_id',
@@ -17,6 +21,7 @@ class Form extends Model implements ComponentInterface
         'key',
         'target',
         'icon',
+        'state',
     ];
 
     public function permissions()
@@ -29,7 +34,7 @@ class Form extends Model implements ComponentInterface
     }
     public function module()
     {
-        return $this->belongsTo(Module::class, 'id','module_id');
+        return $this->belongsTo(Module::class, 'module_id','id');
     }
 
     public function getUsersAttribute()
@@ -58,7 +63,13 @@ class Form extends Model implements ComponentInterface
 
     public function checkActive()
     {
-        return Route::current()->uri === $this->target ? 'active' : '';
+        $current = Route::current()->uri;
+        $atLeast = Str::contains( $current, $this->target);
+        if($atLeast || $current === $this->target){
+            return 'active';
+        }else{
+            return '';
+        }
     }
 
     public function userCanActive(){

@@ -10,9 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class RolesController extends BaseController implements ControllerContract
 {
-    public function __construct(){
-        $this->model = new Role;
-    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +18,7 @@ class RolesController extends BaseController implements ControllerContract
      */
     public function index()
     {
+
         $roles = Role::all();
         return view('backend.admin.roles.index', compact('roles'));
     }
@@ -50,7 +49,7 @@ class RolesController extends BaseController implements ControllerContract
             return redirect()->route('roles.index');
         }catch (\Exception $e){
             DB::rollBack();
-            $request->session()->flash('flash_error', 'El usuario no se pudo crear!');
+            $request->session()->flash('flash_error', 'El rol no se pudo crear!');
             return redirect()->route('roles.index');
         }
     }

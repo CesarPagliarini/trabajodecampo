@@ -4,9 +4,8 @@
 namespace App\Core\Controllers;
 
 
-use App\Entities\User;
+
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;

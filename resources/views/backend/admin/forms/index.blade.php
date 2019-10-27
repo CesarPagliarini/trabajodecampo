@@ -1,15 +1,15 @@
 @extends('layouts.content-panel')
 @section('page-name')
-    Usuarios
+    Formularios
 @endsection
 @section('content')
 
-    @create('users')
-    <a href="{{ route('users.create') }}"
+    @create('forms')
+    <a href="{{ route('forms.create') }}"
        class="btn btn-primary">Nuevo
     </a>
     @endcreate
-    @delete('users')
+    @delete('forms')
     <button data-placement="bottom"
             title="Borrar"
             type="button"
@@ -34,53 +34,57 @@
             <td class="check-mail">
                 <input type="checkbox" class="i-checks todo">
             </td>
+            <th>Módulo</th>
             <th>Nombre</th>
-            <th>Email</th>
-            <th>Rol(es)</th>
+            <th>Clave</th>
+            <th>Ruta</th>
             <th class="pull-right">Estado</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($users as $user)
+        @foreach($forms as $form)
         <tr>
             <td valign="top" class="check-mail">
                 <input type="checkbox"
                        class="i-checks"
-                       value="{{$user->id}}"
+                       value="{{$form->id}}"
                        name="ids[]">
             </td>
            <td>
-               <a class="accion"
-                  @update('users') href="{{route('users.edit', ['id'=>$user->id])}}" @endif >
-                   {{$user->name}}
-               </a>
-           </td>
-            <td>
                 <a class="accion"
-                   @update('users')href="{{route('users.edit', ['id'=>$user->id])}}" @endif >
-                    {{$user->email}}
+                   @update('forms') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
+                    {{$form->module->name}}
                 </a>
             </td>
             <td>
                 <a class="accion"
-                   @update('users')href="{{route('users.edit', ['id'=>$user->id])}}" @endif >
-                  @forelse ($user->roleList as $role)
-                            {{$role->name}}@if(!$loop->last), @endif
-                        @empty
-                            No posee
-                    @endforelse
+                   @update('forms') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
+                    {{$form->name}}
                 </a>
             </td>
             <td>
-                <a href="{{route('users.edit', [$user->id])}}" class="accion">
+                <a class="accion"
+                   @update('forms') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
+                {{$form->key}}
+                </a>
+            </td>
+            <td>
+                <a class="accion"
+                   @update('forms') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
+                {{$form->target}}
+                </a>
+            </td>
 
-                    @if(($user->state)==0)
-                        <span class="label label-danger pull-right">Inactivo</span>
+            <td>
+                <a href="{{route('forms.edit', [$form->id])}}" class="accion">
+                    @if(($form->state)==0)
+                        <span class="label label-danger pull-right ">Inactivo</span>
                     @else
-                        <span class="label label-primary pull-right">Activo</span>
+                        <span class="label label-primary pull-right ">Activo</span>
                     @endif
                 </a>
             </td>
+
         </tr>
             @endforeach
     </tbody>
@@ -94,10 +98,10 @@
     </table>
     @component('backend.modals.sure-delete')
         @slot('modelToDelete')
-            deleteUser
+            deleteForms
         @endslot
         @slot('question')
-            ¿Esta seguro de eliminar este usuario?
+            ¿Esta seguro de eliminar este formulario?
         @endslot
     @endcomponent
 
@@ -106,9 +110,9 @@
 @section('custom-scripts')
     <script>
         const bulkConfig = {
-            'model': 'user',
+            'model': 'form',
             'soft':true,
-            'modalName':'deleteUser'
+            'modalName':'deleteForms'
         }
     </script>
     <script src="{{asset('js/requests/bulk-delete.js')}}"></script>

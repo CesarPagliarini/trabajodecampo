@@ -3,11 +3,11 @@
 namespace App\Entities;
 
 
+use App\Core\Entities\BaseEntity;
 use App\Core\interfaces\ComponentInterface;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Route;
 
-class Module extends Model implements ComponentInterface
+
+class Module extends BaseEntity implements ComponentInterface
 {
 
     protected $fillable = [
@@ -48,6 +48,7 @@ class Module extends Model implements ComponentInterface
 
     public function checkActive()
     {
+
         foreach($this->forms as $form){
             if($form->checkActive() === 'active'){
                 return 'active';

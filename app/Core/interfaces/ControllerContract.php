@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 
 interface ControllerContract
 {
-    public function __construct();
+
 }

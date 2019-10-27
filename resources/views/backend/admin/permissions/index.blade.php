@@ -1,15 +1,15 @@
 @extends('layouts.content-panel')
 @section('page-name')
-    Usuarios
+    Permisos
 @endsection
 @section('content')
 
-    @create('users')
-    <a href="{{ route('users.create') }}"
+    @create('forms')
+    <a href="{{ route('permissions.create') }}"
        class="btn btn-primary">Nuevo
     </a>
     @endcreate
-    @delete('users')
+    @delete('permissions')
     <button data-placement="bottom"
             title="Borrar"
             type="button"
@@ -35,52 +35,47 @@
                 <input type="checkbox" class="i-checks todo">
             </td>
             <th>Nombre</th>
-            <th>Email</th>
-            <th>Rol(es)</th>
-            <th class="pull-right">Estado</th>
+            <th>Descripción</th>
+            <th>Acción</th>
+            <th>Icono</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($users as $user)
+        @foreach($permissions as $permission)
         <tr>
             <td valign="top" class="check-mail">
                 <input type="checkbox"
                        class="i-checks"
-                       value="{{$user->id}}"
+                       value="{{$permission->id}}"
                        name="ids[]">
             </td>
-           <td>
-               <a class="accion"
-                  @update('users') href="{{route('users.edit', ['id'=>$user->id])}}" @endif >
-                   {{$user->name}}
-               </a>
-           </td>
-            <td>
-                <a class="accion"
-                   @update('users')href="{{route('users.edit', ['id'=>$user->id])}}" @endif >
-                    {{$user->email}}
-                </a>
-            </td>
-            <td>
-                <a class="accion"
-                   @update('users')href="{{route('users.edit', ['id'=>$user->id])}}" @endif >
-                  @forelse ($user->roleList as $role)
-                            {{$role->name}}@if(!$loop->last), @endif
-                        @empty
-                            No posee
-                    @endforelse
-                </a>
-            </td>
-            <td>
-                <a href="{{route('users.edit', [$user->id])}}" class="accion">
 
-                    @if(($user->state)==0)
-                        <span class="label label-danger pull-right">Inactivo</span>
-                    @else
-                        <span class="label label-primary pull-right">Activo</span>
-                    @endif
+            <td>
+                <a class="accion"
+                   @update('permissions') href="{{route('permissions.edit', ['id'=>$permission->id])}}" @endif >
+                {{$permission->name}}
                 </a>
             </td>
+            <td>
+                <a class="accion"
+                   @update('permissions') href="{{route('permissions.edit', ['id'=>$permission->id])}}" @endif >
+                {{$permission->description}}
+                </a>
+            </td>
+            <td>
+                <a class="accion"
+                   @update('permissions') href="{{route('permissions.edit', ['id'=>$permission->id])}}" @endif >
+                {{$permission->action}}
+                </a>
+            </td>
+            <td>
+                <a class="accion"
+                   @update('permissions') href="{{route('permissions.edit', ['id'=>$permission->id])}}" @endif >
+                    <i class="{{$permission->icon}}" aria-hidden="true"></i>
+
+                </a>
+            </td>
+
         </tr>
             @endforeach
     </tbody>
@@ -94,10 +89,10 @@
     </table>
     @component('backend.modals.sure-delete')
         @slot('modelToDelete')
-            deleteUser
+            deletePermission
         @endslot
         @slot('question')
-            ¿Esta seguro de eliminar este usuario?
+            ¿Esta seguro de eliminar este permiso, esta accion es irreversible?
         @endslot
     @endcomponent
 
@@ -106,9 +101,9 @@
 @section('custom-scripts')
     <script>
         const bulkConfig = {
-            'model': 'user',
-            'soft':true,
-            'modalName':'deleteUser'
+            'model': 'permission',
+            'soft':false,
+            'modalName':'deletePermission'
         }
     </script>
     <script src="{{asset('js/requests/bulk-delete.js')}}"></script>

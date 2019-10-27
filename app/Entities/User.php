@@ -5,15 +5,15 @@ namespace App\Entities;
 
 
 
+use App\Core\Entities\BaseEntity;
 use App\Entities\traits\RulesManager;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 use Illuminate\Support\Facades\Hash;
 
-class User extends Model implements Authenticatable
+class User extends BaseEntity implements Authenticatable
 {
     use AuthenticableTrait, Notifiable, RulesManager;
 
@@ -23,7 +23,7 @@ class User extends Model implements Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','state'
     ];
 
     /**

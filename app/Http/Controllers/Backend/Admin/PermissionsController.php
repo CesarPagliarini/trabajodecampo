@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Backend\Admin;
 
+use App\Entities\Permission;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class PermissionsController extends Controller
 {
@@ -14,7 +16,8 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        //
+        $permissions = Permission::all();
+        return view('backend.admin.permissions.index', compact('permissions'));
     }
 
     /**
@@ -24,7 +27,7 @@ class PermissionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.admin.permissions.create');
     }
 
     /**
@@ -35,7 +38,18 @@ class PermissionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try{
+            $permission = Permission::create($request->all());
+            DB::commit();
+            $request->session()->flash('flash_message', 'El Permiso se ha creado exitosamente!');
+            return redirect()->route('permissions.index');
+        }catch (\Exception $e){
+            dd($e->getMessage());
+            DB::rollBack();
+            $request->session()->flash('flash_error', 'El Permiso no se pudo crear!');
+            return redirect()->route('permissions.index');
+        }
     }
 
     /**
@@ -55,9 +69,9 @@ class PermissionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Permission $permission)
     {
-        //
+        return view('backend.admin.permissions.edit', compact('permission'));
     }
 
     /**
@@ -67,9 +81,20 @@ class PermissionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Permission $permission)
     {
-        //
+        DB::beginTransaction();
+        try{
+            $permission->update($request->all());
+            DB::commit();
+            $request->session()->flash('flash_message', 'El Permiso se ha actualizado exitosamente!');
+            return redirect()->route('permissions.index');
+
+        }catch (\Exception $e){
+            DB::rollBack();
+            $request->session()->flash('flash_error', 'El Permiso no se pudo actualizar!');
+            return redirect()->route('permissions.index');
+        }
     }
 
     /**

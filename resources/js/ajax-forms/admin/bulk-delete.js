@@ -8,36 +8,41 @@ $('button[data-action=delete]').click(function(e) {
     const ids = $('[name="ids[]"]:checked').map(function () {
         return this.value;
     }).get();
-    const token = $('meta[name="csrf-token"]').attr('content');
-    $.ajaxSetup({
-        headers:{
-            'X-CSRF-TOKEN': token}
-    });
-    $.ajax({
-        type: "POST",
-        url: "bulk-delete",
-        data: {
-            'ids':ids,
-            _method:'POST',
-            'soft':bulkConfig.soft,
-            'model':bulkConfig.model
-        },
-        beforeSend: function () {
-            $("#resultado").html("Procesando, espere por favor...");
-        },
-        success:  function (response) {
-            console.log(response);
-            $('#deleteUser').modal('toggle');
-            if(response.error){
-                toastr.error('Los siguientes usuarios no se han eliminado: '+response.failed);
+    if(!ids.length){
+        $("#resultado").html("Debe seleccionar algo a eliminar");
+    }else{
+        const token = $('meta[name="csrf-token"]').attr('content');
+        $.ajaxSetup({
+            headers:{
+                'X-CSRF-TOKEN': token}
+        });
+        $.ajax({
+            type: "POST",
+            url: "bulk-delete",
+            data: {
+                'ids':ids,
+                _method:'POST',
+                'soft':bulkConfig.soft,
+                'model':bulkConfig.model
+            },
+            beforeSend: function () {
+                $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) {
+                console.log(response);
+                $('#'+bulkConfig.modalName).modal('toggle');
+                if(response.error){
+                    toastr.error('Los siguientes usuarios no se han eliminado: '+response.failed);
 
-            }else{
-                toastr.success('Se han eliminado correctamente');
+                }else{
+                    toastr.success('Se han eliminado correctamente');
+                }
+                setTimeout(()=>{
+                    location.reload();
+                },500);
+
             }
-            setTimeout(()=>{
-                //location.reload();
-            },500);
+        });
+    }
 
-        }
-    });
 });

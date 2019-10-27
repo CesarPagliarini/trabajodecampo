@@ -17,7 +17,7 @@ class CreateTableRoles extends Migration
             $table->bigIncrements('id');
             $table->string("name")->index();
             $table->text("description")->nullable();
-
+            $table->enum('state', [1,0])->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

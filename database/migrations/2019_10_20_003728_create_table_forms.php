@@ -20,6 +20,8 @@ class CreateTableForms extends Migration
             $table->string('key');
             $table->string('target');
             $table->string('icon')->default('fa-th-large');
+            $table->enum('state', [1,0])->default(1);
+
 
             //relationships
             $table->foreign('module_id')->references('id')

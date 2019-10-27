@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Backend\Admin;
 
+use App\Core\Controllers\BaseController;
+use App\Core\interfaces\ControllerContract;
+use App\Entities\Form;
+use App\Entities\Module;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
-class FormsController extends Controller
+
+class FormsController extends BaseController implements ControllerContract
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +19,9 @@ class FormsController extends Controller
      */
     public function index()
     {
-        //
+
+        $forms = Form::all();
+        return view('backend.admin.forms.index', compact('forms'));
     }
 
     /**
@@ -24,7 +31,9 @@ class FormsController extends Controller
      */
     public function create()
     {
-        //
+        $modules= Module::all();
+        return view('backend.admin.forms.create', compact('modules'));
+
     }
 
     /**
@@ -35,7 +44,18 @@ class FormsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try{
+            $form = Form::create($request->all());
+            DB::commit();
+            $request->session()->flash('flash_message', 'El formulario se ha creado exitosamente!');
+            return redirect()->route('forms.index');
+        }catch (\Exception $e){
+            dd($e->getMessage());
+            DB::rollBack();
+            $request->session()->flash('flash_error', 'El formulario no se pudo crear!');
+            return redirect()->route('forms.index');
+        }
     }
 
     /**
@@ -55,9 +75,10 @@ class FormsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Form $form)
     {
-        //
+        $modules= Module::all();
+        return view('backend.admin.forms.edit', compact('form', 'modules'));
     }
 
     /**
@@ -67,9 +88,21 @@ class FormsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Form $form)
     {
-        //
+
+        DB::beginTransaction();
+        try{
+            $form->update($request->all());
+            DB::commit();
+            $request->session()->flash('flash_message', 'El Formulario se ha actualizado exitosamente!');
+            return redirect()->route('forms.index');
+
+        }catch (\Exception $e){
+            DB::rollBack();
+            $request->session()->flash('flash_error', 'El Formulario no se pudo actualizar!');
+            return redirect()->route('forms.index');
+        }
     }
 
     /**
