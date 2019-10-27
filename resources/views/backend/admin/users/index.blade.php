@@ -47,7 +47,7 @@
                 <input type="checkbox"
                        class="i-checks"
                        value="{{$user->id}}"
-                       name="users_ids[]">
+                       name="ids[]">
             </td>
            <td>
                <a class="accion"
@@ -103,5 +103,12 @@
 @endsection
 
 @section('custom-scripts')
-    <script src="{{asset('js/requests/user-form.js')}}"></script>
+    <script>
+        const bulkConfig = {
+            'model': 'user',
+            'soft':true,
+            'modalName':'deleteUser'
+        }
+    </script>
+    <script src="{{asset('js/requests/bulk-delete.js')}}"></script>
 @endsection

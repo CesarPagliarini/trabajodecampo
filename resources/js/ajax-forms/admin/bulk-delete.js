@@ -1,14 +1,13 @@
 $('button[data-action=show]').click(function(e) {
     e.preventDefault();
     $("#resultado").html("");
-    $('#deleteUser').modal('show');
+    $('#'+bulkConfig.modalName).modal('show');
 });
 $('button[data-action=delete]').click(function(e) {
     e.preventDefault();
-    const ids = $('[name="users_ids[]"]:checked').map(function () {
+    const ids = $('[name="ids[]"]:checked').map(function () {
         return this.value;
     }).get();
-    console.log(ids);
     const token = $('meta[name="csrf-token"]').attr('content');
     $.ajaxSetup({
         headers:{
@@ -16,12 +15,18 @@ $('button[data-action=delete]').click(function(e) {
     });
     $.ajax({
         type: "POST",
-        url: "users/bulk-delete",
-        data: {'ids':ids, _method:'POST','soft':true},
+        url: "bulk-delete",
+        data: {
+            'ids':ids,
+            _method:'POST',
+            'soft':bulkConfig.soft,
+            'model':bulkConfig.model
+        },
         beforeSend: function () {
             $("#resultado").html("Procesando, espere por favor...");
         },
         success:  function (response) {
+            console.log(response);
             $('#deleteUser').modal('toggle');
             if(response.error){
                 toastr.error('Los siguientes usuarios no se han eliminado: '+response.failed);
@@ -30,7 +35,7 @@ $('button[data-action=delete]').click(function(e) {
                 toastr.success('Se han eliminado correctamente');
             }
             setTimeout(()=>{
-                location.reload();
+                //location.reload();
             },500);
 
         }

@@ -17,13 +17,27 @@ abstract class BaseController extends Controller
 
     public function bulkDelete(Request $request)
     {
+
+        $class = "\App\Entities\\".ucfirst($request->model);
+
+        if(class_exists($class)){
+          $this->model = new $class();
+
+        }else{
+            return response()->json([
+                'error' => true,
+                'failed' => 'No models match'
+            ]);
+        };
+
+
         $failedItems = new Collection();
         $itemList = $this->model::whereIn('id', $request->ids)->get();
         foreach($itemList as $item)
         {
             DB::beginTransaction();
             try{
-                if(isset($request->soft) ){
+                if(isset($request->soft) && $request->soft == 'true' ){
                     $item->state = '0';
                     $item->save();
                     DB::commit();

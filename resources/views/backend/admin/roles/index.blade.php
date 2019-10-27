@@ -46,7 +46,7 @@
                 <input type="checkbox"
                        class="i-checks"
                        value="{{$rol->id}}"
-                       name="roles_ids[]">
+                       name="ids[]">
             </td>
            <td>
                 <a class="accion"
@@ -92,5 +92,12 @@
 @endsection
 
 @section('custom-scripts')
-    <script src="{{asset('js/requests/role-form.js')}}"></script>
+    <script>
+        const bulkConfig = {
+            'model': 'role',
+            'soft':false,
+            'modalName':'deleteRoles'
+        }
+    </script>
+    <script src="{{asset('js/requests/bulk-delete.js')}}"></script>
 @endsection

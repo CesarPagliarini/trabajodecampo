@@ -8,6 +8,7 @@ use App\Entities\Module;
 
 
 use App\Core\interfaces\ComponentInterface;
+use Illuminate\Support\Facades\Route;
 
 class MenuResponsable implements ComponentInterface
 {
@@ -26,7 +27,15 @@ class MenuResponsable implements ComponentInterface
     public function render()
     {
 
-        $element = '';
+        $element = '
+         <li class="'.$this->checkActive().'">
+                <a href="'.url('/panel').'"><i class="fa fa-home" aria-hidden="true"></i>
+                    <span class="nav-label">
+                    Home
+                    </span>
+                </a>
+            </li>
+            ';
         foreach($this->componentList as $component){
           $element .=  $component->render();
         }
@@ -36,6 +45,7 @@ class MenuResponsable implements ComponentInterface
 
     public function checkActive()
     {
-        // TODO: Implement checkActive() method.
+        return Route::current()->uri === 'panel' ? 'active' : '';
+
     }
 }

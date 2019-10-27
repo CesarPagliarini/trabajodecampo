@@ -36,5 +36,5 @@ mix.styles([
     'resources/template/js/plugins/toastr/toastr.min.js',
 ], 'public/js/panel.js');
 
-mix.js('resources/js/ajax-forms/admin/users.js', 'public/js/requests/user-form.js');
-mix.js('resources/js/ajax-forms/admin/roles.js', 'public/js/requests/role-form.js');
+mix.js('resources/js/ajax-forms/admin/bulk-delete.js', 'public/js/requests/bulk-delete.js');
+

@@ -81,29 +81,28 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/ajax-forms/admin/roles.js":
-/*!************************************************!*\
-  !*** ./resources/js/ajax-forms/admin/roles.js ***!
-  \************************************************/
+/***/ "./resources/js/ajax-forms/admin/bulk-delete.js":
+/*!******************************************************!*\
+  !*** ./resources/js/ajax-forms/admin/bulk-delete.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
 $('button[data-action=show]').click(function (e) {
   e.preventDefault();
   $("#resultado").html("");
-  $('#deleteRoles').modal('show');
+  $('#' + bulkConfig.modalName).modal('show');
 });
 $('button[data-action=delete]').click(function (e) {
   e.preventDefault();
-  var ids = $('[name="roles_ids[]"]:checked').map(function () {
+  var ids = $('[name="ids[]"]:checked').map(function () {
     return this.value;
   }).get();
-  console.log(ids);
   var token = $('meta[name="csrf-token"]').attr('content');
   $.ajaxSetup({
     headers: {
@@ -112,25 +111,27 @@ $('button[data-action=delete]').click(function (e) {
   });
   $.ajax({
     type: "POST",
-    url: "roles/bulk-delete",
+    url: "bulk-delete",
     data: {
       'ids': ids,
-      _method: 'POST'
+      _method: 'POST',
+      'soft': bulkConfig.soft,
+      'model': bulkConfig.model
     },
     beforeSend: function beforeSend() {
       $("#resultado").html("Procesando, espere por favor...");
     },
     success: function success(response) {
-      $('#deleteRoles').modal('toggle');
+      console.log(response);
+      $('#deleteUser').modal('toggle');
 
       if (response.error) {
-        toastr.error('Los siguientes roles no se han eliminado: ' + response.failed);
+        toastr.error('Los siguientes usuarios no se han eliminado: ' + response.failed);
       } else {
         toastr.success('Se han eliminado correctamente');
       }
 
-      setTimeout(function () {
-        location.reload();
+      setTimeout(function () {//location.reload();
       }, 500);
     }
   });
@@ -138,14 +139,14 @@ $('button[data-action=delete]').click(function (e) {
 
 /***/ }),
 
-/***/ 1:
-/*!******************************************************!*\
-  !*** multi ./resources/js/ajax-forms/admin/roles.js ***!
-  \******************************************************/
+/***/ 0:
+/*!************************************************************!*\
+  !*** multi ./resources/js/ajax-forms/admin/bulk-delete.js ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\ajax-forms\admin\roles.js */"./resources/js/ajax-forms/admin/roles.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\ajax-forms\admin\bulk-delete.js */"./resources/js/ajax-forms/admin/bulk-delete.js");
 
 
 /***/ })
