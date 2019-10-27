@@ -20,10 +20,14 @@ class DatabaseSeeder extends Seeder
             ModulesTableSeeder::class,
             FormsTableSeeder::class,
             RolePermissionFormTableSeeder::class,
-
-
+//Seeders Productos
+            BrandTableSeeder::class, 
+            CategoryTableSeeder::class,
+            SubcategoryTableSeeder::class,
+            CurrencyTableSeeder::class,
+            ProductTableSeeder::class,
+            PriceTableSeeder::class
         ]);
-
-
+        
     }
 }
