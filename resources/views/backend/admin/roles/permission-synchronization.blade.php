@@ -15,31 +15,30 @@
                           method="POST">
                         @csrf
                         @method('PUT')
-                        <div class="form-group row  @if ($errors->has('name')) has-error @endif">
-                            <label class="col-sm-2 control-label" for="input-name">Nombre <span class="oblig">*</span></label>
-                            <div class="col-sm-8">
-                                <input id="input-name" type="text" class="form-control"
-                                       value="{{$role->name}}"
-                                       name="name">
-                            </div>
-                        </div>
-                        <div class="form-group row @if ($errors->has('description')) has-error @endif">
-                            <label class="col-sm-2 control-label" for="input-email">Descripcion <span class="oblig">*</span></label>
-                            <div class="col-sm-8">
-                                <input id="input-email" type="text" class="form-control"
-                                       value="{{$role->description}}"
-                                       name="description">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 control-label">Estado</label>
-                            <div class="col-sm-3">
+                        <div class="form-group row ">
 
-                                <div class="i-checks"><label> <input type="radio" value="1" name="state" @if(($role->state)==1) checked="" @endif> <i></i> Activo </label></div>
+                            <div class="col-md-12 ">
+                                <div class="col-md-2 offset-2 float-left">Visualizar</div>
+                                <div class="col-md-2 float-left">Crear</div>
+                                <div class="col-md-2 float-left">Eliminar</div>
+                                <div class="col-md-2 float-left">Actualizar</div>
                             </div>
-                            <div class="col-sm-3">
-                                <div class="i-checks"><label> <input type="radio" value="0" name="state" @if(($role->state)==0) checked="" @endif > <i></i> Inactivo </label></div>
+                            @foreach($forms->unique() as $form)
+
+                            <div class="col-md-12">
+                            <label class="col-sm-2 float-left control-label" for="input-name">{{$form->name}} </label>
+                                @foreach($role->permissions->unique() as $permission)
+                                    <div class="col-md-2 float-left">
+                                        <label class="checkbox-inline i-checks">
+                                            <input type="checkbox"
+                                                   name="roles[]"
+                                                   value="{{$permission->id}}">
+
+                                        </label>
+                                    </div>
+                                @endforeach
                             </div>
+                            @endforeach
                         </div>
 
                         <!-- Botones de accion -->

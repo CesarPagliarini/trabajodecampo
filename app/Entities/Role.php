@@ -33,5 +33,14 @@ class Role extends BaseEntity
         return $this->belongsToMany(Form::class, 'role_permissions_forms' , 'role_id', 'form_id' );
     }
 
+    public function hasForm(Form $form)
+    {
+        if($this->forms->unique()->find($form)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
 }

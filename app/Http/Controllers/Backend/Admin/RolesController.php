@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Admin;
 
 use App\Core\Controllers\BaseController;
 use App\Core\interfaces\ControllerContract;
+use App\Entities\Form;
 use App\Entities\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -30,6 +31,7 @@ class RolesController extends BaseController implements ControllerContract
      */
     public function create()
     {
+
         return view('backend.admin.roles.create');
     }
 
@@ -62,7 +64,8 @@ class RolesController extends BaseController implements ControllerContract
      */
     public function show(Role $role)
     {
-        return view('backend.admin.roles.permission-synchronization', compact('role'));
+        $forms = Form::with('permissions')->get();
+        return view('backend.admin.roles.permission-synchronization', compact('role', 'forms'));
     }
 
     /**

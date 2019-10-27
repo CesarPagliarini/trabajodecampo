@@ -26,7 +26,8 @@ class Form extends BaseEntity implements ComponentInterface
 
     public function permissions()
     {
-        return $this->belongsToMany(Permission::class, 'role_permissions_forms' , 'form_id' );
+        return $this->belongsToMany(Permission::class, 'role_permissions_forms' , 'form_id');
+
     }
     public function roles()
     {
