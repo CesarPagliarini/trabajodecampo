@@ -1,7 +1,6 @@
 <?php
+namespace App\Core\Traits;
 
-
-namespace App\Entities\traits;
 
 
 
@@ -36,16 +35,16 @@ trait RulesManager
 
     public function can($permission)
     {
-
         $forms = $this->forms;
         $searched = explode('.',$permission);
         if(!is_null($forms)) {
             $collection = $this->forms->where('key', $searched[0])
                 ->first();
+
             if(is_null($collection)){
                 return false;
             }else{
-               $collection =  $collection->permissions->pluck('action');
+               $collection =  $collection->permissions->pluck('action')->unique();
             }
             if ($collection->contains('all'))
                 return true;

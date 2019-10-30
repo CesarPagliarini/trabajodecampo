@@ -1,7 +1,5 @@
 @extends('layouts.content-panel')
 
 @section('content')
-@can('view')
-    asdas
-@endcan
+SORY YOU CAN'T SEE THIS SECTION
 @endsection

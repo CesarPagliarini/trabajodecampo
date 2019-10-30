@@ -18,7 +18,7 @@
                 </div>
             </li>
             <li>
-            {{\App\Core\MenuResponsable::make()->render()}}
+            {{\App\Core\Entities\MenuResponsable::make()->render()}}
             </li>
         </ul>
     </div>

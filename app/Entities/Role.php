@@ -4,7 +4,8 @@ namespace App\Entities;
 
 use App\Core\Entities\BaseEntity;
 
-use App\Entities\traits\RulesManager;
+
+use App\Core\Traits\RulesManager;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Role extends BaseEntity

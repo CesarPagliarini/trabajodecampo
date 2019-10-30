@@ -6,7 +6,8 @@ namespace App\Entities;
 
 
 use App\Core\Entities\BaseEntity;
-use App\Entities\traits\RulesManager;
+
+use App\Core\Traits\RulesManager;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -68,14 +69,9 @@ class User extends BaseEntity implements Authenticatable
         foreach($this->roles as $rol){
            $filtered = $filtered->merge($rol->forms->unique());
         }
-
-
-
         if(!$filtered->count()){
             return new Collection();
         }
-
-
         return $filtered;
     }
     public function roleList()

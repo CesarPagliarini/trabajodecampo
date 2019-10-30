@@ -6,10 +6,7 @@ namespace App\Entities;
 use App\Core\Entities\BaseEntity;
 use App\Core\interfaces\ComponentInterface;
 use Illuminate\Database\Eloquent\Collection;
-
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -27,7 +24,6 @@ class Form extends BaseEntity implements ComponentInterface
     public function permissions()
     {
         return $this->belongsToMany(Permission::class, 'role_permissions_forms' , 'form_id');
-
     }
     public function roles()
     {
@@ -46,8 +42,6 @@ class Form extends BaseEntity implements ComponentInterface
         }
         return $filtered;
     }
-
-
 
     public function render()
     {
@@ -74,8 +68,6 @@ class Form extends BaseEntity implements ComponentInterface
     }
 
     public function userCanActive(){
-
-
         $collection = Auth::user()->forms->find($this);
         return count($collection) ? true : false;
     }

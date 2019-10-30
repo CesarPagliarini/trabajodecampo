@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\interfaces;
+namespace App\Core\Interfaces;
 
 interface ComponentInterface
 {

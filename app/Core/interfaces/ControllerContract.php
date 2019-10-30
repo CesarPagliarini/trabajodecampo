@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Core\interfaces;
+namespace App\Core\Interfaces;
 
 
 use Illuminate\Database\Eloquent\Model;
