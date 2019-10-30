@@ -12,13 +12,10 @@ use Illuminate\Support\Facades\DB;
 
 abstract class BaseController extends Controller
 {
-    protected $model;
 
     public function bulkDelete(Request $request)
     {
-
         $class = "\App\Entities\\".ucfirst($request->model);
-
         if(class_exists($class)){
           $this->model = new $class();
 
@@ -28,8 +25,6 @@ abstract class BaseController extends Controller
                 'failed' => 'No models match'
             ]);
         };
-
-
         $failedItems = new Collection();
         $itemList = $this->model::whereIn('id', $request->ids)->get();
         foreach($itemList as $item)
@@ -47,7 +42,7 @@ abstract class BaseController extends Controller
             }
             catch(\Exception $e){
                 DB::rollBack();
-                $failedItems->push($e->getMessage());
+                $failedItems->push($item->name);
             }
         }
         if($failedItems->count()){

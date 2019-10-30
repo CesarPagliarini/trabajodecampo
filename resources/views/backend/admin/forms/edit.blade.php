@@ -49,7 +49,7 @@
                                             selected
                                         @endif
                                             name="module_id"
-                                        value="{{$module->id}}"
+                                            value="{{$module->id}}"
                                         >
                                             {{$module->name}}
                                         </option>
@@ -57,9 +57,6 @@
                                 </select>
                             </div>
                         </div>
-
-
-
 
                         <div class="form-group row">
                             <label class="col-sm-2 control-label">Estado</label>

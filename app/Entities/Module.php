@@ -32,7 +32,6 @@ class Module extends BaseEntity implements ComponentInterface
             <a href="#" ><i class="'.$this->icon.'"></i> <span class="nav-label">'.$this->name.'</span> <span class="fa arrow"></span></a>
             <ul class="nav nav-second-level collapse">';
             foreach($this->forms as $form){
-
                 if($form->userCanActive()){
                     $element .= $form->render();
                 }else{

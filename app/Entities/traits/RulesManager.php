@@ -5,6 +5,8 @@ namespace App\Entities\traits;
 
 
 
+use App\Entities\RolePermissionsForms;
+
 trait RulesManager
 {
 
@@ -34,6 +36,7 @@ trait RulesManager
 
     public function can($permission)
     {
+
         $forms = $this->forms;
         $searched = explode('.',$permission);
         if(!is_null($forms)) {
@@ -44,13 +47,24 @@ trait RulesManager
             }else{
                $collection =  $collection->permissions->pluck('action');
             }
-
             if ($collection->contains('all'))
                 return true;
             return $collection->contains($searched[1]);
         }else{
             return false;
         }
+    }
+
+    public function roleCan($triada)
+    {
+
+        $exploded = explode('-', $triada);
+
+        $r = RolePermissionsForms::where('role_id', intval($exploded[0]))
+            ->where('form_id', intval($exploded[1]))
+            ->where('permission_id', intval($exploded[2]))->first();
+        return !is_null($r);
+
     }
 
 

@@ -66,14 +66,17 @@ class User extends BaseEntity implements Authenticatable
     {
         $filtered = new Collection();
         foreach($this->roles as $rol){
-           $filtered->push($rol->forms->unique());
+           $filtered = $filtered->merge($rol->forms->unique());
         }
 
-        $items = $filtered->first();
-        if(is_null($items)){
+
+
+        if(!$filtered->count()){
             return new Collection();
         }
-        return $filtered->first();
+
+
+        return $filtered;
     }
     public function roleList()
     {

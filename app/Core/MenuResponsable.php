@@ -26,7 +26,6 @@ class MenuResponsable implements ComponentInterface
 
     public function render()
     {
-
         $element = '
          <li class="'.$this->checkActive().'">
                 <a href="'.url('/panel').'"><i class="fa fa-home" aria-hidden="true"></i>
@@ -42,10 +41,8 @@ class MenuResponsable implements ComponentInterface
          echo $element;
     }
 
-
     public function checkActive()
     {
         return Route::current()->uri === 'panel' ? 'active' : '';
-
     }
 }

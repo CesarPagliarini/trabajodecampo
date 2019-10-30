@@ -21,13 +21,13 @@ class DatabaseSeeder extends Seeder
             FormsTableSeeder::class,
             RolePermissionFormTableSeeder::class,
 //Seeders Productos
-            BrandTableSeeder::class, 
-            CategoryTableSeeder::class,
-            SubcategoryTableSeeder::class,
-            CurrencyTableSeeder::class,
-            ProductTableSeeder::class,
-            PriceTableSeeder::class
+//            BrandTableSeeder::class,
+//            CategoryTableSeeder::class,
+//            SubcategoryTableSeeder::class,
+//            CurrencyTableSeeder::class,
+//            ProductTableSeeder::class,
+//            PriceTableSeeder::class
         ]);
-        
+
     }
 }

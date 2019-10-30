@@ -2,9 +2,10 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\Entities\BaseEntity;
 
-class Currency extends Model
+
+class Currency extends BaseEntity
 {
     public function prices()
     {

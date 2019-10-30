@@ -18,12 +18,18 @@ class CreateProductsTable extends Migration
             $table->string('description');
             $table->string('dimension');
             $table->string('unit');
-            $table->string('status');
-            $table->string('provider'); 
-            $table->bigInteger('subcategory_id')->nullable()->foreign()->references('id')->on('subcategories');
-            $table->bigInteger('brand_id')->foreign()->references('id')->on('brands');
-            $table->bigInteger('category_id')->foreign()->references('id')->on('categories'); 
+            $table->string('provider');
+            $table->enum('state', [1,0])->default(1);
+            $table->unsignedBigInteger('subcategory_id')->nullable();
+            $table->unsignedBigInteger('brand_id');
+            $table->unsignedBigInteger('category_id');
             $table->timestamps();
+
+            //relationships
+            $table->foreign('subcategory_id')->references('id')->on('subcategories');
+            $table->foreign('brand_id')->references('id')->on('brands');
+            $table->foreign('category_id')->references('id')->on('categories');
+
         });
     }
 

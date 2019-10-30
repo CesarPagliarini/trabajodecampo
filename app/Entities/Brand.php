@@ -2,9 +2,10 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\Entities\BaseEntity;
 
-class Brand extends Model
+
+class Brand extends BaseEntity
 {
     public function products()
     {

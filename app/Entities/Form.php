@@ -75,6 +75,7 @@ class Form extends BaseEntity implements ComponentInterface
 
     public function userCanActive(){
 
+
         $collection = Auth::user()->forms->find($this);
         return count($collection) ? true : false;
     }

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Backend\Admin;
 use App\Core\Controllers\BaseController;
 use App\Core\interfaces\ControllerContract;
 use App\Entities\Form;
+use App\Entities\Permission;
 use App\Entities\Role;
+use App\Entities\RolePermissionsForms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -64,8 +66,10 @@ class RolesController extends BaseController implements ControllerContract
      */
     public function show(Role $role)
     {
-        $forms = Form::with('permissions')->get();
-        return view('backend.admin.roles.permission-synchronization', compact('role', 'forms'));
+        $forms = Form::all();
+        $permissions = Permission::all();
+
+        return view('backend.admin.roles.permission-synchronization', compact('role', 'forms','permissions'));
     }
 
     /**
@@ -88,6 +92,7 @@ class RolesController extends BaseController implements ControllerContract
      */
     public function update(Request $request, Role $role)
     {
+        dd($request->all());
 
         DB::beginTransaction();
         try{
@@ -113,6 +118,31 @@ class RolesController extends BaseController implements ControllerContract
     public function destroy($id)
     {
         //
+    }
+
+    public function synchronizePermissions(Request $request)
+    {
+        $sync = RolePermissionsForms::where('role_id', intval($request->roleId))->get();
+        $sync->each(function($relation){
+            $relation->delete();
+        });
+
+        $permissions = $request->permissions != null ? $request->permissions : [];
+
+        foreach($permissions as $permission)
+        {
+            $items = explode('-', $permission);
+
+            RolePermissionsForms::create([
+                'form_id' => intval($items[0]),
+                'permission_id' =>intval($items[1]),
+                'role_id' => intval($request->roleId),
+            ]);
+        }
+
+        $request->session()->flash('flash_message', 'El Rol se ha actualizado exitosamente!');
+        return redirect()->route('roles.index');
+
     }
 
 }

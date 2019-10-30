@@ -16,9 +16,15 @@ class CreatePricesTable extends Migration
         Schema::create('prices', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->double('value');
-            $table->bigInteger('currency_id')->foreign()->references('id')->on('currencies');
-            $table->bigInteger('product_id')->foreign()->references('id')->on('products');
+            $table->unsignedBigInteger('currency_id');
+            $table->enum('state', [1,0])->default(1);
+            $table->unsignedBigInteger('product_id');
             $table->timestamps();
+
+            //relationships
+            $table->foreign('currency_id')->references('id')->on('currencies');
+            $table->foreign('product_id')->references('id')->on('products');
+
         });
     }
 

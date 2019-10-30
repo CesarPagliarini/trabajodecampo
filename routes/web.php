@@ -23,11 +23,15 @@ Route::middleware('auth')->prefix('panel')->group(function () {
     Route::post('/bulk-delete', 'PanelController@bulkDelete')->name('bulk-delete');
 
     Route::namespace('Backend\Admin')->group(function () {
+        Route::post('synchronizePermissions','RolesController@synchronizePermissions')->name('roles.synchronize');
         Route::resource('users', 'UsersController');
         Route::resource('roles', 'RolesController');
         Route::resource('forms', 'FormsController');
         Route::resource('modules', 'ModuleController');
         Route::resource('permissions', 'PermissionsController');
+
+
+
     });
 
 

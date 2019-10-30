@@ -2,9 +2,10 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\Entities\BaseEntity;
 
-class Subcategory extends Model
+
+class Subcategory extends BaseEntity
 {
     public function category()
     {
