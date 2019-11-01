@@ -50,6 +50,22 @@
                                 <div class="i-checks"><label> <input type="radio" value="0" name="state" @if(($module->state)==0) checked="" @endif > <i></i> Inactivo </label></div>
                             </div>
                         </div>
+                        <div class="form-group row @if ($errors->has('order')) has-error @endif">
+                            <label class="col-sm-2 control-label" for="input-email">Órden<span class="oblig">*</span></label>
+                            <div class="col-sm-8">
+                                <select class="form-control m-b" name="order">
+
+                                    @for($i = 0; $i <= $limit; $i++)
+                                        <option
+                                            name="order"
+                                            value="{{$i}}"
+                                        >
+                                            {{$i}}
+                                        </option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="form-group row @if ($errors->has('icon')) has-error @endif">
                             <label class="col-sm-2 control-label" for="input-email">Ícono <span class="oblig">*</span></label>
@@ -71,7 +87,7 @@
                         <div class="clear"></div>
                         <div class="form-group row">
                             <div class="col-sm-4 col-sm-offset-2">
-                                <a href="{{ route('forms.index') }}" class="btn btn-white" type="submit">Cancelar</a>
+                                <a href="{{ route('modules.index') }}" class="btn btn-white" type="submit">Cancelar</a>
                                 <button class="btn btn-primary" type="submit">Guardar</button>
                             </div>
                         </div>

@@ -20,7 +20,7 @@ class FormsController extends BaseController implements ControllerContract
     public function index()
     {
 
-        $forms = Form::all();
+        $forms = Form::all()->sortBy('order');
         return view('backend.admin.forms.index', compact('forms'));
     }
 
@@ -44,6 +44,10 @@ class FormsController extends BaseController implements ControllerContract
      */
     public function store(Request $request)
     {
+        if($request->module_id === 'Null'){
+            $request['module_id'] = NULL;
+        }
+
         DB::beginTransaction();
         try{
             $form = Form::create($request->all());
@@ -90,6 +94,11 @@ class FormsController extends BaseController implements ControllerContract
      */
     public function update(Request $request, Form $form)
     {
+        if($request->module_id === 'Null'){
+            $request['module_id'] = NULL;
+
+        }
+
 
         DB::beginTransaction();
         try{

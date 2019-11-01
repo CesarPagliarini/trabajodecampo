@@ -15,7 +15,7 @@ Auth::routes();
 
 Route::get('forbidden','PanelController@forbidden')->name('forbidden');
 Route::middleware(['auth','checkPermissions'])->prefix('panel')->group(function () {
-    Route::get('/', 'PanelController@index')->name('panel');
+    Route::get('home', 'PanelController@index')->name('panel');
     Route::post('/bulk-delete', 'PanelController@bulkDelete')->name('bulk-delete');
     Route::namespace('Backend\Admin')->group(function () {
         Route::post('synchronizePermissions','RolesController@synchronizePermissions')->name('roles.synchronize');

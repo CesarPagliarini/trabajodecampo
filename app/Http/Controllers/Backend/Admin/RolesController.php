@@ -10,6 +10,7 @@ use App\Entities\Role;
 use App\Entities\RolePermissionsForms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Exception;
 
 class RolesController extends BaseController implements ControllerContract
 {
@@ -122,26 +123,37 @@ class RolesController extends BaseController implements ControllerContract
 
     public function synchronizePermissions(Request $request)
     {
-        $sync = RolePermissionsForms::where('role_id', intval($request->roleId))->get();
-        $sync->each(function($relation){
-            $relation->delete();
-        });
+        DB::beginTransaction();
 
-        $permissions = $request->permissions != null ? $request->permissions : [];
+        try{
+            RolePermissionsForms::where('role_id', intval($request->roleId))->delete();
 
-        foreach($permissions as $permission)
-        {
-            $items = explode('-', $permission);
 
-            RolePermissionsForms::create([
-                'form_id' => intval($items[0]),
-                'permission_id' =>intval($items[1]),
-                'role_id' => intval($request->roleId),
-            ]);
+
+            $permissions = $request->permissions != null ? $request->permissions : [];
+
+            foreach($permissions as $permission)
+            {
+                $items = explode('-', $permission);
+                DB::table('role_permissions_forms')->insert([
+                    'form_id' => intval($items[0]),
+                    'permission_id' =>intval($items[1]),
+                    'role_id' => intval($request->roleId),
+                ]);
+            }
+            DB::commit();
+
+            $request->session()->flash('flash_message', 'El Rol se ha actualizado exitosamente!');
+            return redirect()->route('roles.index');
+
+
+
+        }catch(Exception $e){
+            DB::rollBack();
+            dd($e->getMessage());
         }
 
-        $request->session()->flash('flash_message', 'El Rol se ha actualizado exitosamente!');
-        return redirect()->route('roles.index');
+
 
     }
 

@@ -15,7 +15,8 @@ class Module extends BaseEntity implements ComponentInterface
         'description',
         'internal_handler',
         'icon',
-        'state'
+        'state',
+        'order'
     ];
     //
 
@@ -31,13 +32,13 @@ class Module extends BaseEntity implements ComponentInterface
        <li class="'.$this->checkActive().'">
             <a href="#" ><i class="'.$this->icon.'"></i> <span class="nav-label">'.$this->name.'</span> <span class="fa arrow"></span></a>
             <ul class="nav nav-second-level collapse">';
-            foreach($this->forms as $form){
+            foreach($this->forms->where('module_id', '!=', Null)->sortBy('order') as $form){
+
                 if($form->userCanActive()){
                     $element .= $form->render();
                 }else{
                     $cants++;
                 }
-
             }
             $element .= '</ul>
         </li>';

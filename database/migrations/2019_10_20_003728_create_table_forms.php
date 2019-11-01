@@ -15,12 +15,13 @@ class CreateTableForms extends Migration
     {
         Schema::create('forms', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('module_id');
+            $table->unsignedBigInteger('module_id')->nullable()->default(Null);
             $table->string('name');
             $table->string('key');
             $table->string('target');
             $table->string('icon')->default('fa-th-large');
             $table->enum('state', [1,0])->default(1);
+            $table->unsignedInteger('order')->default(0);
 
 
             //relationships

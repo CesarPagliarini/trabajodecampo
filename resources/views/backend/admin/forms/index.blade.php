@@ -38,6 +38,7 @@
             <th>Nombre</th>
             <th>Clave</th>
             <th>Ruta</th>
+            <th>Orden</th>
             <th class="pull-right">Estado</th>
         </tr>
         </thead>
@@ -53,7 +54,7 @@
            <td>
                 <a class="accion"
                    @update('forms') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
-                    {{$form->module->name}}
+                    {{$form->module? $form->module->name : 'Menu lateral'}}
                 </a>
             </td>
             <td>
@@ -72,6 +73,12 @@
                 <a class="accion"
                    @update('forms') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
                 {{$form->target}}
+                </a>
+            </td>
+            <td>
+                <a class="accion"
+                   @update('forms') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
+                {{$form->order}}
                 </a>
             </td>
 

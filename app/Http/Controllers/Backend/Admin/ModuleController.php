@@ -18,7 +18,7 @@ class ModuleController extends BaseController implements ControllerContract
      */
     public function index()
     {
-        $modules = Module::all();
+        $modules = Module::all()->sortBy('order');
         return view('backend.admin.modules.index', compact('modules'));
     }
 

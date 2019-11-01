@@ -38,6 +38,7 @@
             <th>Descripción</th>
             <th>Relacion interna</th>
             <th>Icono</th>
+            <th>Orden</th>
             <th>Estado</th>
         </tr>
         </thead>
@@ -74,6 +75,12 @@
                    @update('modules') href="{{route('modules.edit', ['id'=>$module->id])}}" @endif >
                     <i class="{{$module->icon}}" aria-hidden="true"></i>
 
+                </a>
+            </td>
+            <td>
+                <a class="accion"
+                   @update('modules') href="{{route('modules.edit', ['id'=>$module->id])}}" @endif >
+                {{$module->order}}
                 </a>
             </td>
             <td>

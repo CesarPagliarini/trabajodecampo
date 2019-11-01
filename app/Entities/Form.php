@@ -19,6 +19,7 @@ class Form extends BaseEntity implements ComponentInterface
         'target',
         'icon',
         'state',
+        'order'
     ];
 
     public function permissions()
@@ -68,6 +69,7 @@ class Form extends BaseEntity implements ComponentInterface
     }
 
     public function userCanActive(){
+
         $collection = Auth::user()->forms->find($this);
         return count($collection) ? true : false;
     }

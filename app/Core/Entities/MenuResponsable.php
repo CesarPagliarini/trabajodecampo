@@ -2,6 +2,7 @@
 
 
 namespace App\Core\Entities;
+use App\Entities\Form;
 use App\Entities\Module;
 
 
@@ -15,30 +16,33 @@ class MenuResponsable implements ComponentInterface
 
     protected $componentList;
 
-    public function __construct(ComponentInterface $componentList)
+    public function __construct(ComponentInterface $moduleList, ComponentInterface $formList)
     {
-        $this->componentList = $componentList->all();
+        $modules = $moduleList->all();
+        $forms = $formList->where('module_id', null)->orderBy('order')->get();
+        $forms->each(function($form)use($modules){
+            if($form->userCanActive()){
+                $modules->push($form);
+            }
+        });
+        $this->componentList = $modules->sortBy('order');
+
+
+        ;
     }
 
     public static function make(){
-        return new static(new Module());
+        return new static(new Module(), new Form());
     }
 
     public function render()
     {
-        $element = '
-         <li class="'.$this->checkActive().'">
-                <a href="'.url('/panel').'"><i class="fa fa-home" aria-hidden="true"></i>
-                    <span class="nav-label">
-                    Home
-                    </span>
-                </a>
-            </li>
-            ';
-        foreach($this->componentList as $component){
-          $element .=  $component->render();
+
+        $element = '';
+        foreach($this->componentList->sortBy('order') as $component){
+            $element .=  $component->render();
         }
-         echo $element;
+        echo $element;
     }
 
     public function checkActive()

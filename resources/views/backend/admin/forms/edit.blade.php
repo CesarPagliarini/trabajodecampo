@@ -28,21 +28,22 @@
                             <div class="col-sm-8">
                                 <input id="input-email" type="text" class="form-control"
                                        value="{{$form->key}}"
-                                       name="description">
+                                       name="key">
                             </div>
                         </div>
-                        <div class="form-group row @if ($errors->has('key')) has-error @endif">
+                        <div class="form-group row @if ($errors->has('target')) has-error @endif">
                             <label class="col-sm-2 control-label" for="input-email">Target / Ruta / Url <span class="oblig">*</span></label>
                             <div class="col-sm-8">
                                 <input id="input-email" type="text" class="form-control"
                                        value="{{$form->target}}"
-                                       name="description">
+                                       name="target">
                             </div>
                         </div>
-                        <div class="form-group row @if ($errors->has('module')) has-error @endif">
+                        <div class="form-group row @if ($errors->has('module_id')) has-error @endif">
                             <label class="col-sm-2 control-label" for="input-email">Mòdulo <span class="oblig">*</span></label>
                             <div class="col-sm-8">
                                 <select class="form-control m-b" name="module_id">
+                                    <option value="Null">Menu Lateral</option>
                                     @foreach($modules as $module)
                                         <option
                                         @if($form->module_id == $module->id)
@@ -58,6 +59,7 @@
                             </div>
                         </div>
 
+
                         <div class="form-group row">
                             <label class="col-sm-2 control-label">Estado</label>
                             <div class="col-sm-3">
@@ -66,6 +68,22 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="i-checks"><label> <input type="radio" value="0" name="state" @if(($form->state)==0) checked="" @endif > <i></i> Inactivo </label></div>
+                            </div>
+                        </div>
+                        <div class="form-group row @if ($errors->has('order')) has-error @endif">
+                            <label class="col-sm-2 control-label" for="input-email">Órden<span class="oblig">*</span></label>
+                            <div class="col-sm-8">
+                                <select class="form-control m-b" name="order">
+
+                                    @for($i = 1; $i <= $limit; $i++)
+                                        <option
+                                            name="order"
+                                            value="{{$i}}"
+                                        >
+                                            {{$i}}
+                                        </option>
+                                    @endfor
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row @if ($errors->has('icon')) has-error @endif">

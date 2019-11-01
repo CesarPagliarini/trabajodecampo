@@ -29,18 +29,23 @@ class CheckPermissions
         }
 
         $formId = Form::where('target', $searched)->pluck('id')->first();
+
         $permissionId = Permission::where('action', 'view')->pluck('id')->first();
+
         foreach(Auth::user()->roles as $role)
         {
+
             $exist = RolePermissionsForms::where('permission_id', $permissionId)
                 ->where('role_id', $role->id)
                 ->where('form_id', $formId)->first();
+
         }
 
-        if(is_null($exist)){
-           // return redirect()->route('forbidden');
-        };
 
+
+        if(is_null($exist)){
+            //return redirect()->route('forbidden');
+        };
 
         return $next($request);
     }

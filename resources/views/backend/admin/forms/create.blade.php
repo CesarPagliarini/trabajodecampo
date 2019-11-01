@@ -42,7 +42,7 @@
                             <label class="col-sm-2 control-label" for="input-email">Mòdulo <span class="oblig">*</span></label>
                             <div class="col-sm-8">
                                 <select class="form-control m-b" name="module_id">
-                                    <option value="">Selecciona un módulo</option>
+                                    <option value="">Menu Lateral</option>
                                     @foreach($modules as $module)
                                         <option
                                             name="module_id"
@@ -62,6 +62,22 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="i-checks"><label> <input type="radio" value="0" name="state" > <i></i> Inactivo </label></div>
+                            </div>
+                        </div>
+                        <div class="form-group row @if ($errors->has('order')) has-error @endif">
+                            <label class="col-sm-2 control-label" for="input-email">Órden<span class="oblig">*</span></label>
+                            <div class="col-sm-8">
+                                <select class="form-control m-b" name="order">
+
+                                    @for($i = 1; $i <= $limit; $i++)
+                                        <option
+                                            name="order"
+                                            value="{{$i}}"
+                                        >
+                                            {{$i}}
+                                        </option>
+                                    @endfor
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row @if ($errors->has('icon')) has-error @endif">
