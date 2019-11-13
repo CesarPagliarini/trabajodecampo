@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<integrantes>
+  <integrante>
+    <nombre>tomas</nombre>
+    <apellido>rebot</apellido>
+  </integrante>
+  <integrante>
+    <nombre>jeremias</nombre>
+    <apellido>cepeda</apellido>
+  </integrante>
+  <integrante>
+    <nombre>alejandro</nombre>
+    <apellido>arfeli</apellido>
+  </integrante>
+  <integrante>
+    <nombre>maximiliano</nombre>
+    <apellido>ramirez</apellido>
+  </integrante>
+</integrantes>

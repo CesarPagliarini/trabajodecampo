@@ -127,11 +127,7 @@ class RolesController extends BaseController implements ControllerContract
 
         try{
             RolePermissionsForms::where('role_id', intval($request->roleId))->delete();
-
-
-
             $permissions = $request->permissions != null ? $request->permissions : [];
-
             foreach($permissions as $permission)
             {
                 $items = explode('-', $permission);

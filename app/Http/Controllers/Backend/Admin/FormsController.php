@@ -33,7 +33,6 @@ class FormsController extends BaseController implements ControllerContract
     {
         $modules= Module::all();
         return view('backend.admin.forms.create', compact('modules'));
-
     }
 
     /**
@@ -96,7 +95,6 @@ class FormsController extends BaseController implements ControllerContract
     {
         if($request->module_id === 'Null'){
             $request['module_id'] = NULL;
-
         }
 
 

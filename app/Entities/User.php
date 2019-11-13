@@ -12,11 +12,13 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Hash;
 
 class User extends BaseEntity implements Authenticatable
 {
-    use AuthenticableTrait, Notifiable, RulesManager;
+
+    use AuthenticableTrait, Notifiable, RulesManager, SerializesModels;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +26,7 @@ class User extends BaseEntity implements Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','state'
+        'name', 'email',
     ];
 
     /**

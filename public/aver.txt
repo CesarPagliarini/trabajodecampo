@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<colaboradores>
+  <colaborador>
+    <nombre>Erick</nombre>
+    <apellido>campos</apellido>
+    <web_favorita>lospillaos.es</web_favorita>
+    <nombre>Robert</nombre>
+    <apellido>Lopez</apellido>
+    <web_favorita>linux.org</web_favorita>
+  </colaborador>
+</colaboradores>

@@ -12,6 +12,7 @@
 */
 
 Auth::routes();
+Route::get('/' ,'PanelController@index');
 
 Route::get('forbidden','PanelController@forbidden')->name('forbidden');
 Route::middleware(['auth','checkPermissions'])->prefix('panel')->group(function () {
@@ -28,12 +29,6 @@ Route::middleware(['auth','checkPermissions'])->prefix('panel')->group(function 
 
 
     });
-
-
-
-
-
-
 });
 
 
