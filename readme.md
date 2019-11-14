@@ -15,6 +15,38 @@
 <li>Npm run dev</li>
 <li>Enjoy coding</li>
 </ul> 
+
+### Usefulls commands
+
+<ul>
+<li>
+  <p>php artisan make:scaffold</p>
+    <ul>
+    <p>params</p>
+    <li>
+        --controllerfolder={content} content is the param who represents view folder name, it's created if not exist      
+    </li>
+    <li>
+     --controller={categories} controller name it's created if not exist 
+    </li>
+    <li>
+    --model={category} :model name it's created if not exist
+    </li>
+    <li>
+    --viewfolder={content} content represents the view folder name it's created if not exist 
+    </li>
+    <li>
+    --view={categories} represents view folder inside folder created before, this generate three views inside this, index, create and edit.
+    </li>
+    </ul>
+    <hr>
+    pending: generate route resource scaffolding
+    <hr>
+  
+ 
+</li>
+</ul>
+
 <br>
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
