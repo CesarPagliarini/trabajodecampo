@@ -32,8 +32,15 @@ abstract class BaseController extends Controller
             DB::beginTransaction();
             try{
                 if(isset($request->soft) && $request->soft == 'true' ){
-                    $item->state = '0';
+
+                    if(isset($request->restore) && $request->restore == 'true'){
+                        $item->state = "1";
+                    }else{
+                        $item->state = "0";
+                    }
                     $item->save();
+
+
                     DB::commit();
                 }else{
                     $item->delete();

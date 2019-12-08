@@ -26,7 +26,17 @@ class User extends BaseEntity implements Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'name',
+        'email',
+        'state',
+        'last_name',
+        'address',
+        'cel_phone',
+        'city',
+        'region',
+        'zip_code',
+        'country',
+        'password'
     ];
 
     /**
@@ -52,6 +62,7 @@ class User extends BaseEntity implements Authenticatable
      * @return Void
      */
     public function setPasswordAttribute($password): Void{
+
         if (!empty($password) && Hash::needsRehash($password))
         {
             $this->attributes['password'] = Hash::make($password);

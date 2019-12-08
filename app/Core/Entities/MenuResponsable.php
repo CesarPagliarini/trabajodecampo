@@ -37,7 +37,6 @@ class MenuResponsable implements ComponentInterface
 
     public function render()
     {
-
         $element = '';
         foreach($this->componentList->sortBy('order') as $component){
             $element .=  $component->render();

@@ -12,14 +12,10 @@ use Illuminate\Support\Facades\DB;
 
 class UsersController extends BaseController implements ControllerContract
 {
-    public function __construct(){
-        $this->model = new User;
-    }
 
     public function index()
     {
-
-        $users = User::all();
+        $users = User::allAdmins();
         return view('backend.admin.users.index', compact('users'));
     }
 
@@ -46,6 +42,7 @@ class UsersController extends BaseController implements ControllerContract
             return redirect()->route('users.index');
         }catch (\Exception $e){
             DB::rollBack();
+            dd($e->getMessage());
             $request->session()->flash('flash_error', 'El usuario no se pudo crear!');
             return redirect()->route('users.index');
         }
@@ -53,6 +50,8 @@ class UsersController extends BaseController implements ControllerContract
     }
     public function update(Request $request, User $user)
     {
+
+
         DB::beginTransaction();
         try{
             $stmt = $request->password == '' ? $request->except('password') : $request->all();
@@ -60,7 +59,6 @@ class UsersController extends BaseController implements ControllerContract
             $user->update($stmt);
             $user->roles()->sync($request->roles);
             $user->save();
-
             DB::commit();
             $request->session()->flash('flash_message', 'El usuario se ha actualizado exitosamente!');
             return redirect()->route('users.index');

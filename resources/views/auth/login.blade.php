@@ -5,7 +5,7 @@
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
             <div>
-                <h1 class="logo-name">R+</h1>
+                <h1 class="logo-name">G+</h1>
             </div>
             <h3>Bienvenido a Genesis</h3>
             <p>Inicia sesión para utilizar la herramienta.</p>

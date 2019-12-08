@@ -23,7 +23,8 @@ $('button[data-action=delete]').click(function(e) {
                 'ids':ids,
                 _method:'POST',
                 'soft':bulkConfig.soft,
-                'model':bulkConfig.model
+                'model':bulkConfig.model,
+                'restore':bulkConfig.restore
             },
             beforeSend: function () {
                 $("#resultado").html("Procesando, espere por favor...");
@@ -32,10 +33,13 @@ $('button[data-action=delete]').click(function(e) {
                 console.log(response);
                 $('#'+bulkConfig.modalName).modal('toggle');
                 if(response.error){
-                    toastr.error('Los siguientes usuarios no se han eliminado: '+response.failed);
+                    const errorMsg = bulkConfig.restore ? 'Los siguientes usuarios no se han restaurado: ':
+                        'Los siguientes usuarios no se han eliminado: ';
+                    toastr.error(errorMsg + response.failed);
 
                 }else{
-                    toastr.success('Se han eliminado correctamente');
+                    const successMsg = bulkConfig.restore ? 'Se han restaurado correctamente'  : 'Se han eliminado correctamente'
+                    toastr.success(successMsg);
                 }
                 setTimeout(()=>{
                     location.reload();

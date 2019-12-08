@@ -25,5 +25,39 @@ class UsersTableSeeder extends Seeder
             'user_id' => $idTom,
             'role_id' => $adminRole,
         ]);
+
+        $idMaxi = DB::table('users')->insertGetId([
+            'name' => 'maxi',
+            'email' => 'maxi@genesis.com',
+            'password' => bcrypt('maxi'),
+        ]);
+        DB::table('user_roles')->insert([
+            'user_id' => $idMaxi,
+            'role_id' => $adminRole,
+        ]);
+
+        $date = DateTime::createFromFormat('Y-m-d', '1991-07-20');
+        $idCalvo = DB::table('users')->insertGetId([
+            'name' => 'pelado',
+            'email' => 'pelado@genesis.com',
+            'password' => bcrypt('pelado'),
+            'last_name' => 'arfeli',
+            'address' => 'la casa 123',
+            'cel_phone' => '345419874',
+            'city' => 'rosario',
+            'region'=> 'santa fe',
+            'zip_code' => '2000',
+            'country'=> 'argentina',
+            'date_of_birthday' => $date,
+        ]);
+        $clientRole = Role::where('name', 'Cliente')->first()->id;
+        DB::table('user_roles')->insert([
+            'user_id' => $idCalvo,
+            'role_id' => $clientRole,
+        ]);
+
+
+
+
     }
 }

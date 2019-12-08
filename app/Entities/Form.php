@@ -48,7 +48,7 @@ class Form extends BaseEntity implements ComponentInterface
     {
             return '
              <li class="'.$this->checkActive().'">
-                <a href="'.url($this->target).'"><i class="'.$this->icon.'"></i> 
+                <a href="'.url($this->target).'"><i class="'.$this->icon.'"></i>
                     <span class="nav-label">
                         '.$this->name.'
                     </span>
@@ -71,6 +71,13 @@ class Form extends BaseEntity implements ComponentInterface
     public function userCanActive(){
 
         $collection = Auth::user()->forms->find($this);
-        return count($collection) ? true : false;
+
+        if($collection && $collection->count()){
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 }

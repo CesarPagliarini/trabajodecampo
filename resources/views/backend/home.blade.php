@@ -1,6 +1,7 @@
 @extends('layouts.content-panel')
 
 @section('content')
+
     <div class="col-lg-3">
         <div class="widget style1 lazur-bg">
             <div class="row">
@@ -62,5 +63,6 @@
             background-color: #2f4050!important;
         }
     </style>
+
 
 @endsection

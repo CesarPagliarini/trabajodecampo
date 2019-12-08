@@ -27,9 +27,9 @@ class PanelController extends BaseController
     {
         return view('backend.home');
     }
+
     public function forbidden()
     {
-//        dd('coming controller');
         return view('backend.partials.cant-see');
     }
 }
