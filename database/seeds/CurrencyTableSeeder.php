@@ -1,6 +1,8 @@
 <?php
 
+use App\Entities\Currency;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CurrencyTableSeeder extends Seeder
 {
@@ -11,9 +13,24 @@ class CurrencyTableSeeder extends Seeder
      */
     public function run()
     {
-        App\Currency::create(['description'=>'Dolar','origin'=>'USA']);
-        App\Currency::create(['description'=>'Real','origin'=>'Brasil']);
-        App\Currency::create(['description'=>'Peso Argentino','origin'=>'Argentina']);
+        DB::table('currencies')->insert([
+            'name' => 'U$D',
+            'description' => 'Dolares estadounidenses',
+            'origin' => '1',
+            'state' => '1'
+        ]);
+        DB::table('currencies')->insert([
+            'name' => 'AR%',
+            'description' => 'Pesos argentinos',
+            'origin' => '1',
+            'state' => '1'
+        ]);
+        DB::table('currencies')->insert([
+            'name' => 'REAL',
+            'description' => 'Reales brasileños',
+            'origin' => 'Brasil',
+            'state' => '1'
+        ]);
 
     }
 }

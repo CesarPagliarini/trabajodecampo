@@ -1,6 +1,8 @@
 <?php
 
+use App\Entities\Brand;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class BrandTableSeeder extends Seeder
 {
@@ -10,9 +12,43 @@ class BrandTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {   
-        App\Brand::create(['description'=>'SKF','origin'=>'SUECIA']);
-        App\Brand::create(['description'=>'ZKL','origin'=>'REPUBLICA CHECA']);
-        App\Brand::create(['description'=>'DBH','origin'=>'ARGENTINA']);
+    {
+        DB::table('brands')->insert([
+            'name' => 'Johnsons',
+            'description' => 'Productos varios',
+            'origin' => 'Usa',
+            'state' => '1'
+        ]);
+        DB::table('brands')->insert([
+            'name' => 'P&G',
+            'description' => 'Productos varios',
+            'origin' => 'Usa',
+            'state' => '1'
+        ]);
+        DB::table('brands')->insert([
+            'name' => 'Capilatis',
+            'description' => 'Productos varios',
+            'origin' => 'Usa',
+            'state' => '1'
+        ]);
+        DB::table('brands')->insert([
+            'name' => '919',
+            'description' => 'Productos varios peluquerias',
+            'origin' => 'Brasil',
+            'state' => '1'
+        ]);
+        DB::table('brands')->insert([
+            'name' => 'P&G',
+            'description' => 'Productos odontologicos',
+            'origin' => 'Brasil',
+            'state' => '1'
+        ]);
+        DB::table('brands')->insert([
+            'name' => 'P&G',
+            'description' => 'Productos de tocador',
+            'origin' => 'Argentina',
+            'state' => '1'
+        ]);
+
     }
 }

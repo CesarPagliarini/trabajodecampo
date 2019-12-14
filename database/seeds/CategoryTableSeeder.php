@@ -1,6 +1,8 @@
 <?php
 
+use App\Entities\Category;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CategoryTableSeeder extends Seeder
 {
@@ -11,7 +13,11 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        App\Category::create(['description'=>'Rodamientos','status'=>'disponible']);
-        App\Category::create(['description'=>'Retenes','status'=>'disponible']);
+        DB::table('categories')->insert([
+            'name' => 'Peluquerias',
+            'description' => 'Productos peluquerias',
+            'state' => '1'
+        ]);
+
     }
 }

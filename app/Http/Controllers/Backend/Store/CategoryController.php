@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Admin;
+namespace App\Http\Controllers\Backend\Store;
 
-use App\Entities\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ClientController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,13 +14,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = User::allClients('active');
-        return view('backend.admin.clients.active-index', compact('clients'));
-    }
-    public function unactives()
-    {
-        $clients = User::allClients('unactive');
-        return view('backend.admin.clients.unactive-index', compact('clients'));
+        //
     }
 
     /**

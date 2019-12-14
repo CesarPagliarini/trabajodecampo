@@ -8,6 +8,7 @@ namespace App\Entities;
 use App\Core\Entities\BaseEntity;
 
 use App\Core\Traits\RulesManager;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -36,7 +37,12 @@ class User extends BaseEntity implements Authenticatable
         'region',
         'zip_code',
         'country',
-        'password'
+        'document',
+        'cuit_cuil',
+        'date_of_birthday',
+        'password',
+        'email_verification_token',
+        'email_recover_token'
     ];
 
     /**
@@ -91,6 +97,10 @@ class User extends BaseEntity implements Authenticatable
     {
         return $this->belongsToMany(Role::class,'user_roles'  ,'user_id')
             ->select('name');
+    }
+
+    public function getFullnameAttribute(){
+        return "{$this->name} {$this->last_name}";
     }
 
 

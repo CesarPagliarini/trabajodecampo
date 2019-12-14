@@ -50,7 +50,7 @@
                 <td>
                     <a class="accion"
                        @update('activeClients') href="{{route('clients.edit', ['id'=>$client->id])}}" @endif >
-                    {{$client->name}}
+                    {{$client->fullname}}
                     </a>
                 </td>
                 <td>

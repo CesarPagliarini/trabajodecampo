@@ -41,7 +41,19 @@ class implementModules extends Command
     public function handle()
     {
 
-       $this->implementClientModule();
+        try{
+            $this->implementClientModule();
+            $this->implementHomeForm();
+            $this->implementsProductModule();
+            $this->info('Modules successfully implementeds');
+
+        }catch (\Exception $e){
+            $this->info('Failed modules implementation');
+
+        }
+
+
+
 
     }
 }

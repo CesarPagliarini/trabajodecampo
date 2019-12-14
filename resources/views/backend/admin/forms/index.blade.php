@@ -34,8 +34,8 @@
             <td class="check-mail">
                 <input type="checkbox" class="i-checks todo">
             </td>
-            <th>Módulo</th>
             <th>Nombre</th>
+            <th>Módulo</th>
             <th>Clave</th>
             <th>Ruta</th>
             <th>Orden</th>

@@ -8,12 +8,10 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link href="{{ asset('css/panel.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/plugins/iCheck/custom.css') }}" rel="stylesheet">
-
-    @yield('custom-styles')
-    <!-- Scripts -->
+    <link href="{{ asset('css/general.css') }}" rel="stylesheet">
     <link href="{{asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet">
     <script src="{{ asset('js/panel.js') }}"></script>
+    @yield('custom-styles')
 </head>
 <body>
 <div id="wrapper">
@@ -21,6 +19,6 @@
 </div>
     @include('backend.alerts.common-alerts')
     @yield('custom-scripts')
+    <script src="{{ asset('js/general.js') }}"></script>
 </body>
-
 </html>

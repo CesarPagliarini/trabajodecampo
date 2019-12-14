@@ -1,6 +1,8 @@
 <?php
 
+use App\Entities\Subcategory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class SubcategoryTableSeeder extends Seeder
 {
@@ -11,10 +13,11 @@ class SubcategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        App\Subcategory::create(['description'=>'Lineal Bolita','status'=>'disponible','category_id'=>'1']);
-        App\Subcategory::create(['description'=>'Lineal Rodillo','status'=>'disponible','category_id'=>'1']);
-        App\Subcategory::create(['description'=>'Doble Labio','status'=>'disponible','category_id'=>'2']);
-        App\Subcategory::create(['description'=>'Labio Simple','status'=>'disponible','category_id'=>'2']);
-
+        DB::table('subcategories')->insert([
+            'name' => 'Shampoo',
+            'description' => 'Shampoo general',
+            'category_id' => '1',
+            'state' => '1'
+        ]);
     }
 }

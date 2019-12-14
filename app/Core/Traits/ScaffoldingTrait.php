@@ -66,10 +66,13 @@ trait ScaffoldingTrait
     }
     public function generateModel($model)
     {
-        $model = ucfirst(strtolower($model));
-        $this->call('make:model', [
-            'name' => $model,
-        ]);
+        if($model){
+            $model = ucfirst(strtolower($model));
+            $this->call('make:model', [
+                'name' => $model,
+            ]);
+        }
+
     }
 
 

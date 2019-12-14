@@ -1,5 +1,10 @@
 {
+    "/js/general.js": "/js/general.js",
+    "/js/general-front.js": "/js/general-front.js",
     "/js/requests/bulk-delete.js": "/js/requests/bulk-delete.js",
     "/css/panel.css": "/css/panel.css",
-    "/js/panel.js": "/js/panel.js"
+    "/js/panel.js": "/js/panel.js",
+    "/css/general.css": "/css/general.css",
+    "/css/front/front-layout.css": "/css/front/front-layout.css",
+    "/js/front/front-layout.js": "/js/front/front-layout.js"
 }

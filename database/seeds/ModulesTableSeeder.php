@@ -17,6 +17,7 @@ class ModulesTableSeeder extends Seeder
             'description' => 'admin/roles',
             'internal_handler' => 'configModule',
             'icon' => 'fa fa-cog',
+            'order' => '1'
         ]);
     }
 }

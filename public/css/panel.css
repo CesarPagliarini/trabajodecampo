@@ -11704,12 +11704,7 @@ body.landing-page {
     height: 470px;
     width: 100%;
 }
-.landing-page .header-back.one {
-    background: url('../img/landing/header_one.jpg') 50% 0 no-repeat;
-}
-.landing-page .header-back.two {
-    background: url('../img/landing/header_two.jpg') 50% 0 no-repeat;
-}
+
 .landing-page .carousel {
     height: 470px;
 }
@@ -11919,7 +11914,7 @@ body.landing-page {
     color: #1ab394 !important;
 }
 .landing-page .contact {
-    background-image: url('../img/landing/word_map.png');
+
     background-position: 50% 50%;
     background-repeat: no-repeat;
     margin-top: 60px;
@@ -13292,7 +13287,9 @@ a.accion{
     font-size: 13px;
     color: #676a6c!important;
 }
-
+.modal-xxl {
+    min-width: 75%!important;
+}
 
 .toast-title {
     font-weight: 700

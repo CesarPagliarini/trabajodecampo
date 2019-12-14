@@ -1,20 +1,21 @@
 @extends('layouts.content-panel')
 @section('page-name')
-    Clientes activos
+    Dato a editar
 @endsection
 @section('content')
-    @create('activeClients')
-    <a href="{{ route('clients.create') }}"
+
+    @create('editar')
+    <a href="{{ route('editar.create') }}"
        class="btn btn-primary">Nuevo
     </a>
     @endcreate
-    @delete('activeClients')
+    @delete('editar')
     <button data-placement="bottom"
             title="Borrar"
             type="button"
             class="btn btn-danger accion"
             data-action="show">
-        Suspender
+        Eliminar
     </button>
     @enddelete
 
@@ -34,41 +35,51 @@
                 <input type="checkbox" class="i-checks todo">
             </td>
             <th>Nombre</th>
-            <th>Email</th>
+            <th>Descripcion</th>
+            <th>Acciones</th>
             <th class="pull-right">Estado</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($clients as $client)
+        @foreach($editar as $role)
         <tr>
             <td valign="top" class="check-mail">
                 <input type="checkbox"
                        class="i-checks"
-                       value="{{$client->id}}"
+                       value="{{parametro}}"
                        name="ids[]">
             </td>
            <td>
-               <a class="accion"
-                  @update('activeClients') href="{{route('clients.edit', ['id'=>$client->id])}}" @endif >
-                   {{$client->name}}
-               </a>
-           </td>
-            <td>
                 <a class="accion"
-                   @update('activeClients')href="{{route('clients.edit', ['id'=>$client->id])}}" @endif >
-                    {{$client->email}}
+                   @update('editar') href="{{route('ruta', ['id'=>parametro])}}" @endif >
+                    {{$role->name}}
                 </a>
             </td>
             <td>
-                <a href="{{route('clients.edit', [$client->id])}}" class="accion">
+                <a class="accion"
+                   @update('editar') href="{{route('ruta', ['id'=>parametro])}}" @endif >
+                    {{$role->description}}
+                </a>
+            </td>
+            <td>
+                <a class="accion "
+                   @update('editar') href="{{route('ruta', ['id'=>parametro])}}" @endif >
+                <div class="col-md-2 offset-1">
+                    <i class="fa fa-key" aria-hidden="true"></i>
+                </div>
 
-                    @if(($client->state)==0)
-                        <span class="label label-danger pull-right">Inactivo</span>
+                </a>
+            </td>
+            <td>
+                <a href="{{route('users.edit', [parametro])}}" class="accion">
+                    @if(($role->state)==0)
+                        <span class="label label-danger pull-right ">Inactivo</span>
                     @else
-                        <span class="label label-primary pull-right">Activo</span>
+                        <span class="label label-primary pull-right ">Activo</span>
                     @endif
                 </a>
             </td>
+
         </tr>
             @endforeach
     </tbody>
@@ -82,10 +93,10 @@
     </table>
     @component('backend.modals.sure-delete')
         @slot('modelToDelete')
-            deleteClient
+            deleteRoles
         @endslot
         @slot('question')
-            ¿Esta seguro de suspender este usuario?
+            ¿Esta seguro de eliminar este editar?
         @endslot
     @endcomponent
 
@@ -94,9 +105,9 @@
 @section('custom-scripts')
     <script>
         const bulkConfig = {
-            'model': 'user',
+            'model': 'role',
             'soft':true,
-            'modalName':'deleteClient'
+            'modalName':'deleteRoles'
         }
     </script>
     <script src="{{asset('js/requests/bulk-delete.js')}}"></script>

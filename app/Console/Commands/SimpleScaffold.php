@@ -44,12 +44,16 @@ class SimpleScaffold extends Command
     public function handle()
     {
         try{
-           $this->generateViewScaffold($this->option('view') , $this->option('viewfolder'));
-           $this->generateController($this->option('controllerfolder'), $this->option('controller'));
-           $this->generateModel($this->option('model'));
+            $this->generateViewScaffold($this->option('view') , $this->option('viewfolder'));
+            $this->generateController($this->option('controllerfolder'), $this->option('controller'));
+            $this->generateModel($this->option('model'));
+            $this->info('Scaffold generated successfully');
+            $this->call("optimize");
+
 
         }catch (\Exception $e){
-                Log::info($e->getMessage());
+            $this->info('Check your logs, errors have ocurred');
+            Log::info($e->getMessage());
         }
     }
 
