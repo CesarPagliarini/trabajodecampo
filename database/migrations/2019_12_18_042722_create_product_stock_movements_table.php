@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePricesTable extends Migration
+class CreateProductStockMovementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,18 @@ class CreatePricesTable extends Migration
      */
     public function up()
     {
-        Schema::create('prices', function (Blueprint $table) {
+        Schema::create('product_stock_movements', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->double('value');
-            $table->unsignedBigInteger('currency_id')->default(1);
-            $table->dateTime('vigency_from');
-            $table->dateTime('vigency_to');
-
             $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('origin')->default(1);
+            $table->unsignedBigInteger('quantity_before');
+            $table->unsignedBigInteger('quantity_after');
+            $table->unsignedBigInteger('order_identifier');
+
             $table->timestamps();
 
-            //relationships
-            $table->foreign('currency_id')->references('id')->on('currencies');
             $table->foreign('product_id')->references('id')->on('products');
-
+            $table->foreign('order_identifier')->references('identifier')->on('sales_order');
         });
     }
 
@@ -37,6 +35,6 @@ class CreatePricesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prices');
+        Schema::dropIfExists('product_stock_movements');
     }
 }

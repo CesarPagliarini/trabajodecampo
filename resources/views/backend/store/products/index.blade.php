@@ -4,12 +4,12 @@
 @endsection
 @section('content')
 
-    @create('editar')
-    <a href="{{ route('editar.create') }}"
+    @create('product')
+    <a href="{{ route('products.create') }}"
        class="btn btn-primary">Nuevo
     </a>
     @endcreate
-    @delete('editar')
+    @delete('product')
     <button data-placement="bottom"
             title="Borrar"
             type="button"
@@ -35,68 +35,72 @@
                 <input type="checkbox" class="i-checks todo">
             </td>
             <th>Nombre</th>
-            <th>Descripcion</th>
-            <th>Acciones</th>
-            <th class="pull-right">Estado</th>
+            <th>Descripción</th>
+            <th>Categoria</th>
+            <th>Marca</th>
+            <th>Precio</th>
+
         </tr>
         </thead>
         <tbody>
-        @foreach($editar as $role)
+        @foreach($products as $product)
+            <tr>
+                <td valign="top" class="check-mail">
+                    <input type="checkbox"
+                           class="i-checks"
+                           value="{{$product->id}}"
+                           name="ids[]">
+                </td>
+
+                <td>
+                    <a class="accion"
+                       @update('products') href="{{route('products.edit', ['id'=>$product->id])}}" @endif >
+                    {{$product->name}}
+                    </a>
+                </td>
+                <td>
+                    <a class="accion"
+                       @update('products') href="{{route('products.edit', ['id'=>$product->id])}}" @endif >
+                    {{$product->description}}
+                    </a>
+                </td>
+                <td>
+                    <a class="accion"
+                       @update('products') href="{{route('products.edit', ['id'=>$product->id])}}" @endif >
+                    {{$product->category->name}}
+                    </a>
+                </td>
+                <td>
+                    <a class="accion"
+                       @update('products') href="{{route('products.edit', ['id'=>$product->id])}}" @endif >
+                        {{$product->brand->name}}
+                    </a>
+                </td>
+                <td>
+                    <a class="accion"
+                       @update('products') href="{{route('products.edit', ['id'=>$product->id])}}" @endif >
+                        {{$product->price->value}}
+                    </a>
+                </td>
+
+
+            </tr>
+        @endforeach
+        </tbody>
+        <tfoot>
         <tr>
-            <td valign="top" class="check-mail">
-                <input type="checkbox"
-                       class="i-checks"
-                       value="{{parametro}}"
-                       name="ids[]">
+            <td colspan="6">
+                <ul class="pagination pull-right"></ul>
             </td>
-           <td>
-                <a class="accion"
-                   @update('editar') href="{{route('ruta', ['id'=>parametro])}}" @endif >
-                    {{$role->name}}
-                </a>
-            </td>
-            <td>
-                <a class="accion"
-                   @update('editar') href="{{route('ruta', ['id'=>parametro])}}" @endif >
-                    {{$role->description}}
-                </a>
-            </td>
-            <td>
-                <a class="accion "
-                   @update('editar') href="{{route('ruta', ['id'=>parametro])}}" @endif >
-                <div class="col-md-2 offset-1">
-                    <i class="fa fa-key" aria-hidden="true"></i>
-                </div>
-
-                </a>
-            </td>
-            <td>
-                <a href="{{route('users.edit', [parametro])}}" class="accion">
-                    @if(($role->state)==0)
-                        <span class="label label-danger pull-right ">Inactivo</span>
-                    @else
-                        <span class="label label-primary pull-right ">Activo</span>
-                    @endif
-                </a>
-            </td>
-
         </tr>
-            @endforeach
-    </tbody>
-    <tfoot>
-    <tr>
-        <td colspan="6">
-            <ul class="pagination pull-right"></ul>
-        </td>
-    </tr>
-    </tfoot>
+        </tfoot>
     </table>
     @component('backend.modals.sure-delete')
         @slot('modelToDelete')
-            deleteRoles
+            deleteProduct
         @endslot
         @slot('question')
-            ¿Esta seguro de eliminar este editar?
+            ¿Esta seguro de eliminar este producto, esta accion es irreversible?
         @endslot
     @endcomponent
 
@@ -105,9 +109,9 @@
 @section('custom-scripts')
     <script>
         const bulkConfig = {
-            'model': 'role',
+            'model': 'product',
             'soft':true,
-            'modalName':'deleteRoles'
+            'modalName':'deleteProduct'
         }
     </script>
     <script src="{{asset('js/requests/bulk-delete.js')}}"></script>

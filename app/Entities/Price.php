@@ -11,8 +11,9 @@ class Price extends BaseEntity
     protected $fillable = [
         'value',
         'currency_id',
-        'state',
         'product_id',
+        'vigency_from',
+        'vigency_to'
     ];
     public function currency()
     {

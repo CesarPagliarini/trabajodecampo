@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('unit')->nullable()->default(null);
             $table->string('provider')->nullable()->default(null);
             $table->enum('state', [1,0])->default(1);
+            $table->unsignedBigInteger('stock')->default(0);
             $table->unsignedBigInteger('subcategory_id')->nullable()->default(null);
             $table->unsignedBigInteger('brand_id');
             $table->unsignedBigInteger('category_id');

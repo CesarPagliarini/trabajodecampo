@@ -14,21 +14,9 @@ class CurrencyTableSeeder extends Seeder
     public function run()
     {
         DB::table('currencies')->insert([
-            'name' => 'U$D',
-            'description' => 'Dolares estadounidenses',
-            'origin' => '1',
-            'state' => '1'
-        ]);
-        DB::table('currencies')->insert([
-            'name' => 'AR%',
+            'name' => 'AR$',
             'description' => 'Pesos argentinos',
             'origin' => '1',
-            'state' => '1'
-        ]);
-        DB::table('currencies')->insert([
-            'name' => 'REAL',
-            'description' => 'Reales brasileños',
-            'origin' => 'Brasil',
             'state' => '1'
         ]);
 

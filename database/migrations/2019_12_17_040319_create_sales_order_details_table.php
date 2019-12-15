@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePricesTable extends Migration
+class CreateSalesOrderDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,18 @@ class CreatePricesTable extends Migration
      */
     public function up()
     {
-        Schema::create('prices', function (Blueprint $table) {
+        Schema::create('sales_order_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->double('value');
-            $table->unsignedBigInteger('currency_id')->default(1);
-            $table->dateTime('vigency_from');
-            $table->dateTime('vigency_to');
-
+            $table->unsignedBigInteger('order_identifier');
             $table->unsignedBigInteger('product_id');
-            $table->timestamps();
+            $table->unsignedBigInteger('quantity');
+            $table->unsignedBigInteger('unit_price');
+            $table->unsignedBigInteger('total_item');
 
-            //relationships
-            $table->foreign('currency_id')->references('id')->on('currencies');
+
+            $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('order_identifier')->references('identifier')->on('sales_order');
 
         });
     }
@@ -37,6 +36,6 @@ class CreatePricesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prices');
+        Schema::dropIfExists('sales_order_details');
     }
 }
