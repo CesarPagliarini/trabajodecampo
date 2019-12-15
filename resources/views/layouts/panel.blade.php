@@ -10,6 +10,8 @@
     <link href="{{ asset('css/panel.css') }}" rel="stylesheet">
     <link href="{{ asset('css/general.css') }}" rel="stylesheet">
     <link href="{{asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/plugins/iCheck/custom.css') }}" rel="stylesheet">
+
     <script src="{{ asset('js/panel.js') }}"></script>
     @yield('custom-styles')
 </head>

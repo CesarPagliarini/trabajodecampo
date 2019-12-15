@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Genesis - Landing Page</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('css/front/front-layout.css') }}" rel="stylesheet">
@@ -26,5 +27,9 @@
 <script src="{{ asset('js/general-front.js') }}"></script>
 @yield('custom-scripts')
 @yield('modals')
+
+@include('frontend.modals.registermodal')
+@include('frontend.modals.loginmodal')
+
 </body>
 </html>

@@ -72,7 +72,10 @@ mix.styles([
         'resources/template/js/plugins/pace/pace.min.js',
         'resources/template/js/plugins/wow/wow.min.js',
     ], 'public/js/front/front-layout.js');
-mix.js('resources/js/frontend/miscellaneous.js', 'public/js/general-front.js');
+mix.js([
+    'resources/js/frontend/miscellaneous.js',
+    'resources/js/frontend/register-form.js'
+] ,'public/js/general-front.js');
 
 
 

@@ -56,14 +56,25 @@ trait RulesManager
 
     public function roleCan($triada)
     {
-
         $exploded = explode('-', $triada);
 
         $r = RolePermissionsForms::where('role_id', intval($exploded[0]))
             ->where('form_id', intval($exploded[1]))
             ->where('permission_id', intval($exploded[2]))->first();
         return !is_null($r);
+    }
 
+    public function hasAccessToPanel()
+    {
+        foreach ($this->roles()->get() as $role)
+        {
+            if ($role->name == 'Cliente')
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 

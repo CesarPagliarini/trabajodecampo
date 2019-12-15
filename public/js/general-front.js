@@ -148,14 +148,53 @@ new WOW().init();
 
 /***/ }),
 
+/***/ "./resources/js/frontend/register-form.js":
+/*!************************************************!*\
+  !*** ./resources/js/frontend/register-form.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $('#registerButton').click(function (e) {
+    e.preventDefault();
+    $('#registerForm').addClass('hidden');
+    $('#registerLoading').removeClass('hidden');
+    var data = {
+      'email': $('#registerEmail').val(),
+      'password': $('#registerPassword').val(),
+      'name': $('#registerName').val()
+    };
+    var csrf = $('meta[name="csrf-token"]').attr('content');
+    var url = $('#registerUrl').val();
+    console.log(url);
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': csrf
+      }
+    });
+    $.ajax({
+      type: 'POST',
+      url: url,
+      data: data,
+      success: function success(data) {
+        window.location.replace(data);
+      }
+    });
+  });
+});
+
+/***/ }),
+
 /***/ 2:
-/*!******************************************************!*\
-  !*** multi ./resources/js/frontend/miscellaneous.js ***!
-  \******************************************************/
+/*!***********************************************************************************************!*\
+  !*** multi ./resources/js/frontend/miscellaneous.js ./resources/js/frontend/register-form.js ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\frontend\miscellaneous.js */"./resources/js/frontend/miscellaneous.js");
+__webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\frontend\miscellaneous.js */"./resources/js/frontend/miscellaneous.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\frontend\register-form.js */"./resources/js/frontend/register-form.js");
 
 
 /***/ })

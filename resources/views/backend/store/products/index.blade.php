@@ -1,6 +1,6 @@
 @extends('layouts.content-panel')
 @section('page-name')
-    Dato a editar
+    Productos
 @endsection
 @section('content')
 

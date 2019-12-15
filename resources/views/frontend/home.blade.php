@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 
-
 @section('content')
     @include('frontend.sliders.home-slider')
     <section id="store" class="gray-section" style="padding-top:25px!important;">
@@ -32,6 +31,4 @@
     </style>
 @endsection
 
-@section('modals')
-    @include('frontend.modals.registermodal')
-@endsection
+

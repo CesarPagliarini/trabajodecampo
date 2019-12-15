@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal inmodal" tabindex="-1" id="registerModal">
+<div class="modal inmodal" tabindex="-1" id="loginModal">
     <div class="modal-dialog modal-xxl">
         <div class="modal-content">
             <div class="gray-bg">
@@ -27,37 +27,35 @@
                         </div>
                         <div class="col-md-6">
                             <div class="ibox-content">
-                                <form class="m-t" id="registerForm">
-                                    <input type="hidden" id="registerUrl" value="{{route('frontend.clients.register')}}">
-                                    <div class="form-group">
-                                        <input type="text"
-                                               class="form-control"
-                                               placeholder="Nombre"
-                                               name="name"
-                                               id="registerName"
-                                               required="">
-                                    </div>
-                                    <div class="form-group">
+
+                                <form class="m-t" role="form" method="POST" action="{{ route('login') }}">
+                                    @csrf
+                                    <div class="form-group {{$errors->has('email') ? "has-error" : ""}}">
                                         <input type="email"
-                                               class="form-control"
+                                               class="form-control "
                                                name="email"
-                                               id="registerEmail"
+                                               value="{{old('email')}}"
                                                placeholder="Email"
                                                required="">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group {{$errors->has('password') ? "has-error" : ""}}">
                                         <input type="password"
                                                class="form-control"
                                                name="password"
-                                               id="registerPassword"
                                                placeholder="Password"
                                                required="">
                                     </div>
-                                    <button id="registerButton" class="btn btn-primary block full-width m-b">Crear cuenta</button>
+                                    @if($errors->has('email')) @endif
+                                    <div class="row buttons-login">
+                                        <button type="submit" class="btn btn-primary  m-b">Login</button>
+                                        <button type="button" class="btn btn-primary m-b cancel-button" data-dismiss="modal">Close</button>
+                                    </div>
+
+
+                                    <a  href="{{ route('password.request') }}"><small>Olvido su contraseña?</small></a>
                                 </form>
-                                <div id="registerLoading" class="hidden">
-                                    @include('frontend.partials.spinner')
-                                </div>
+
+                                @include('frontend.alerts.login-validations')
                                 <p class="m-t">
                                     <small>Genesis proyect &copy; 2019</small>
                                 </p>
@@ -75,6 +73,7 @@
                     </div>
                 </div>
             </div>
+
         </div><!-- /.modal-content -->
     </div>
 </div>

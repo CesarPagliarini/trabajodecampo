@@ -21,13 +21,14 @@ class UsersController extends BaseController implements ControllerContract
 
     public function edit(User $user)
     {
-        $roles = Role::all();
+        $roles = Role::where('name', '!=', 'Cliente')->get();
+
         return view('backend.admin.users.edit', compact('user','roles'));
     }
 
     public function create()
     {
-        $roles = Role::all();
+        $roles = Role::where('name', '!=', 'Cliente')->get();
         return view('backend.admin.users.create', compact('roles'));
     }
     public function store(Request $request)

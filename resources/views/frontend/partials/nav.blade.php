@@ -12,11 +12,38 @@
                     <li><a class="nav-link page-scroll" href="#page-top">Home</a></li>
                     <li><a class="nav-link page-scroll" href="#store">Tienda</a></li>
                     <li><a class="nav-link page-scroll" href="#team">Equipo</a></li>
-                    <li><a
-                       href="#myModal"
-                       class="nav-link"
-                       data-toggle="modal">Registrarme</a>
-                    </li>
+                    @auth
+                        <li>
+                            <a
+                                href="/perfil"
+                                class="nav-link"
+                                >Mi perfil</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                 document.getElementById('logout-client-form').submit();"
+                            class="nav-link">
+                                Cerrar sesion
+                            </a>
+                            <form id="logout-client-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                    @else
+                        <li>
+                            <a
+                            href="#loginModal"
+                            class="nav-link"
+                            data-toggle="modal">Iniciar sesion</a>
+                        </li>
+                        <li>
+                            <a
+                           href="#registerModal"
+                           class="nav-link"
+                           data-toggle="modal">Registrarme</a>
+                        </li>
+                    @endauth
 
                 </ul>
             </div>

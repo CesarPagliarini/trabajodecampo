@@ -13,9 +13,10 @@
 Auth::routes();
 
 Route::namespace('Frontend')->group(function(){
-    Route::get('/', 'HomeController@index');
     Route::post('/client/register', 'ProfileController@register')->name('frontend.clients.register');
+    Route::get('/', 'HomeController@index');
     Route::get('/client/confirm-email/{token}', 'ProfileController@confirmToken')->name('frontend.clients.email.confirmation');
+    Route::get('/client/thanks-for-register', 'ProfileController@registerSuccess')->name('frontend.register-success');
 });
 
 
