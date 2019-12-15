@@ -16,3 +16,9 @@
         <span class="sr-only">Siguiente</span>
     </a>
 </div>
+<div class="row m-b-lg">
+    <div class="col-lg-12 text-center">
+        <div class="navy-line"></div>
+        <a href="{{route('frontend.products')}}" type="submit" class="btn btn-primary  m-b">Ver todos</a>
+    </div>
+</div>

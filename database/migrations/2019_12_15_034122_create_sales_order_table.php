@@ -29,7 +29,7 @@ class CreateSalesOrderTable extends Migration
             //relations
             $table->foreign('admin_id')->references('id')->on('users');
             $table->foreign('client_id')->references('id')->on('users');
-            $table->foreign('state_id')->references('state')->on('order_states');
+            $table->foreign('state_id')->references('id')->on('sales_order_states');
         });
     }
 

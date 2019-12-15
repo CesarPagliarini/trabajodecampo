@@ -3,6 +3,7 @@
 namespace App\Entities;
 
 use App\Core\Entities\BaseEntity;
+use Carbon\Carbon;
 
 
 class Price extends BaseEntity
@@ -19,8 +20,10 @@ class Price extends BaseEntity
     {
         return $this->hasOne(Currency::class);
     }
-    public function products()
+    public function product()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasOne(Product::class, 'id','product_id');
     }
+
+
 }

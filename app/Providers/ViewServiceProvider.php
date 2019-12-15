@@ -6,6 +6,7 @@ namespace App\Providers;
 use App\Entities\Form;
 use App\Entities\Module;
 
+use App\Entities\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -46,5 +47,13 @@ class ViewServiceProvider extends ServiceProvider
             $limit =  DB::table('forms')->count();
             $view->with('limit',$limit);
         });
+
+        View::composer([
+            'frontend.partials.product-slider-item',
+        ], function ($view) {
+            $products = Product::all();
+            $view->with('products',$products);
+        });
+
     }
 }

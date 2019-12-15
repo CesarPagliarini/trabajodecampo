@@ -3,10 +3,13 @@
 namespace App\Entities;
 
 use App\Core\Entities\BaseEntity;
+use Carbon\Carbon;
 
 
 class Product extends BaseEntity
 {
+
+    protected $table = 'products';
     protected $fillable = [
         'description',
         'dimension',
@@ -30,8 +33,12 @@ class Product extends BaseEntity
     {
         return $this->hasOne(Subcategory::class);
     }
-    public function price()
+    public function getPriceAttribute()
     {
-        return $this->hasOne(Price::class);
+        return Price::where('vigency_from' , '<=' , Carbon::now())
+            ->where('vigency_to' , '>=', Carbon::now())
+            ->where('product_id', $this->id)->first();
     }
+
+
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrderStateHistoryTable extends Migration
+class CreateSalesOrderHistoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -22,9 +22,9 @@ class CreateOrderStateHistoryTable extends Migration
             $table->timestamps();
 
             //relationships
-            $this->foreign('user_id')->references('id')->on('users');
-            $this->foreign('state_id')->references('id')->on('sales_order_states');
-            $this->foreign('order_identifier')->references('identifier')->on('sales_order');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('state_id')->references('id')->on('sales_order_states');
+            $table->foreign('order_identifier')->references('identifier')->on('sales_order');
         });
     }
 

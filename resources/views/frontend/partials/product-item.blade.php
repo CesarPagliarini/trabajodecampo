@@ -1,27 +1,33 @@
-<div class="col-md-3">
-    <div class="ibox">
-        <div class="ibox-content product-box">
 
-            <div class="product-imitation">
-                [ INFO ]
-            </div>
-            <div class="product-desc">
-                                <span class="product-price">
-                                    $10
-                                </span>
-                <small class="text-muted">Category</small>
-                <a href="#" class="product-name"> Product</a>
+    <div class="col-md-3">
+        <div class="ibox">
+            <div class="ibox-content product-box">
 
-
-
-                <div class="small m-t-xs">
-                    Many desktop publishing packages and web page editors now.
+                <div class="product-imitation">
+                    [ INFO ]
                 </div>
-                <div class="m-t text-righ">
+                <div class="product-desc">
+                                <span class="product-price">
+                                {{$product->price->value}}
+                                </span>
+                    <small class="text-muted">{{$product->category->name}}</small>
+                    <a href="#" class="product-name"> {{$product->name}}</a>
 
-                    <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+
+
+                    <div class="small m-t-xs">
+                        {{$product->description}}
+                    </div>
+                    @auth()
+                        boton para agregar al carrito
+                    @else
+                        <a
+                            href="#loginModal"
+                            class="nav-link"
+                            data-toggle="modal">Agregar al carrito</a>
+                    @endauth
+
                 </div>
             </div>
         </div>
     </div>
-</div>
