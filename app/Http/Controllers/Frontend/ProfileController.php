@@ -9,6 +9,7 @@ use App\Entities\User;
 use App\Jobs\RegistrationRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -72,4 +73,11 @@ class ProfileController extends BaseController implements ControllerContract
         Session::forget(['internal_message']);
         return view('frontend.pages.thanks-page', compact('message'));
     }
+
+    public function profile(){
+        $user = Auth::user();
+        return view('frontend.pages.profile', compact('user'));
+    }
+
+
 }

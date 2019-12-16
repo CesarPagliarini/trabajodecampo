@@ -13,7 +13,6 @@ class SaleOrderHistory extends BaseEntity
     protected $fillable = [
     'order_identifier',
     'state_id',
-    'changed_date',
     'user_id',
     ];
 

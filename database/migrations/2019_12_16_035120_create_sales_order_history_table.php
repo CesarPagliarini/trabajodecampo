@@ -17,7 +17,6 @@ class CreateSalesOrderHistoryTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('order_identifier');
             $table->unsignedBigInteger('state_id');
-            $table->timestamp('changed_date');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 

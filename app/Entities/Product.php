@@ -12,12 +12,13 @@ class Product extends BaseEntity
     protected $table = 'products';
     protected $fillable = [
         'description',
+        'name',
         'dimension',
         'unit',
         'provider',
         'state',
         'subcategory_id',
-        'brand_id',
+        'stock',
         'category_id'
     ];
 
@@ -33,11 +34,23 @@ class Product extends BaseEntity
     {
         return $this->hasOne(Subcategory::class);
     }
-    public function getPriceAttribute()
-    {
-        return Price::where('vigency_from' , '<=' , Carbon::now())
+
+    public function price(){
+        return $this->hasOne(Price::class, 'product_id', 'id')
             ->where('vigency_to' , '>=', Carbon::now())
             ->where('product_id', $this->id)->first();
+
+    }
+
+
+    public function getPriceAttribute()
+    {
+        $price =  Price::where('vigency_from' , '<=' , Carbon::now())
+            ->where('vigency_to' , '>=', Carbon::now())
+            ->where('product_id', $this->id)->first();
+        if($price){
+            return $price->value;
+        }
     }
 
 

@@ -48,10 +48,10 @@
                                     @if($errors->has('email')) @endif
                                     <div class="row buttons-login">
                                         <button type="submit" class="btn btn-primary  m-b">Login</button>
-                                        <button type="button" class="btn btn-primary m-b cancel-button" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary m-b cancel-button"
+                                                style="margin-left:5%!important;"
+                                                data-dismiss="modal">Close</button>
                                     </div>
-
-
                                     <a  href="{{ route('password.request') }}"><small>Olvido su contraseña?</small></a>
                                 </form>
 

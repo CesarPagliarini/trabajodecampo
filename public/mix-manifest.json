@@ -1,4 +1,5 @@
 {
+    "/js/front/sales-cart.js": "/js/front/sales-cart.js",
     "/js/general.js": "/js/general.js",
     "/js/general-front.js": "/js/general-front.js",
     "/js/requests/bulk-delete.js": "/js/requests/bulk-delete.js",

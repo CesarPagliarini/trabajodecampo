@@ -9,15 +9,22 @@
             </div>
             <div class="collapse navbar-collapse justify-content-end" id="navbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="nav-link page-scroll" href="#page-top">Home</a></li>
-                    <li><a class="nav-link page-scroll" href="#store">Tienda</a></li>
-                    <li><a class="nav-link page-scroll" href="#team">Equipo</a></li>
+                    <li><a class="nav-link page-scroll" href="{{route('frontend.home')}}">Home</a></li>
+                    <li><a class="nav-link page-scroll" href="{{route('frontend.products')}}">Tienda</a></li>
                     @auth
                         <li>
                             <a
-                                href="/perfil"
+                                href="{{route('frontend.client.profile')}}"
                                 class="nav-link"
                                 >Mi perfil</a>
+                        </li>
+                        <li>
+                            <a
+                                href="#cartModal"
+                                class="nav-link"
+                                data-toggle="modal">
+                                <i class="fa fa-cart-arrow-down"></i></a>
+
                         </li>
                         <li>
                             <a href="{{ route('logout') }}"

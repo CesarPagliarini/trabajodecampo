@@ -1,6 +1,4 @@
-
 $(document).ready(() => {
-
         $('#registerButton').click( (e) => {
         e.preventDefault();
         $('#registerForm').addClass('hidden');
@@ -29,6 +27,5 @@ $(document).ready(() => {
                 window.location.replace(data);
             }
         });
-
     });
 });

@@ -60,6 +60,10 @@ mix.styles([
     'resources/template/css/bootstrap.min.css',
     'resources/template/css/animate.css',
     'resources/template/css/style.css',
+    'resources/template/css/plugins/toastr/toastr.min.css',
+    'resources/template/css/plugins/datatables/dataTables.css',
+
+
 
 ], 'public/css/front/front-layout.css')
     .scripts([
@@ -68,14 +72,25 @@ mix.styles([
         'resources/template/js/bootstrap.min.js',
         'resources/template/js/plugins/metisMenu/jquery.metisMenu.js',
         'resources/template/js/plugins/slimscroll/jquery.slimscroll.min.js',
+        'resources/template/js/plugins/jquery-ui/jquery-ui.min',
+        'resources/template/js/plugins/table-js/footable.all.min.js',
         'resources/template/js/inspinia.js',
         'resources/template/js/plugins/pace/pace.min.js',
         'resources/template/js/plugins/wow/wow.min.js',
+        'resources/template/js/plugins/toastr/toastr.min.js',
+        'resources/template/js/plugins/iCheck/icheck.min.js',
+
+
     ], 'public/js/front/front-layout.js');
 mix.js([
     'resources/js/frontend/miscellaneous.js',
     'resources/js/frontend/register-form.js'
 ] ,'public/js/general-front.js');
+
+mix.js([
+    'resources/js/frontend/sales-cart.js',
+] ,'public/js/front/sales-cart.js');
+
 
 
 

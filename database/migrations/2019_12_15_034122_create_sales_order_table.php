@@ -20,14 +20,13 @@ class CreateSalesOrderTable extends Migration
             $table->unsignedBigInteger('shipping_way')->default(1);
             $table->unsignedBigInteger('sub_total');
             $table->unsignedBigInteger('client_id');
-            $table->unsignedBigInteger('admin_id');
-            $table->string('observation');
+            $table->string('observation')->nullable();
 
 
             $table->timestamps();
 
             //relations
-            $table->foreign('admin_id')->references('id')->on('users');
+
             $table->foreign('client_id')->references('id')->on('users');
             $table->foreign('state_id')->references('id')->on('sales_order_states');
         });

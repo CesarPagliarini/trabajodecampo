@@ -14,14 +14,16 @@ Auth::routes();
 
 Route::namespace('Frontend')->group(function(){
     Route::post('/client/register', 'ProfileController@register')->name('frontend.clients.register');
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeController@index')->name('frontend.home');
     Route::get('/client/confirm-email/{token}', 'ProfileController@confirmToken')->name('frontend.clients.email.confirmation');
     Route::get('/client/thanks-for-register', 'ProfileController@registerSuccess')->name('frontend.register-success');
     Route::get('/products', 'HomeController@showProducts')->name('frontend.products');
+    Route::get('/client-profile', 'ProfileController@profile')->name('frontend.client.profile')->middleware(['auth']);
 });
 
-
-
+Route::namespace('Backend\Sales')->group(function () {
+    Route::post('generate-order-sale', 'SalesController@generateOrderSale')->name('client.sent.order');
+});
 
 
 Route::get('forbidden','PanelController@forbidden')->name('forbidden');
@@ -50,6 +52,17 @@ Route::middleware(['auth','checkPermissions'])->prefix('panel')->group(function 
         Route::resource('subcategories', 'SubcategoryController');
         Route::resource('brands', 'BrandController');
     });
+    Route::namespace('Backend\Sales')->group(function () {
+        Route::get('pending-orders', 'SalesController@index')->name('backend.pending.orders');
+        Route::get('rejected-orders', 'SalesController@index')->name('backend.rejected.orders');
+        Route::get('accepted-orders', 'SalesController@index')->name('backend.accepted.orders');
+        Route::get('delivered-orders', 'SalesController@index')->name('backend.delivered.orders');
+        Route::get('in-prepare-orders', 'SalesController@index')->name('backend.inprepare.orders');
+
+        Route::resource('orders', 'SalesController')->except(['index']);
+    });
+
+
 
 });
 

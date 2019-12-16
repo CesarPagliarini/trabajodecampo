@@ -10,7 +10,7 @@
         <div class="tab-content">
             <div id="general" class="tab-pane active">
                 <div class="panel-body" style="padding-top:25px">
-                    <form action="{{route('ruta', parametro)}}"
+                    <form action="{{route('categories.update', [$category])}}"
                           class="form-horizontal offset-1"
                           method="POST">
                         @csrf
@@ -19,7 +19,7 @@
                             <label class="col-sm-2 control-label" for="input-name">Nombre <span class="oblig">*</span></label>
                             <div class="col-sm-8">
                                 <input id="input-name" type="text" class="form-control"
-                                       value="editar aqui"
+                                       value="{{$category->name}}"
                                        name="name">
                             </div>
                         </div>
@@ -27,7 +27,7 @@
                             <label class="col-sm-2 control-label" for="input-email">Descripcion <span class="oblig">*</span></label>
                             <div class="col-sm-8">
                                 <input id="input-email" type="text" class="form-control"
-                                       value="editar aqui"
+                                       value="{{$category->description}}"
                                        name="description">
                             </div>
                         </div>
@@ -35,10 +35,10 @@
                             <label class="col-sm-2 control-label">Estado</label>
                             <div class="col-sm-3">
 
-                                <div class="i-checks"><label> <input type="radio" value="1" name="state" @if((editar aqui)==1) checked="" @endif> <i></i> Activo </label></div>
+                                <div class="i-checks"><label> <input type="radio" value="1" name="state" @if(($category->state)==1) checked="" @endif> <i></i> Activo </label></div>
                             </div>
                             <div class="col-sm-3">
-                                <div class="i-checks"><label> <input type="radio" value="0" name="state" @if((editar aqui)==0) checked="" @endif > <i></i> Inactivo </label></div>
+                                <div class="i-checks"><label> <input type="radio" value="0" name="state" @if(($category->state)==0) checked="" @endif > <i></i> Inactivo </label></div>
                             </div>
                         </div>
 

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Backend\Store;
 
+use App\Entities\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -14,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('backend.store.categories.index', compact('categories'));
     }
 
     /**
@@ -24,7 +27,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.store.categories.create');
+
     }
 
     /**
@@ -35,29 +39,29 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try{
+            Category::create($request->all());
+            DB::commit();
+            $request->session()->flash('flash_message', 'La categoria se ha creado exitosamente!');
+            return redirect()->route('categories.index');
+        }catch (\Exception $e){
+            DB::rollBack();
+            dd($e->getMessage());
+            $request->session()->flash('flash_error', 'La categoria no se pudo crear!');
+            return redirect()->route('categories.index');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
+   /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('backend.store.categories.edit', compact('product','category'));
     }
 
     /**
@@ -67,19 +71,20 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        DB::beginTransaction();
+        try{
+            $category->update($request->all());
+            DB::commit();
+            $request->session()->flash('flash_message', 'La categoria se ha actualizado exitosamente!');
+            return redirect()->route('categories.index');
+        }catch (\Exception $e){
+            DB::rollBack();
+            dd($e->getMessage());
+            $request->session()->flash('flash_error', 'La categoria no se pudo actualizar!');
+            return redirect()->route('categories.index');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

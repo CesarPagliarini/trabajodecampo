@@ -7,11 +7,3 @@
         </div>
     </div>
 </div>
-
-<div class="carousel-item">
-    <div class="container">
-        <div class="row">
-
-        </div>
-    </div>
-</div>

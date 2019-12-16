@@ -51,18 +51,14 @@
                        value="{{$form->id}}"
                        name="ids[]">
             </td>
+
            <td>
                 <a class="accion"
                    @update('forms') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
                     {{$form->module? $form->module->name : 'Menu lateral'}}
                 </a>
             </td>
-            <td>
-                <a class="accion"
-                   @update('forms') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
-                    {{$form->name}}
-                </a>
-            </td>
+
             <td>
                 <a class="accion"
                    @update('forms') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >

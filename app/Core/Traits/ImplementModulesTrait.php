@@ -138,14 +138,14 @@ trait implementModulesTrait
                     'key' => 'subcategoriesForm',
                     'target' => 'panel/subcategories',
                     'icon' => 'fa fa-clone',
-                    'state' => '1',
+                    'state' => '0',
                     'order' => '2'];
                 $brandsForm = ['module_id' => $idModule,
                     'name' => 'Marcas',
                     'key' => 'brandsForm',
                     'target' => 'panel/brands',
                     'icon' => 'fa fa-bookmark-o',
-                    'state' => '1',
+                    'state' => '0',
                     'order' => '3'];
 
                 $productFormId = DB::table('forms')->insertGetId($productForm);
@@ -155,6 +155,88 @@ trait implementModulesTrait
 
                 $adminRole = Role::where('name', 'Administrador')->first()->id;
                 $formsToAttach = [$productFormId, $categoryFormId,$subcategoryFormId, $brandsFormId];
+                $permissions = Permission::all()->pluck('id')->toArray();
+                foreach($formsToAttach as $idForm)
+                {
+                    for($i = 0 ; $i < count($permissions) ;$i++) {
+                        DB::table('role_permissions_forms')->insert([
+                            'role_id' => intval($adminRole),
+                            'permission_id' => intval($permissions[$i]),
+                            'form_id' => intval($idForm),
+                        ]);
+                    }
+                }
+                DB::commit();
+            }catch(Exception $e){
+                DB::rollBack();
+
+            }
+        }
+
+    }
+
+    public function implementsOrderSalesModule(){
+
+        $orderSaleModule = Module::where('name','Pedidos')->first();
+        if(!$orderSaleModule){
+            try {
+                DB::beginTransaction();
+                $moduleData = [
+                    'name' => 'Pedidos',
+                    'description' => 'Modulo de gestion de pedidos',
+                    'internal_handler' => 'orders_handler',
+                    'icon' => 'fa fa-shopping-cart',
+                    'state' => '1',
+                    'order' => '1'];
+                $idModule = DB::table('modules')->insertGetId($moduleData);
+
+                //implements client forms
+
+                $order = ['module_id' => $idModule,
+                    'name' => 'Ordenes de pedido',
+                    'key' => 'orders',
+                    'target' => 'panel/orders',
+                    'icon' => 'fa fa-sort',
+                    'state' => '1',
+                    'order' => '0'];
+                $pendingForm = ['module_id' => $idModule,
+                    'name' => 'Ordenes pendientes',
+                    'key' => 'pendingOrders',
+                    'target' => 'panel/pending-orders',
+                    'icon' => 'fa fa-spinner',
+                    'state' => '1',
+                    'order' => '1'];
+                $rejecterForm = ['module_id' => $idModule,
+                    'name' => 'Ordenes rechazadas',
+                    'key' => 'rejectedOrders',
+                    'target' => 'panel/rejected-orders',
+                    'icon' => 'fa fa-clone',
+                    'state' => '1',
+                    'order' => '2'];
+                $aceptedForm = ['module_id' => $idModule,
+                    'name' => 'Ordenes aprobadas',
+                    'key' => 'acceptedOrders',
+                    'target' => 'panel/accepted-orders',
+                    'icon' => 'fa fa-clone',
+                    'state' => '1',
+                    'order' => '3'];
+                $deliveredForm = ['module_id' => $idModule,
+                    'name' => 'Ordenes entregadas',
+                    'key' => 'deliveredOrders',
+                    'target' => 'panel/delivered-orders',
+                    'icon' => 'fa fa-thumbs-o-up',
+                    'state' => '1',
+                    'order' => '4'];
+
+
+
+                $deliveredFormId = DB::table('forms')->insertGetId($deliveredForm);
+                $aceptedFormId =  DB::table('forms')->insertGetId($aceptedForm);
+                $rejecterFormId = DB::table('forms')->insertGetId($rejecterForm);
+                $pendingFormId =  DB::table('forms')->insertGetId($pendingForm);
+
+                $adminRole = Role::where('name', 'Administrador')->first()->id;
+                $formsToAttach = [$deliveredFormId, $aceptedFormId,$rejecterFormId, $pendingFormId];
                 $permissions = Permission::all()->pluck('id')->toArray();
                 foreach($formsToAttach as $idForm)
                 {

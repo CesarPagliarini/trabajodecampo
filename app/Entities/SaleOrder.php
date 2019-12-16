@@ -16,12 +16,8 @@ class SaleOrder extends BaseEntity
         'shipping_way',
         'sub_total',
         'client_id',
-        'admin_id',
     ];
 
-    public function inChargeAdmin(){
-        return $this->hasOne(User::class, 'id', 'admin_id');
-    }
     public function client(){
         return $this->hasOne(User::class, 'id', 'client_id');
     }
@@ -32,6 +28,10 @@ class SaleOrder extends BaseEntity
     public function details(){
         return $this->hasMany(SaleOrderDetail::class,'order_identifier', 'identifier');
     }
+
+
+
+
 
 
 }

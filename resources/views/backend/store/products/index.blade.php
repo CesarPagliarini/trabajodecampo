@@ -4,12 +4,12 @@
 @endsection
 @section('content')
 
-    @create('product')
+    @create('productForm')
     <a href="{{ route('products.create') }}"
        class="btn btn-primary">Nuevo
     </a>
     @endcreate
-    @delete('product')
+    @delete('productForm')
     <button data-placement="bottom"
             title="Borrar"
             type="button"
@@ -35,14 +35,16 @@
                 <input type="checkbox" class="i-checks todo">
             </td>
             <th>Nombre</th>
+            <th>Stock actual</th>
             <th>Descripción</th>
             <th>Categoria</th>
-            <th>Marca</th>
             <th>Precio</th>
+            <th>Estado</th>
 
         </tr>
         </thead>
         <tbody>
+        @if(count($products))
         @foreach($products as $product)
             <tr>
                 <td valign="top" class="check-mail">
@@ -51,41 +53,51 @@
                            value="{{$product->id}}"
                            name="ids[]">
                 </td>
-
                 <td>
                     <a class="accion"
-                       @update('products') href="{{route('products.edit', ['id'=>$product->id])}}" @endif >
+                       @update('productForm') href="{{route('products.edit', ['id'=>$product->id])}}" @endif >
                     {{$product->name}}
                     </a>
                 </td>
                 <td>
                     <a class="accion"
-                       @update('products') href="{{route('products.edit', ['id'=>$product->id])}}" @endif >
+                       @update('productForm') href="{{route('products.edit', ['id'=>$product->id])}}" @endif >
+                    {{$product->stock}}
+                    </a>
+                </td>
+                <td>
+                    <a class="accion"
+                       @update('productForm') href="{{route('products.edit', ['id'=>$product->id])}}" @endif >
                     {{$product->description}}
                     </a>
                 </td>
                 <td>
                     <a class="accion"
-                       @update('products') href="{{route('products.edit', ['id'=>$product->id])}}" @endif >
+                       @update('productForm') href="{{route('products.edit', ['id'=>$product->id])}}" @endif >
                     {{$product->category->name}}
                     </a>
                 </td>
                 <td>
                     <a class="accion"
-                       @update('products') href="{{route('products.edit', ['id'=>$product->id])}}" @endif >
-                        {{$product->brand->name}}
+                       @update('productForm') href="{{route('products.edit', ['id'=>$product->id])}}" @endif >
+                         AR$ {{$product->price}}
                     </a>
                 </td>
                 <td>
-                    <a class="accion"
-                       @update('products') href="{{route('products.edit', ['id'=>$product->id])}}" @endif >
-                        {{$product->price->value}}
+                    <a href="{{route('products.edit', [$product->id])}}" class="accion">
+
+                        @if(($product->state)==0)
+                            <span class="label label-danger pull-right">Inactivo</span>
+                        @else
+                            <span class="label label-primary pull-right">Activo</span>
+                        @endif
                     </a>
                 </td>
-
-
             </tr>
         @endforeach
+        @else
+            No existen productos cargados
+        @endif
         </tbody>
         <tfoot>
         <tr>

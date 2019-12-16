@@ -11849,6 +11849,10 @@ body.landing-page {
     background: #f4f4f4;
     margin-top: 60px;
 }
+.landing-page .white-section{
+    background: #FFFFFF;
+    margin-top: 60px;
+}
 .landing-page .team-member {
     text-align: center;
 }

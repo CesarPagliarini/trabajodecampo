@@ -105,5 +105,18 @@ class User extends BaseEntity implements Authenticatable
 
 
 
+    public function salesOrders(){
+        return $this->hasMany(SaleOrder::class, 'client_id', 'id');
+    }
+
+    public function hasOrders(){
+        if(count($this->salesOrders)){
+            return true;
+        }
+        return false;
+    }
+
+
+
 
 }

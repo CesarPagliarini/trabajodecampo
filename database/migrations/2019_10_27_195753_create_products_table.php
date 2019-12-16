@@ -23,13 +23,13 @@ class CreateProductsTable extends Migration
             $table->enum('state', [1,0])->default(1);
             $table->unsignedBigInteger('stock')->default(0);
             $table->unsignedBigInteger('subcategory_id')->nullable()->default(null);
-            $table->unsignedBigInteger('brand_id');
+            $table->unsignedBigInteger('brand_id')->nullable()->default(null);
             $table->unsignedBigInteger('category_id');
             $table->timestamps();
 
             //relationships
             $table->foreign('subcategory_id')->references('id')->on('subcategories');
-            $table->foreign('brand_id')->references('id')->on('brands');
+
             $table->foreign('category_id')->references('id')->on('categories');
 
         });

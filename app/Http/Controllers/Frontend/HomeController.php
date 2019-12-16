@@ -9,6 +9,7 @@ use App\Entities\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
 
 class HomeController extends BaseController implements ControllerContract
 {
@@ -18,7 +19,14 @@ class HomeController extends BaseController implements ControllerContract
     }
 
     public function showProducts(){
-        $products = Product::all();
+
+
+        $products = new Collection();
+        foreach (Product::all() as $product){
+            $product['precio'] = $product->price;
+            $products->push($product);
+        }
+
         return view('frontend.pages.products', compact('products'));
     }
 }

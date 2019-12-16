@@ -46,6 +46,9 @@ class Form extends BaseEntity implements ComponentInterface
 
     public function render()
     {
+        if($this->checkState()){
+
+
             return '
              <li class="'.$this->checkActive().'">
                 <a href="'.url($this->target).'"><i class="'.$this->icon.'"></i>
@@ -55,10 +58,14 @@ class Form extends BaseEntity implements ComponentInterface
                 </a>
             </li>
         ';
+        }else{
+            return false;
+        }
     }
 
     public function checkActive()
     {
+
         $current = Route::current()->uri;
         $atLeast = Str::contains( $current, $this->target);
         if($atLeast || $current === $this->target){
@@ -78,6 +85,12 @@ class Form extends BaseEntity implements ComponentInterface
         else{
             return false;
         }
+    }
 
+    public function checkState(){
+        if(isset($this->attributes['state'])){
+            return $this->state === '1';
+        }
+        return true;
     }
 }

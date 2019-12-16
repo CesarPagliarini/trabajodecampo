@@ -18,7 +18,6 @@
 </div>
 <div class="row m-b-lg">
     <div class="col-lg-12 text-center">
-        <div class="navy-line"></div>
-        <a href="{{route('frontend.products')}}" type="submit" class="btn btn-primary  m-b">Ver todos</a>
+        <a href="{{route('frontend.products')}}" class="btn btn-primary  m-b">Ver todos los productos</a>
     </div>
 </div>

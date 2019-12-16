@@ -4,12 +4,12 @@
 @endsection
 @section('content')
 
-    @create('editar')
-    <a href="{{ route('editar.create') }}"
+    @create('categoriesForm')
+    <a href="{{ route('categories.create') }}"
        class="btn btn-primary">Nuevo
     </a>
     @endcreate
-    @delete('editar')
+    @delete('categoriesForm')
     <button data-placement="bottom"
             title="Borrar"
             type="button"
@@ -36,43 +36,33 @@
             </td>
             <th>Nombre</th>
             <th>Descripcion</th>
-            <th>Acciones</th>
             <th class="pull-right">Estado</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($editar as $role)
+        @foreach($categories as $category)
         <tr>
             <td valign="top" class="check-mail">
                 <input type="checkbox"
                        class="i-checks"
-                       value="{{parametro}}"
+                       value="{{$category->id}}"
                        name="ids[]">
             </td>
            <td>
                 <a class="accion"
-                   @update('editar') href="{{route('ruta', ['id'=>parametro])}}" @endif >
-                    {{$role->name}}
+                   @update('categoriesForm') href="{{route('categories.edit', ['id'=>$category->id])}}" @endif >
+                    {{$category->name}}
                 </a>
             </td>
             <td>
                 <a class="accion"
-                   @update('editar') href="{{route('ruta', ['id'=>parametro])}}" @endif >
-                    {{$role->description}}
+                   @update('categoriesForm') href="{{route('categories.edit', ['id'=>$category->id])}}" @endif >
+                    {{$category->description}}
                 </a>
             </td>
             <td>
-                <a class="accion "
-                   @update('editar') href="{{route('ruta', ['id'=>parametro])}}" @endif >
-                <div class="col-md-2 offset-1">
-                    <i class="fa fa-key" aria-hidden="true"></i>
-                </div>
-
-                </a>
-            </td>
-            <td>
-                <a href="{{route('users.edit', [parametro])}}" class="accion">
-                    @if(($role->state)==0)
+                <a href="{{route('categories.edit', ['id'=>$category->id])}}" class="accion">
+                    @if(($category->state)==0)
                         <span class="label label-danger pull-right ">Inactivo</span>
                     @else
                         <span class="label label-primary pull-right ">Activo</span>
@@ -93,7 +83,7 @@
     </table>
     @component('backend.modals.sure-delete')
         @slot('modelToDelete')
-            deleteRoles
+            deleteCategory
         @endslot
         @slot('question')
             ¿Esta seguro de eliminar este editar?
@@ -105,9 +95,9 @@
 @section('custom-scripts')
     <script>
         const bulkConfig = {
-            'model': 'role',
+            'model': 'category',
             'soft':true,
-            'modalName':'deleteRoles'
+            'modalName':'deleteCategory'
         }
     </script>
     <script src="{{asset('js/requests/bulk-delete.js')}}"></script>
