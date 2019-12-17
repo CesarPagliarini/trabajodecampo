@@ -40,17 +40,24 @@ class SaleOrder extends BaseEntity
     }
 
     public function getLastModifiedAttribute(){
-        return $this->history->sortByDesc('created_at')->first()->createdParsed;
+        if(count($this->history)){
+            return $this->history->sortByDesc('created_at')->first()->createdParsed;
+        }
+        return '---';
+
     }
     public function getLastHistoryAttribute(){
-        return $this->history->sortByDesc('created_at')->first();
+        if(count($this->history)) {
+            return $this->history->sortByDesc('created_at')->first();
+        }
+        return false;
     }
 
     public function getLastAdminAttribute(){
 
-        $admin = $this->lastHistory->admin;
-        if($admin && $admin->hasAccessToPanel()){
-            return $admin->fullName;
+        $history = $this->lastHistory;
+        if($history && $history->admin->hasAccessToPanel()){
+            return $history->admin->fullName;
         }else{
             return '---';
         }

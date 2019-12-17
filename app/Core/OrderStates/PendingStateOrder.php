@@ -7,6 +7,7 @@ use App\Core\Entities\StateHanddler;
 use App\Core\Interfaces\OrderStateInterface;
 use App\Entities\SaleOrder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PendingStateOrder extends StateHanddler implements OrderStateInterface
@@ -29,10 +30,11 @@ class PendingStateOrder extends StateHanddler implements OrderStateInterface
 
     function edit(): Array
     {
+
         $this->state['title'] = 'Editar orden';
         $this->state['order'] = $this->orderObject;
         $this->state['formAccessor'] = 'pendingOrders';
-        $this->state['rejectRoute'] = true;
+        $this->state['rejectRoute'] =Auth::user()->can( 'pendingOrders'.'.delete');
         $this->state['routeBack'] = 'backend.pending.orders';
         $this->state['forwardButton'] = 'Aceptar';
 
@@ -49,6 +51,7 @@ class PendingStateOrder extends StateHanddler implements OrderStateInterface
 
     function update(): Array
     {
+
         try{
             $identifier = $this->orderObject->identifier;
             foreach($this->orderObject->details as $detail){
@@ -87,8 +90,9 @@ class PendingStateOrder extends StateHanddler implements OrderStateInterface
     function index(): Array
     {
 
+
         $this->state['orders'] = SaleOrder::where('state_id', $this->stateId)->get();
-        $this->state['formAccessor'] = 'rejectedOrders';
+        $this->state['formAccessor'] = 'pendingOrders';
         $this->state['title'] = 'Ordenes pendientes';
         $this->state['route'] = $this->editionRoute;
 

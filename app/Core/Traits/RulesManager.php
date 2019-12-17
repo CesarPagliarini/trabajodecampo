@@ -5,6 +5,8 @@ namespace App\Core\Traits;
 
 
 use App\Entities\RolePermissionsForms;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 trait RulesManager
 {
@@ -35,23 +37,28 @@ trait RulesManager
 
     public function can($permission)
     {
-        $forms = $this->forms;
-        $searched = explode('.',$permission);
-        if(!is_null($forms)) {
-            $collection = $this->forms->where('key', $searched[0])
-                ->first();
 
-            if(is_null($collection)){
-                return false;
-            }else{
-               $collection =  $collection->permissions->pluck('action')->unique();
-            }
-            if ($collection->contains('all'))
+        //llega permission key del formulario . accion
+        //explode 0 es la key de form, explode 1 es la accion
+
+        $searched = explode('.',$permission);
+        $roles = Auth::user()->roles->pluck('id')->unique();
+        $form = $searched[0];
+        $action = $searched[1];
+
+        $permission = DB::table('permissions')->where('action', $searched[1])->first('id');
+        $form = DB::table('forms')->where('key', $searched[0])->first('id');
+
+            $triada = DB::table('role_permissions_forms')
+                ->where('permission_id', $permission->id)
+                ->where('form_id', $form->id)
+                ->whereIn('role_id', $roles)->count();
+            if($triada){
                 return true;
-            return $collection->contains($searched[1]);
-        }else{
-            return false;
-        }
+            }else{
+                return false;
+            }
+
     }
 
     public function roleCan($triada)

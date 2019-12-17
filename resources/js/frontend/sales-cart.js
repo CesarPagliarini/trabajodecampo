@@ -129,4 +129,4 @@ $(document).ready(function(){
         let item = products.find( (el) => { return  el.id == clicked } );
         $(document).trigger('addThisProductToCart', [ { item }]);
     });
-})
+});

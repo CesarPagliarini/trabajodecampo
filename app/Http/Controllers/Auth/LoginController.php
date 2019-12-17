@@ -44,6 +44,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if( ! $user->hasAccessToPanel()){
+
             if($user->state != '1'){
                 Auth::logout();
                 $this->redirectTo = '/';
@@ -51,6 +52,7 @@ class LoginController extends Controller
                     'status_0' => ['Verify your email acount'],
                 ]);
             }
+
             $this->redirectTo = '/';
         }
         return redirect()->to($this->redirectTo);

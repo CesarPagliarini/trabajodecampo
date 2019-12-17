@@ -38,8 +38,11 @@ class SaleOrderState extends BaseEntity
             default:
                 return '';
             break;
-
         }
+    }
+
+    public function orders(){
+        return $this->hasMany(SaleOrder::class, 'state_id', 'id');
     }
 
 }

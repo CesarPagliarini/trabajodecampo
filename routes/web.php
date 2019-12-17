@@ -11,7 +11,6 @@
 |
 */
 Auth::routes();
-
 Route::namespace('Frontend')->group(function(){
     Route::post('/client/register', 'ProfileController@register')->name('frontend.clients.register');
     Route::get('/', 'HomeController@index')->name('frontend.home');
@@ -60,10 +59,13 @@ Route::middleware(['auth','checkPermissions'])->prefix('panel')->group(function 
         Route::get('accepted-orders', 'SalesOrderController@index')->name('backend.accepted.orders');
         Route::get('delivered-orders', 'SalesOrderController@index')->name('backend.delivered.orders');
         Route::get('in-prepare-orders', 'SalesOrderController@index')->name('backend.inprepare.orders');
-
         Route::resource('orders', 'SalesOrderController')->only(['update', 'edit']);
     });
 
+    Route::namespace('Backend\Reports')->group(function () {
+        Route::post('/reports', 'ReportController@report')->name('backend.reports');
+        Route::post('/reports/single', 'ReportController@reportSingle')->name('backend.reports.single');
+    });
 
 
 });

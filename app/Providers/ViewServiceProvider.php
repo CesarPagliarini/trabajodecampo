@@ -7,6 +7,7 @@ use App\Entities\Form;
 use App\Entities\Module;
 
 use App\Entities\Product;
+use App\Entities\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -53,6 +54,19 @@ class ViewServiceProvider extends ServiceProvider
         ], function ($view) {
             $products = Product::all();
             $view->with('products',$products);
+        });
+
+        View::composer([
+            'backend.home'
+        ], function ($view) {
+            $data = [
+                'clients' =>User::allClients('active')->count(),
+                'products' =>DB::table('products')->count(),
+                'delivered' => DB::table('sales_order')->where('state_id',5)->count(),
+                'totalOrders' => DB::table('sales_order')->count(),
+            ];
+
+            $view->with($data);
         });
 
     }

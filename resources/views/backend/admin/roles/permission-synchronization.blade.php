@@ -22,6 +22,7 @@
         <thead>
         <tr>
             <th>Formulario</th>
+            <th>Módulo</th>
             @foreach($permissions as $permission)
                 <th>{{$permission->name}}</th>
             @endforeach
@@ -33,6 +34,11 @@
                 <td>
                     <a class="accion">
                         {{$form->name}}
+                    </a>
+                </td>
+                <td>
+                    <a class="accion">
+                        {{isset($form->module) ? $form->module->name : 'Menu principal'}}
                     </a>
                 </td>
                 @foreach($permissions as $permission)
