@@ -76,7 +76,7 @@ trait RulesManager
     {
         foreach ($this->roles()->get() as $role)
         {
-            if ($role->name == 'Cliente')
+            if ($role->name === 'Cliente')
             {
                 return false;
             }
