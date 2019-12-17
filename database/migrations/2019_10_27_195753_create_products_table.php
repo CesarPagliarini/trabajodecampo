@@ -28,7 +28,7 @@ class CreateProductsTable extends Migration
             $table->timestamps();
 
             //relationships
-            $table->foreign('subcategory_id')->references('id')->on('subcategories');
+
 
             $table->foreign('category_id')->references('id')->on('categories');
 

@@ -6,6 +6,7 @@ use App\Core\Controllers\BaseController;
 use App\Core\interfaces\ControllerContract;
 use App\Entities\Form;
 use App\Entities\Module;
+use App\Entities\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,6 +20,7 @@ class FormsController extends BaseController implements ControllerContract
      */
     public function index()
     {
+
 
         $forms = Form::all()->sortBy('order');
         return view('backend.admin.forms.index', compact('forms'));

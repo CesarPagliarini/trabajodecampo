@@ -2,6 +2,7 @@
 
 use App\Entities\Role;
 use App\Entities\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,45 +15,67 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 4)->create();
-        $idTom = DB::table('users')->insertGetId([
-            'name' => 'tomas',
-            'email' => 'tomas@genesis.com',
-            'password' => bcrypt('tomas'),
-        ]);
+
         $adminRole = Role::where('name', 'Administrador')->first()->id;
+        $idAdmin = DB::table('users')->insertGetId([
+            'name' => 'administrador',
+            'last_name' => 'apellido administrador',
+            'email' => 'administrador@genesis.com',
+            'password' => bcrypt('123'),
+        ]);
         DB::table('user_roles')->insert([
-            'user_id' => $idTom,
+            'user_id' => $idAdmin,
             'role_id' => $adminRole,
         ]);
 
-        $idMaxi = DB::table('users')->insertGetId([
-            'name' => 'maxi',
-            'email' => 'maxi@genesis.com',
-            'password' => bcrypt('maxi'),
+        $adminVentasRole = Role::where('name', 'Gestor de ventas')->first()->id;
+        $idVentas = DB::table('users')->insertGetId([
+            'name' => 'gestor de ventas',
+            'last_name' => 'apellido gestor ventas',
+            'email' => 'ventas@genesis.com',
+            'password' => bcrypt('123'),
         ]);
         DB::table('user_roles')->insert([
-            'user_id' => $idMaxi,
-            'role_id' => $adminRole,
+            'user_id' => $idVentas,
+            'role_id' => $adminVentasRole,
         ]);
 
-        $date = DateTime::createFromFormat('Y-m-d', '1991-07-20');
-        $idCalvo = DB::table('users')->insertGetId([
-            'name' => 'pelado',
-            'email' => 'pelado@genesis.com',
-            'password' => bcrypt('pelado'),
-            'last_name' => 'arfeli',
-            'address' => 'la casa 123',
-            'cel_phone' => '345419874',
-            'city' => 'rosario',
-            'region'=> 'santa fe',
-            'zip_code' => '2000',
-            'country'=> 'argentina',
-            'date_of_birthday' => $date,
+
+        $adminUserRoles = Role::where('name', 'Gestor de usuarios')->first()->id;
+        $idadminUsers = DB::table('users')->insertGetId([
+            'name' => 'gestor de usuarios',
+            'last_name' => 'apellido gestor usuarios',
+            'email' => 'usuarios@genesis.com',
+            'password' => bcrypt('123'),
         ]);
+        DB::table('user_roles')->insert([
+            'user_id' => $idadminUsers,
+            'role_id' => $adminUserRoles,
+        ]);
+
+
         $clientRole = Role::where('name', 'Cliente')->first()->id;
+
+
+        for($i = 0; $i <= 10; $i++){
+            $idCliente = DB::table('users')->insertGetId([
+                'name' => 'Cliente de test '.$i,
+                'last_name' => 'Apellido de test '.$i,
+                'email' => 'cliente'.$i.'@genesis.com',
+                'password' => bcrypt('123'),
+                'cuit_cuil' => '203600635'.$i,
+                'document' => '3600635'.$i,
+                'address' => 'calle 123',
+                'cel_phone' => '34541999555',
+                'city' => 'Rosario',
+                'region' => 'Santa fe',
+                'zip_code' => '2000',
+                'country' => 'Argentina',
+                'date_of_birthday' => Carbon::yesterday()
+            ]);
+        }
         DB::table('user_roles')->insert([
-            'user_id' => $idCalvo,
+            'user_id' => $idCliente,
             'role_id' => $clientRole,
         ]);
 

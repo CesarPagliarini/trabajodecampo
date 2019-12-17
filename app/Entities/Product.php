@@ -51,6 +51,7 @@ class Product extends BaseEntity
         if($price){
             return $price->value;
         }
+
     }
 
 

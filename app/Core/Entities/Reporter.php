@@ -2,12 +2,11 @@
 
 namespace App\Core\Entities;
 
-use App\Core\interfaces\ReportContract;
 use App\Core\ReportStrategies\ClientReportStrategy;
 use App\Core\ReportStrategies\OrderReportStrategy;
 use App\Core\ReportStrategies\StrategyContext;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
+
 
 
 class Reporter extends Model

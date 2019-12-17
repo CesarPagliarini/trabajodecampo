@@ -14,8 +14,14 @@ class CategoryTableSeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            'name' => 'Peluquerias',
-            'description' => 'Productos peluquerias',
+            'name' => 'Categoria 1',
+            'description' => 'Categoria de test 1',
+            'state' => '1'
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Categoria 2',
+            'description' => 'Categoria de test 2',
             'state' => '1'
         ]);
 

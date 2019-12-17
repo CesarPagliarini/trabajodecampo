@@ -14,19 +14,18 @@ class PriceTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('prices')->insert([
-            'value' => '25',
-            'currency_id' => '1',
-            'product_id' => '1',
-            'vigency_to' => Carbon::now()->addDays(25),
-            'vigency_from' => Carbon::now()
-        ]);
-        DB::table('prices')->insert([
-            'value' => '25',
-            'currency_id' => '1',
-            'product_id' => '2',
-            'vigency_to' => Carbon::now()->addDays(25),
-            'vigency_from' => Carbon::now()
-        ]);
+
+        $prices = [];
+        for($i = 1; $i <= 6; $i++){
+            $price = [
+                'value' => ($i%2===0) ? $i+98 : $i+99,
+                'currency_id' => '1',
+                'product_id' => $i,
+                'vigency_to' => Carbon::now()->addDays(25),
+                'vigency_from' => Carbon::now()
+            ];
+            array_push($prices,$price);
+        }
+        DB::table('prices')->insert($prices);
     }
 }

@@ -17,6 +17,7 @@ class RolePermissionFormTableSeeder extends Seeder
     {
         $idSuperAdmin = Role::where('name','Super administrador')->first()->id;
         $idAdmin = Role::where('name', 'Administrador')->first()->id;
+
         $permissions = Permission::all()->pluck('id')->toArray();
         $forms = Form::all()->pluck('id')->toArray();
 

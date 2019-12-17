@@ -23,11 +23,11 @@ class ProfileController extends BaseController implements ControllerContract
             DB::beginTransaction();
             $client = User::create($request->all());
             $client->roles()->sync(Role::where('name', 'Cliente')->first()->id);
-//            $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-//            $token = '';
-//            for ($i = 0; $i < 5; $i++)
-//                $token .= $characters[mt_rand(0, 61)];
-            $token = 'abc';
+            $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+            $token = '';
+            for ($i = 0; $i < 15; $i++)
+                $token .= $characters[mt_rand(0, 61)];
+
             $client->email_verification_token = $token;
             $client->state = '0';
             $client->save();

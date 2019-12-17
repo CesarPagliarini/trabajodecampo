@@ -112,7 +112,10 @@ $(document).ready(function () {
       url: url,
       data: data,
       success: function success(data) {
-        console.log(data);
+        if (data.success) {
+          toastr.success('Excelente, estaremos en contacto, puedes seguir tu orden de compra en tu perfil');
+        }
+
         window.location.replace('/client-profile');
       }
     });
@@ -131,8 +134,8 @@ $(document).ready(function () {
       $('#cartItemCount').text(productsInCart.length);
       toastr.success('Se ha agregado ' + item.name + ' al carrito');
       productsInCart.forEach(function (el) {
-        var cantidad = $('#itemUnitPrice' + el.id);
-        var total = $('#itemTotalPrice' + el.id);
+        var cantidad = $('#itemUnitPrice' + item.id);
+        var total = $('#itemTotalPrice' + item.id);
         total.val(cantidad.val() * item.precio);
         cantidad.change(function () {
           total.val(cantidad.val() * item.precio);

@@ -13,42 +13,42 @@ class BrandTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('brands')->insert([
-            'name' => 'Johnsons',
-            'description' => 'Productos varios',
-            'origin' => 'Usa',
-            'state' => '1'
-        ]);
-        DB::table('brands')->insert([
-            'name' => 'P&G',
-            'description' => 'Productos varios',
-            'origin' => 'Usa',
-            'state' => '1'
-        ]);
-        DB::table('brands')->insert([
-            'name' => 'Capilatis',
-            'description' => 'Productos varios',
-            'origin' => 'Usa',
-            'state' => '1'
-        ]);
-        DB::table('brands')->insert([
-            'name' => '919',
-            'description' => 'Productos varios peluquerias',
-            'origin' => 'Brasil',
-            'state' => '1'
-        ]);
-        DB::table('brands')->insert([
-            'name' => 'P&G',
-            'description' => 'Productos odontologicos',
-            'origin' => 'Brasil',
-            'state' => '1'
-        ]);
-        DB::table('brands')->insert([
-            'name' => 'P&G',
-            'description' => 'Productos de tocador',
-            'origin' => 'Argentina',
-            'state' => '1'
-        ]);
+//        DB::table('brands')->insert([
+//            'name' => 'Johnsons',
+//            'description' => 'Productos varios',
+//            'origin' => 'Usa',
+//            'state' => '1'
+//        ]);
+//        DB::table('brands')->insert([
+//            'name' => 'P&G',
+//            'description' => 'Productos varios',
+//            'origin' => 'Usa',
+//            'state' => '1'
+//        ]);
+//        DB::table('brands')->insert([
+//            'name' => 'Capilatis',
+//            'description' => 'Productos varios',
+//            'origin' => 'Usa',
+//            'state' => '1'
+//        ]);
+//        DB::table('brands')->insert([
+//            'name' => '919',
+//            'description' => 'Productos varios peluquerias',
+//            'origin' => 'Brasil',
+//            'state' => '1'
+//        ]);
+//        DB::table('brands')->insert([
+//            'name' => 'P&G',
+//            'description' => 'Productos odontologicos',
+//            'origin' => 'Brasil',
+//            'state' => '1'
+//        ]);
+//        DB::table('brands')->insert([
+//            'name' => 'P&G',
+//            'description' => 'Productos de tocador',
+//            'origin' => 'Argentina',
+//            'state' => '1'
+//        ]);
 
     }
 }

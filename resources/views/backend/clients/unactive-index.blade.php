@@ -3,12 +3,12 @@
     Clientes inactivos
 @endsection
 @section('content')
-    @create('clients')
+    @create('unactiveClients')
     <a href="{{ route('clients.create') }}"
        class="btn btn-primary">Nuevo
     </a>
     @endcreate
-    @delete('activeClients')
+    @delete('unactiveClients')
     <button data-placement="bottom"
             title="Borrar"
             type="button"
@@ -49,13 +49,13 @@
                 </td>
                 <td>
                     <a class="accion"
-                       @update('activeClients') href="{{route('clients.edit', ['id'=>$client->id])}}" @endif >
+                       @update('unactiveClients') href="{{route('clients.edit', ['id'=>$client->id])}}" @endif >
                     {{$client->fullname}}
                     </a>
                 </td>
                 <td>
                     <a class="accion"
-                       @update('activeClients')href="{{route('clients.edit', ['id'=>$client->id])}}" @endif >
+                       @update('unactiveClients')href="{{route('clients.edit', ['id'=>$client->id])}}" @endif >
                     {{$client->email}}
                     </a>
                 </td>

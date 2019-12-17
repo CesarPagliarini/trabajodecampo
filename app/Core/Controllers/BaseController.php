@@ -5,6 +5,7 @@ namespace App\Core\Controllers;
 
 
 
+use App\Entities\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 abstract class BaseController extends Controller
 {
+
 
     public function bulkDelete(Request $request)
     {

@@ -40,7 +40,8 @@ mix.styles([
     'resources/template/js/plugins/table-js/common-table.js',
     'resources/template/js/plugins/toastr/toastr.min.js',
     'resources/template/js/plugins/datepicker/bootstrap-datepicker.js',
-    'resources/template/js/plugins/summernote/summernote-bs4.js'
+    'resources/template/js/plugins/summernote/summernote-bs4.js',
+    'resources/template/js/plugins/chartJs/Chart.min.js'
 ], 'public/js/panel.js');
 
 mix.js([
@@ -48,7 +49,11 @@ mix.js([
 
 ], 'public/js/requests/bulk-delete.js');
 
-mix.js('resources/js/miscellaneous.js', 'public/js/general.js');
+mix.js([
+        'resources/js/miscellaneous.js',
+        'resources/js/ajax-forms/admin/order-reporter.js'
+
+    ], 'public/js/general.js');
 mix.js('resources/js/ajax-forms/admin/rejection-handler.js', 'public/js/reject.js');
 
 mix.styles([

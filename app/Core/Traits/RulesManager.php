@@ -5,6 +5,7 @@ namespace App\Core\Traits;
 
 
 use App\Entities\RolePermissionsForms;
+use App\Entities\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 

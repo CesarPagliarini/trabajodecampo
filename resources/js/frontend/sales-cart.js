@@ -88,8 +88,8 @@ $(document).ready(function(){
             $('#cartItemCount').text(productsInCart.length);
             toastr.success('Se ha agregado '+ item.name +' al carrito');
             productsInCart.forEach( (el) => {
-                let cantidad = $('#itemUnitPrice'+el.id);
-                let total =  $('#itemTotalPrice'+el.id);
+                let cantidad = $('#itemUnitPrice'+item.id);
+                let total =  $('#itemTotalPrice'+item.id);
                 total.val(cantidad.val()*item.precio);
                 cantidad.change( () => {
                     total.val(cantidad.val()*item.precio);

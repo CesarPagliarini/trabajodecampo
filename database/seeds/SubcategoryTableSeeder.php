@@ -13,11 +13,11 @@ class SubcategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('subcategories')->insert([
-            'name' => 'Shampoo',
-            'description' => 'Shampoo general',
-            'category_id' => '1',
-            'state' => '1'
-        ]);
+//        DB::table('subcategories')->insert([
+//            'name' => 'Shampoo',
+//            'description' => 'Shampoo general',
+//            'category_id' => '1',
+//            'state' => '1'
+//        ]);
     }
 }

@@ -14,26 +14,22 @@ class ProductTableSeeder extends Seeder
     public function run()
     {
 
-        DB::table('products')->insert([
-            'name' => 'Shampoo anti caspa',
-            'description' => 'El mejor shampoo anticaspa recomendado por los mejores dermatologos',
-            'dimension' => '1',
-            'unit' => '1',
-            'provider' => 'Kellerhoff',
-            'subcategory_id' => '1',
-            'brand_id' => '1',
-            'category_id' => '1',
-        ]);
-        DB::table('products')->insert([
-            'name' => 'Acondicionador rulos rebeldes',
-            'description' => 'Con este super acondicionador decile chau a los rulos rebeldes',
-            'dimension' => '1',
-            'unit' => '1',
-            'provider' => 'Kellerhoff',
-            'subcategory_id' => '1',
-            'brand_id' => '1',
-            'category_id' => '1',
-        ]);
+        $productos = [];
+
+        for($i = 0; $i <= 5; $i++){
+           $prod = [
+                'name' => 'producto'.$i,
+                'description' => 'Producto de test'.$i,
+                'dimension' => '1',
+                'unit' => '1',
+                'provider' => '1',
+                'subcategory_id' => '1',
+                'brand_id' => '1',
+                'category_id' => '1',
+            ];
+           array_push($productos, $prod);
+        }
+        DB::table('products')->insert($productos);
 
 
 
