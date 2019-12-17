@@ -25,7 +25,6 @@
             <th>Fecha de solicitud</th>
             <th>Monto total</th>
 
-            <th class="pull-right">Estado</th>
         </tr>
         </thead>
         <tbody>
@@ -63,14 +62,6 @@
                     AR$ {{$order->sub_total}}
                 </a>
             </td>
-
-            <td>
-                <a class="accion"
-                   @update($formAccessor) href="{{route($route, ['id'=>$order->id])}}" @endif >
-                    AR$ {{$order->sub_total}}
-                </a>
-            </td>
-
 
         </tr>
         @foreach($order->details as $detail)

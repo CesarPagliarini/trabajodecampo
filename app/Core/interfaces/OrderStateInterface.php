@@ -2,19 +2,21 @@
 
 
 namespace App\Core\Interfaces;
-
-
-
+use App\Entities\SaleOrder;
+use Illuminate\Http\Request;
 
 interface OrderStateInterface
 {
 
-    public function __construct();
+    function __construct(Request $request,  $order = null);
 
-    public static function state();
+    function edit();
 
-     function editionState();
-     function creationState();
-     function indexState();
-     function getState();
+     function update();
+
+     function index();
+
+     function returnState();
+
+
 }

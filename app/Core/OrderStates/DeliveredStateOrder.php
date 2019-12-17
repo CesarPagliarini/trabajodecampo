@@ -4,44 +4,59 @@
 namespace App\Core\OrderStates;
 
 
-use App\Core\Entities\BaseEntity;
+
+use App\Core\Entities\StateHanddler;
 use App\Core\Interfaces\OrderStateInterface;
 use App\Entities\SaleOrder;
+use Illuminate\Http\Request;
 
-class DeliveredStateOrder extends AbstractState implements OrderStateInterface
+class DeliveredStateOrder extends StateHanddler implements OrderStateInterface
 {
 
-        public static function state(){
-            return new static();
-        }
+    public $state = [];
+    public $stateId;
+    public $nextState;
 
 
-    function editionState()
+    public function __construct( Request $request, $order = null )
     {
-        // TODO: Implement editionState() method.
+        parent::__construct();
+        $this->request = $request;
+        $this->orderObject = $order;
+        $this->stateId = 5;
+        $this->nextState = 5;
     }
 
-    function creationState()
+    function edit()
     {
-        // TODO: Implement creationState() method.
+        $this->state['title'] = 'Orden entregada.';
+        $this->state['order'] = $this->orderObject;
+        $this->state['formAccessor'] = 'deliveredOrder';
+        $this->state['rejectRoute'] = false;
+        $this->state['routeBack'] = 'backend.delivered.orders';
+        $this->state['forwardButton'] = 'Entregar';
+        $this->state['canUpdate'] = false;
+
+        return $this->returnState();
     }
 
-    function indexState()
+    function update()
     {
-        $this->orders = SaleOrder::where('state_id', 5)->get();
-        $this->formAccessor = 'deliveredOrders';
-        $this->title = 'Ordenes entregadas';
-        return $this->getState();
+
     }
 
-    function getState()
+    function index()
     {
-        return [
-            'orders' => $this->orders,
-            'formAccessor' => $this->formAccessor,
-            'route' => $this->editionRoute,
-            'title' => $this->title,
-            'createRoute' =>$this->createRoute
-        ];
+        $this->state['orders'] = SaleOrder::where('state_id', $this->stateId)->get();
+        $this->state['formAccessor'] = 'inPrepareOrders';
+        $this->state['title'] = 'Ordenes en preparación';
+        $this->state['route'] = $this->editionRoute;
+
+        return $this->returnState();
+    }
+
+    function returnState()
+    {
+        return $this->state;
     }
 }

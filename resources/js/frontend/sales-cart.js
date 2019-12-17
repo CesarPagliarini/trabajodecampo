@@ -23,7 +23,9 @@ $(document).ready(function(){
             url:url,
             data:data,
             success:function(data){
-                console.log(data);
+                if(data.success){
+                    toastr.success('Excelente, estaremos en contacto, puedes seguir tu orden de compra en tu perfil')
+                }
                 window.location.replace('/client-profile');
             }
         });

@@ -22,7 +22,7 @@ Route::namespace('Frontend')->group(function(){
 });
 
 Route::namespace('Backend\Sales')->group(function () {
-    Route::post('generate-order-sale', 'SalesController@generateOrderSale')->name('client.sent.order');
+    Route::post('generate-order-sale', 'SalesOrderController@generateOrderSale')->name('client.sent.order');
 });
 
 
@@ -53,13 +53,15 @@ Route::middleware(['auth','checkPermissions'])->prefix('panel')->group(function 
         Route::resource('brands', 'BrandController');
     });
     Route::namespace('Backend\Sales')->group(function () {
-        Route::get('pending-orders', 'SalesController@index')->name('backend.pending.orders');
-        Route::get('rejected-orders', 'SalesController@index')->name('backend.rejected.orders');
-        Route::get('accepted-orders', 'SalesController@index')->name('backend.accepted.orders');
-        Route::get('delivered-orders', 'SalesController@index')->name('backend.delivered.orders');
-        Route::get('in-prepare-orders', 'SalesController@index')->name('backend.inprepare.orders');
+        Route::post('/reject-order', 'SalesOrderController@reject')->name('reject-order');
 
-        Route::resource('orders', 'SalesController')->except(['index']);
+        Route::get('pending-orders', 'SalesOrderController@index')->name('backend.pending.orders');
+        Route::get('rejected-orders', 'SalesOrderController@index')->name('backend.rejected.orders');
+        Route::get('accepted-orders', 'SalesOrderController@index')->name('backend.accepted.orders');
+        Route::get('delivered-orders', 'SalesOrderController@index')->name('backend.delivered.orders');
+        Route::get('in-prepare-orders', 'SalesOrderController@index')->name('backend.inprepare.orders');
+
+        Route::resource('orders', 'SalesOrderController')->only(['update', 'edit']);
     });
 
 

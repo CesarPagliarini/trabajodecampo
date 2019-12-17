@@ -81,120 +81,74 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/frontend/miscellaneous.js":
-/*!************************************************!*\
-  !*** ./resources/js/frontend/miscellaneous.js ***!
-  \************************************************/
+/***/ "./resources/js/ajax-forms/admin/rejection-handler.js":
+/*!************************************************************!*\
+  !*** ./resources/js/ajax-forms/admin/rejection-handler.js ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
-  $('body').scrollspy({
-    target: '#navbar',
-    offset: 80
-  }); // Page scrolling feature
-
-  $('a.page-scroll').bind('click', function (event) {
-    var link = $(this);
-    $('html, body').stop().animate({
-      scrollTop: $(link.attr('href')).offset().top - 50
-    }, 500);
-    event.preventDefault();
-    $("#navbar").collapse('hide');
-  });
-});
-
-var cbpAnimatedHeader = function () {
-  var docElem = document.documentElement,
-      header = document.querySelector('.navbar-default'),
-      didScroll = false,
-      changeHeaderOn = 200;
-
-  function init() {
-    window.addEventListener('scroll', function (event) {
-      if (!didScroll) {
-        didScroll = true;
-        setTimeout(scrollPage, 250);
+  var message = '';
+  $('.summernote').summernote({
+    height: 100,
+    //set editable area's height
+    toolbar: false,
+    placeholder: 'Indique el motivo de rechazo',
+    callbacks: {
+      onChange: function onChange(contents) {
+        message = contents;
       }
-    }, false);
-  }
-
-  function scrollPage() {
-    var sy = scrollY();
-
-    if (sy >= changeHeaderOn) {
-      $(header).addClass('navbar-scroll');
-    } else {
-      $(header).removeClass('navbar-scroll');
     }
+  });
+  $('#rejectOrder').click(function () {
+    message = message.replace(/<\/?[^>]+(>|$)/g, "");
 
-    didScroll = false;
-  }
-
-  function scrollY() {
-    return window.pageYOffset || docElem.scrollTop;
-  }
-
-  init();
-}(); // Activate WOW.js plugin for animation on scrol
-
-
-new WOW().init();
-
-/***/ }),
-
-/***/ "./resources/js/frontend/register-form.js":
-/*!************************************************!*\
-  !*** ./resources/js/frontend/register-form.js ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-$(document).ready(function () {
-  $('#registerButton').click(function (e) {
-    e.preventDefault();
-    $('#registerForm').addClass('hidden');
-    $('#registerLoading').removeClass('hidden');
-    var data = {
-      'email': $('#registerEmail').val(),
-      'password': $('#registerPassword').val(),
-      'name': $('#registerName').val()
-    };
-    var csrf = $('meta[name="csrf-token"]').attr('content');
-    var url = $('#registerUrl').val();
-    console.log(url);
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': csrf
-      }
-    });
-    $.ajax({
-      type: 'POST',
-      url: url,
-      data: data,
-      success: function success(data) {
-        window.location.replace(data);
-      }
-    });
+    if (message.length < 15) {
+      toastr.error('El motivo de rechazo debe tener al menos 15 caracteres.');
+    } else {
+      var token = $('meta[name="csrf-token"]').attr('content');
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': token
+        }
+      });
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+          'order_id': orderId,
+          'observation': message,
+          _method: 'POST'
+        },
+        success: function success(response) {
+          if (response.error) {
+            toastr.error('Han ocurrido errores, intente luego.');
+          } else {
+            toastr.success('Se ha rechazado con exito la orden.');
+            window.location.replace($('#backbutton').attr('href'));
+          }
+        }
+      });
+    }
   });
 });
 
 /***/ }),
 
-/***/ 3:
-/*!***********************************************************************************************!*\
-  !*** multi ./resources/js/frontend/miscellaneous.js ./resources/js/frontend/register-form.js ***!
-  \***********************************************************************************************/
+/***/ 2:
+/*!******************************************************************!*\
+  !*** multi ./resources/js/ajax-forms/admin/rejection-handler.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\frontend\miscellaneous.js */"./resources/js/frontend/miscellaneous.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\frontend\register-form.js */"./resources/js/frontend/register-form.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\ajax-forms\admin\rejection-handler.js */"./resources/js/ajax-forms/admin/rejection-handler.js");
 
 
 /***/ })

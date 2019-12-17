@@ -20,9 +20,19 @@ class CheckPermissions
     public function handle($request, Closure $next)
     {
 
+        $intendedForm = Form::where('target', $request->path())->first();
+
+        if( Auth::check() && $intendedForm && ! Auth::user()->can($intendedForm->key.'.view')){
+            $request->session()->flash('flash_error', 'No tienes acceso a esta seccion, 
+            si crees que es un error comunicate con 
+            un administrador!');
+            return redirect()->back();
+        }
+
         if( ! Auth::user()->hasAccessToPanel()){
             return redirect('/');
         }
+
 
         return $next($request);
     }

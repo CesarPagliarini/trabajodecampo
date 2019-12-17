@@ -13312,6 +13312,12 @@ a.accion{
 .buttons-login{
     padding:5px!important;
 }
+.rejectModal{
+    padding: 25px 10px 10px !important;
+}
+.table{
+    font-size: 15px!important;
+}
 
 .toast-title {
     font-weight: 700

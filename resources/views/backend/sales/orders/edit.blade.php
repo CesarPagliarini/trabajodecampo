@@ -1,58 +1,150 @@
 @extends('layouts.content-panel')
 @section('page-name')
-    Editar rol
+    {{$title}}
 @stop
 @section('content')
-    <div class="tabs-container">
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#general">Datos Generales</a></li>
-        </ul>
-        <div class="tab-content">
-            <div id="general" class="tab-pane active">
-                <div class="panel-body" style="padding-top:25px">
-                    <form action="{{route('ruta', parametro)}}"
-                          class="form-horizontal offset-1"
-                          method="POST">
-                        @csrf
-                        @method('PUT')
-                        <div class="form-group row  @if ($errors->has('name')) has-error @endif">
-                            <label class="col-sm-2 control-label" for="input-name">Nombre <span class="oblig">*</span></label>
-                            <div class="col-sm-8">
-                                <input id="input-name" type="text" class="form-control"
-                                       value="editar aqui"
-                                       name="name">
-                            </div>
-                        </div>
-                        <div class="form-group row @if ($errors->has('description')) has-error @endif">
-                            <label class="col-sm-2 control-label" for="input-email">Descripcion <span class="oblig">*</span></label>
-                            <div class="col-sm-8">
-                                <input id="input-email" type="text" class="form-control"
-                                       value="editar aqui"
-                                       name="description">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 control-label">Estado</label>
-                            <div class="col-sm-3">
 
-                                <div class="i-checks"><label> <input type="radio" value="1" name="state" @if((editar aqui)==1) checked="" @endif> <i></i> Activo </label></div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="i-checks"><label> <input type="radio" value="0" name="state" @if((editar aqui)==0) checked="" @endif > <i></i> Inactivo </label></div>
-                            </div>
-                        </div>
-
-                        <!-- Botones de accion -->
-                        <div class="clear"></div>
-                        <div class="form-group row">
-                            <div class="col-sm-4 col-sm-offset-2">
-                                <a href="{{ route('roles.index') }}" class="btn btn-white" type="submit">Cancelar</a>
-                                <button class="btn btn-primary" type="submit">Guardar</button>
-                            </div>
-                        </div>
-                    </form>
+    <div class="wrapper wrapper-content animated fadeInRight" >
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <a href="{{ route($routeBack) }}" id="backbutton" class="btn btn-white" type="submit">Volver</a>
+                        @if(isset($rejectRoute) && $rejectRoute)
+                            <button class="btn btn-outline btn-danger" type="button"
+                                    id="rejectOrder"
+                                    onclick="$('#rejectOrderShure').modal()">
+                                Rechazar
+                            </button>
+                        @endif
+                        @if($canUpdate)
+                            <form action="{{route('orders.update', $order)}}" method="POST" class="float-right">
+                                @csrf
+                                @method('PUT')
+                                <button class="btn btn-primary" type="submit" id="forwardButton">{{$forwardButton}}</button>
+                            </form>
+                        @endif
+                        @if(isset($observation) && $observation)
+                            <a  onclick="$('#observationModal').modal()" class="btn btn-danger btn-outline btn-bitbucket pull-right">
+                                <i class="fa fa-times-rectangle-o"></i> Observaciones
+                            </a>
+                        @endif
+                    </div>
+                </div>
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <table class="footable table table-stripped  footable-loaded ">
+                            <thead>
+                            <tr>
+                                <th class="footable-visible footable-sortable">
+                                    Identificador
+                                </th>
+                                <th class="  footable-visible footable-sortable">
+                                    Fecha de solicitud
+                                </th>
+                                <th class=" text-center footable-visible footable-sortable">
+                                    Cliente
+                                </th>
+                                <th class=" text-center footable-visible footable-sortable">
+                                    Última fecha de modificacion
+                                </th>
+                                <th class=" text-center footable-visible footable-sortable">
+                                    Encargado de ultima modificacion
+                                </th>
+                                <th class=" text-center footable-visible footable-sortable">
+                                   Stock actual
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="" style="">
+                                <td class="footable-visible">{{$order->fullIdentifier}}</td>
+                                <td class="footable-visible">{{$order->createdParsed}}</td>
+                                <td class="footable-visible  text-center">{{$order->client->fullName}}</td>
+                                <td class="footable-visible  text-center">{{$order->lastModified}} </td>
+                                <td class="footable-visible text-center">{{$order->lastAdmin}} </td>
+                            </tr>
+                            @foreach($order->details as $detail)
+                                <tr class="footable-row-detail" >
+                                    <td class="footable-row-detail-cell" style="
+                                    border-top:solid 1px #1ab394!important;
+                                    border-bottom:solid 1px #1ab394!important" colspan="5">
+                                        <div class="footable-row-detail-inner">
+                                            <div class="footable-row-detail-row">
+                                                <div class="footable-row-detail-name">Producto:</div>
+                                                <div class="footable-row-detail-value">{{$detail->product->name}}</div>
+                                            </div>
+                                            <div class="footable-row-detail-row">
+                                                <div class="footable-row-detail-name">Cantidad: </div>
+                                                <div class="footable-row-detail-value"> X {{$detail->quantity}}</div>
+                                            </div>
+                                            <div class="footable-row-detail-row">
+                                                <div class="footable-row-detail-name">Precio unitario: </div>
+                                                <div class="footable-row-detail-value">AR$ {{$detail->unit_price}} --</div>
+                                            </div>
+                                            <div class="footable-row-detail-row">
+                                                <div class="footable-row-detail-name">Subtotal: </div>
+                                                <div class="footable-row-detail-value">AR$ {{$detail->total_item}} --</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="border-top:solid 1px #1ab394!important;
+                                            border-bottom:solid 1px #1ab394!important;">
+                                        <div class="footable-row-detail-inner"
+                                        @if(! $detail->product->stock > 0 || ($detail->quantity > $detail->product->stock) )
+                                            style="color: #ec4758!important;"
+                                        @else
+                                             style="color: #1ab394!important;"
+                                        @endif
+                                        >
+                                            <div class="footable-row-detail-row">
+                                                <div class="footable-row-detail-name">Stock actual:</div>
+                                                <div class="footable-row-detail-value">{{$detail->product->stock}}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="6" class="footable-visible">
+                                    <ul class="pagination pull-right float-right">
+                                     <li> Subtotal: AR$ {{$order->sub_total}} --</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+@endsection
+@include('backend.modals.cancelOrderMessage')
+
+@if(isset($observation) && $observation)
+    @include('backend.modals.observations')
+
+@endif
+
+@section('custom-styles')
+    <link rel="stylesheet" href="{{asset('css/plugins/summernote/summernote-bs4.css')}}">
+@endsection
+
+@section('custom-scripts')
+    <script>const orderId = "{{$order->id}}"; const url = "{{route('reject-order')}}";</script>
+    <script src="{{asset('js/reject.js')}}"></script>
+
+    <script>
+        $(document).ready(()=>{
+            $('.summerNoteObservation').summernote({
+                height: 100,   //set editable area's height
+                toolbar: false,
+            });
+            $('#summerNoteObservation').summernote('disable');
+        });
+    </script>
 @endsection

@@ -67,7 +67,9 @@ class Form extends BaseEntity implements ComponentInterface
     {
 
         $current = Route::current()->uri;
+
         $atLeast = Str::contains( $current, $this->target);
+
         if($atLeast || $current === $this->target){
             return 'active';
         }else{

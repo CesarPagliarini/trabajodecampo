@@ -5,44 +5,59 @@ namespace App\Core\OrderStates;
 
 
 use App\Core\Entities\BaseEntity;
+use App\Core\Entities\StateHanddler;
 use App\Core\Interfaces\OrderStateInterface;
 use App\Entities\SaleOrder;
+use Illuminate\Http\Request;
 
-class RejectedStateOrder extends AbstractState implements OrderStateInterface
+class RejectedStateOrder extends StateHanddler implements OrderStateInterface
 {
+    public $state = [];
+    public $stateId;
+    public $nextState;
 
 
-    public static function state(){
-        return new static();
-    }
-
-
-    function editionState()
+    public function __construct( Request $request, $order = null )
     {
-        // TODO: Implement editionState() method.
+        parent::__construct();
+        $this->request = $request;
+        $this->orderObject = $order;
+        $this->stateId = 2;
     }
 
-    function creationState()
+
+    function edit()
+    {
+        $this->state['title'] = 'Orden rechazada' ;
+        $this->state['order'] = $this->orderObject;
+        $this->state['formAccessor'] = 'pendingOrders';
+        $this->state['routeBack'] = 'backend.rejected.orders';
+        $this->state['canUpdate'] = false;
+        $this->state['observation'] = true;
+
+        return $this->returnState();
+
+    }
+
+    function update()
     {
         // TODO: Implement creationState() method.
     }
 
-    function indexState()
+    function index()
     {
-        $this->orders = SaleOrder::where('state_id', 2)->get();
-        $this->formAccessor = 'rejectedOrders';
-        $this->title = 'Ordenes rechazadas';
-        return $this->getState();
+        $this->state['orders'] = SaleOrder::where('state_id', $this->stateId)->get();
+        $this->state['formAccessor'] = 'rejectedOrders';
+        $this->state['title'] = 'Ordenes rechazadas';
+        $this->state['route'] = $this->editionRoute;
+
+
+
+        return $this->returnState();
     }
 
-    public function getState()
+    public function returnState()
     {
-        return [
-            'orders' => $this->orders,
-            'formAccessor' => $this->formAccessor,
-            'route' => $this->editionRoute,
-            'title' => $this->title,
-            'createRoute' => $this->createRoute
-        ];
+        return $this->state;
     }
 }

@@ -17,23 +17,24 @@ class SaleOrderState extends BaseEntity
 
 
     public function getIconAttribute(){
-        switch ($this->name){
 
+        switch (trim($this->name)){
             case 'PENDIENTE':
-                return 'fa fa-battery-empty';
+
+                return  '<i class="fa fa-battery-empty text-navy" style=" color:#f8ac59!important; font-size:22px!important;"></i>';
             break;
             case 'RECHAZADA':
-                return 'fa fa-times-rectangle';
+                return  '<i class="fa fa-times-rectangle text-navy" style="color:#ed5565!important; font-size:22px!important;"></i>';
             break;
             case 'ACEPTADA':
-                return 'fa fa-battery-half';
+                return  '<i class="fa fa-battery-half text-navy" style="color:#1c84c6!important; font-size:22px!important;"></i>';
             break;
             case 'EN PREPARACION':
-                return 'fa fa-battery-3';
+                return '<i class="fa fa-battery-3 text-navy" style=" color:#23c6c8!important;  font-size:22px!important;"></i>';
             break;
             case 'ENTREGADA':
-                return 'fa fa-check';
-            break;
+                return  '<i class="fa fa-check text-navy" style=" color:#1ab394!important; font-size:22px!important;"></i>';
+                break;
             default:
                 return '';
             break;

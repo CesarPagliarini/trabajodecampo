@@ -16,7 +16,7 @@ class SaleOrderHistory extends BaseEntity
     'user_id',
     ];
 
-    public function client(){
+    public function admin(){
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 

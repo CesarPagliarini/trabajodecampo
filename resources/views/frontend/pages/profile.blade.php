@@ -94,7 +94,7 @@
 
 
                         <td class="footable-visible" >
-                            <i class="{{$order->state->icon}} text-navy" style="font-size:16px!important;"></i>
+                            {!!$order->state->icon!!}
                         </td>
                     </tr>
                     @foreach($order->details as $detail)
@@ -148,6 +148,10 @@
     <style>
         .navbar{
             background-color: #676a6c!important;
+            color:white!important;
+        }
+        a.nav-link{
+            color:white!important;
         }
     </style>
 @endsection

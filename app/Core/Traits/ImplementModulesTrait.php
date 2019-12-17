@@ -193,40 +193,47 @@ trait implementModulesTrait
                 //implements client forms
 
                 $order = ['module_id' => $idModule,
-                    'name' => 'Ordenes de pedido',
+                    'name' => 'Pedidos',
                     'key' => 'orders',
                     'target' => 'panel/orders',
                     'icon' => 'fa fa-sort',
                     'state' => '1',
                     'order' => '0'];
                 $pendingForm = ['module_id' => $idModule,
-                    'name' => 'Ordenes pendientes',
+                    'name' => 'Pendientes',
                     'key' => 'pendingOrders',
                     'target' => 'panel/pending-orders',
                     'icon' => 'fa fa-spinner',
                     'state' => '1',
                     'order' => '1'];
                 $rejecterForm = ['module_id' => $idModule,
-                    'name' => 'Ordenes rechazadas',
+                    'name' => 'Rechazados',
                     'key' => 'rejectedOrders',
                     'target' => 'panel/rejected-orders',
                     'icon' => 'fa fa-clone',
                     'state' => '1',
                     'order' => '2'];
                 $aceptedForm = ['module_id' => $idModule,
-                    'name' => 'Ordenes aprobadas',
+                    'name' => 'Aprobados',
                     'key' => 'acceptedOrders',
                     'target' => 'panel/accepted-orders',
                     'icon' => 'fa fa-clone',
                     'state' => '1',
                     'order' => '3'];
                 $deliveredForm = ['module_id' => $idModule,
-                    'name' => 'Ordenes entregadas',
+                    'name' => 'Entregados',
                     'key' => 'deliveredOrders',
                     'target' => 'panel/delivered-orders',
                     'icon' => 'fa fa-thumbs-o-up',
                     'state' => '1',
                     'order' => '4'];
+                $inprepareForm = ['module_id' => $idModule,
+                    'name' => 'En preparacion',
+                    'key' => 'inPrepareOrders',
+                    'target' => 'panel/in-prepare-orders',
+                    'icon' => 'fa fa-thumbs-o-up',
+                    'state' => '1',
+                    'order' => '5'];
 
 
 
@@ -234,9 +241,10 @@ trait implementModulesTrait
                 $aceptedFormId =  DB::table('forms')->insertGetId($aceptedForm);
                 $rejecterFormId = DB::table('forms')->insertGetId($rejecterForm);
                 $pendingFormId =  DB::table('forms')->insertGetId($pendingForm);
+                $inprepareFormId =  DB::table('forms')->insertGetId($inprepareForm);
 
                 $adminRole = Role::where('name', 'Administrador')->first()->id;
-                $formsToAttach = [$deliveredFormId, $aceptedFormId,$rejecterFormId, $pendingFormId];
+                $formsToAttach = [$deliveredFormId, $aceptedFormId,$rejecterFormId, $pendingFormId, $inprepareFormId];
                 $permissions = Permission::all()->pluck('id')->toArray();
                 foreach($formsToAttach as $idForm)
                 {

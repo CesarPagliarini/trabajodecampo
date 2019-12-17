@@ -165,20 +165,8 @@
                 let item = products.find( (el) => { return  el.id == clicked } );
                 $(document).trigger('addThisProductToCart', [ { item }]);
             });
-        })
-
-
-
-
-
-
-
-
-
-
-
-
-        ; </script>
+        });
+    </script>
 {{--    <script src="{{ asset('js/front/sales-cart.js') }}"></script>--}}
 
 @endsection
