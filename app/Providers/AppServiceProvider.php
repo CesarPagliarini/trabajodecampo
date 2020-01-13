@@ -6,6 +6,7 @@ use App\Console\Commands\ModelMakeCommand;
 use App\Entities\Form;
 use App\Entities\Module;
 use App\Entities\Permission;
+use App\Entities\Product;
 use App\Entities\Role;
 use App\Entities\User;
 use DOMDocument;
