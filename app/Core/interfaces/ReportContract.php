@@ -10,4 +10,5 @@ interface ReportContract
 
     public function singleElementReport($id);
 
+
 }

@@ -15,7 +15,6 @@ trait ScaffoldingTrait
     {
         try{
 
-
             $source =resource_path('views\\'.'dummy');
             $path = resource_path('views/backend');
             $dest = "$path\\$folder\\$view";

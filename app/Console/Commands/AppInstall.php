@@ -37,6 +37,7 @@ class AppInstall extends Command
      */
     public function handle()
     {
+        //TODO AGREGAR MIGRACION OPCIONAL
         $this->info('Installing application');
         $this->call("migrate:fresh", ['--seed' => true]);
         $this->info('Database created, implementing modules ... ');

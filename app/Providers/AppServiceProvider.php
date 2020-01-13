@@ -12,6 +12,7 @@ use DOMDocument;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Psy\Util\Json;
@@ -35,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
 
         Schema::defaultStringLength(191);
     }

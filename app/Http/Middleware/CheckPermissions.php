@@ -31,7 +31,6 @@ class CheckPermissions
         }
 
         if( ! Auth::user()->hasAccessToPanel()){
-
             return redirect('/');
         }
 

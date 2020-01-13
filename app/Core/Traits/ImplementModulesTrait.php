@@ -71,7 +71,6 @@ trait implementModulesTrait
             }
         }
 
-
     }
 
 
@@ -227,7 +226,6 @@ trait implementModulesTrait
                 DB::rollBack();
             }
         }
-
     }
 
 

@@ -13,4 +13,9 @@ class ClientReportStrategy implements ReportContract
     {
         return 'client report';
     }
+
+    public function singleElementReport($id)
+    {
+        // TODO: Implement singleElementReport() method.
+    }
 }
