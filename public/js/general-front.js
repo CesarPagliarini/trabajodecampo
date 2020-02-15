@@ -193,8 +193,8 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\frontend\miscellaneous.js */"./resources/js/frontend/miscellaneous.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\frontend\register-form.js */"./resources/js/frontend/register-form.js");
+__webpack_require__(/*! F:\programas\xampp\htdocs\genesis\resources\js\frontend\miscellaneous.js */"./resources/js/frontend/miscellaneous.js");
+module.exports = __webpack_require__(/*! F:\programas\xampp\htdocs\genesis\resources\js\frontend\register-form.js */"./resources/js/frontend/register-form.js");
 
 
 /***/ })

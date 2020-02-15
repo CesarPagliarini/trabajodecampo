@@ -15,6 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\SimpleScaffold::class,
         Commands\AppInstall::class,
+        Commands\makeRequestForm::class,
+
 
     ];
 

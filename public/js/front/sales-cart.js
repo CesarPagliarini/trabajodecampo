@@ -186,7 +186,7 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\frontend\sales-cart.js */"./resources/js/frontend/sales-cart.js");
+module.exports = __webpack_require__(/*! F:\programas\xampp\htdocs\genesis\resources\js\frontend\sales-cart.js */"./resources/js/frontend/sales-cart.js");
 
 
 /***/ })

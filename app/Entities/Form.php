@@ -48,18 +48,28 @@ class Form extends BaseEntity implements ComponentInterface
     {
         if($this->checkState()){
 
-
             return '
              <li class="'.$this->checkActive().'">
-                <a href="'.url($this->target).'"><i class="'.$this->icon.'"></i>
-                    <span class="nav-label">
-                        '.$this->name.'
-                    </span>
+                <a href="'.url($this->target).'">
+                <i class="'.$this->icon.'"></i>
+                  '.$this->wrap().'
                 </a>
             </li>
         ';
         }else{
             return false;
+        }
+    }
+
+    public function wrap()
+    {
+        if(!$this->module_id)
+        {
+            return '  <span class="nav-label">
+                        '.$this->name.'
+                    </span>';
+        }else{
+            return $this->name;
         }
     }
 

@@ -45,12 +45,9 @@ class implementModules extends Command
             $this->implementClientModule();
             $this->implementHomeForm();
             $this->implementsProductModule();
-
             $this->info('Modules successfully implementeds');
-
         }catch (\Exception $e){
             $this->info('Failed modules implementation');
-
         }
 
 

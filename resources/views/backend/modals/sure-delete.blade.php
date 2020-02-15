@@ -1,4 +1,4 @@
-<div class="modal inmodal fade" id="{{$modelToDelete}}" tabindex="-1" role="dialog"  aria-hidden="true">
+<div class="modal inmodal fade" id="delete-modal" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,7 +8,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary btn-danger" data-action="delete">Borrar</button>
+                <button type="button" class="btn btn-primary btn-danger" id="{{$model}}" data-action="delete">Borrar</button>
             </div>
         </div>
     </div>

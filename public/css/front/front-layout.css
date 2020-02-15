@@ -4162,6 +4162,10 @@ body.mini-navbar .nav-label,
 body.mini-navbar .navbar-default .nav li a span {
     display: none;
 }
+.nav-letter{
+    display:block;
+    color:white!important;
+}
 body.canvas-menu .profile-element {
     display: block;
 }

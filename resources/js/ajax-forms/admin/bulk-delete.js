@@ -1,7 +1,7 @@
 $('button[data-action=show]').click(function(e) {
     e.preventDefault();
     $("#resultado").html("");
-    $('#'+bulkConfig.modalName).modal('show');
+    $('#delete-modal').modal('show');
 });
 $('button[data-action=delete]').click(function(e) {
     e.preventDefault();
@@ -22,28 +22,22 @@ $('button[data-action=delete]').click(function(e) {
             data: {
                 'ids':ids,
                 _method:'POST',
-                'soft':bulkConfig.soft,
-                'model':bulkConfig.model,
-                'restore':bulkConfig.restore
+                'model':this.id,
             },
             beforeSend: function () {
                 $("#resultado").html("Procesando, espere por favor...");
             },
             success:  function (response) {
-                console.log(response);
-                $('#'+bulkConfig.modalName).modal('toggle');
+                $('#delete-modal').modal('toggle');
                 if(response.error){
-                    const errorMsg = bulkConfig.restore ? 'Los siguientes usuarios no se han restaurado: ':
-                        'Los siguientes usuarios no se han eliminado: ';
-                    toastr.error(errorMsg + response.failed);
-
+                    toastr.error(response.message);
                 }else{
-                    const successMsg = bulkConfig.restore ? 'Se han restaurado correctamente'  : 'Se han eliminado correctamente'
-                    toastr.success(successMsg);
+
+                    toastr.success(response.message);
                 }
                 setTimeout(()=>{
                     location.reload();
-                },500);
+                },300);
 
             }
         });

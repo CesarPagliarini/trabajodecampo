@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Core\Controllers\BaseController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 
 class PanelController extends BaseController
 {
@@ -28,8 +27,5 @@ class PanelController extends BaseController
         return view('backend.home');
     }
 
-    public function forbidden()
-    {
-        return view('backend.partials.cant-see');
-    }
+
 }

@@ -96,7 +96,7 @@
 $('button[data-action=show]').click(function (e) {
   e.preventDefault();
   $("#resultado").html("");
-  $('#' + bulkConfig.modalName).modal('show');
+  $('#delete-modal').modal('show');
 });
 $('button[data-action=delete]').click(function (e) {
   e.preventDefault();
@@ -119,28 +119,23 @@ $('button[data-action=delete]').click(function (e) {
       data: {
         'ids': ids,
         _method: 'POST',
-        'soft': bulkConfig.soft,
-        'model': bulkConfig.model,
-        'restore': bulkConfig.restore
+        'model': this.id
       },
       beforeSend: function beforeSend() {
         $("#resultado").html("Procesando, espere por favor...");
       },
       success: function success(response) {
-        console.log(response);
-        $('#' + bulkConfig.modalName).modal('toggle');
+        $('#delete-modal').modal('toggle');
 
         if (response.error) {
-          var errorMsg = bulkConfig.restore ? 'Los siguientes usuarios no se han restaurado: ' : 'Los siguientes usuarios no se han eliminado: ';
-          toastr.error(errorMsg + response.failed);
+          toastr.error(response.message);
         } else {
-          var successMsg = bulkConfig.restore ? 'Se han restaurado correctamente' : 'Se han eliminado correctamente';
-          toastr.success(successMsg);
+          toastr.success(response.message);
         }
 
         setTimeout(function () {
           location.reload();
-        }, 500);
+        }, 300);
       }
     });
   }
@@ -155,7 +150,7 @@ $('button[data-action=delete]').click(function (e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\ajax-forms\admin\bulk-delete.js */"./resources/js/ajax-forms/admin/bulk-delete.js");
+module.exports = __webpack_require__(/*! F:\programas\xampp\htdocs\genesis\resources\js\ajax-forms\admin\bulk-delete.js */"./resources/js/ajax-forms/admin/bulk-delete.js");
 
 
 /***/ })

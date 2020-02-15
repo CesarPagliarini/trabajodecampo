@@ -98,7 +98,6 @@
             'soft':true,
             'modalName':'restoreClient',
             'restore':true,
-
         }
     </script>
     <script src="{{asset('js/requests/bulk-delete.js')}}"></script>

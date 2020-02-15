@@ -1,14 +1,8 @@
 <?php
 
 namespace App\Entities;
-
-
-
-
 use App\Core\Entities\BaseEntity;
-
 use App\Core\Traits\RulesManager;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -20,6 +14,15 @@ class User extends BaseEntity implements Authenticatable
 {
 
     use AuthenticableTrait, Notifiable, RulesManager, SerializesModels;
+
+
+    /**
+     * The softDeleting handler association (delete or updateState)
+     *
+     * @var string
+     */
+
+    public $onSoftDelete = 'updateState';
 
     /**
      * The attributes that are mass assignable.
@@ -102,8 +105,6 @@ class User extends BaseEntity implements Authenticatable
     public function getFullnameAttribute(){
         return "{$this->name} {$this->last_name}";
     }
-
-
 
     public function salesOrders(){
         return $this->hasMany(SaleOrder::class, 'client_id', 'id');

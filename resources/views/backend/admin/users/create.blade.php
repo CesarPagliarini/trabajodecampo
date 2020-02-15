@@ -14,22 +14,32 @@
                         class="form-horizontal offset-1"
                         method="post">
                         @csrf
-                        <div class="form-group row  @if ($errors->has('nombre')) has-error @endif">
+                        <div class="form-group row  @if ($errors->has('name')) has-error @endif">
                             <label class="col-sm-2 control-label" for="input-name">Nombre <span class="oblig">*</span></label>
                             <div class="col-sm-8">
                                 <input id="input-name" type="text" class="form-control" name="name">
+                                <span class="control-label">
+                                    <p>{{ $errors->first('name') }}</p>
+                                </span>
+
                             </div>
                         </div>
                         <div class="form-group row @if ($errors->has('email')) has-error @endif">
                             <label class="col-sm-2 control-label" for="input-email">Email <span class="oblig">*</span></label>
                             <div class="col-sm-8">
                                 <input id="input-email" type="text" class="form-control" name="email">
+                                <span class="control-label">
+                                    <p>{{ $errors->first('email') }}</p>
+                                </span>
                             </div>
                         </div>
                         <div class="form-group row @if ($errors->has('password')) has-error @endif">
                             <label class="col-sm-2 control-label" for="input-email">Password <span class="oblig">*</span></label>
                             <div class="col-sm-8">
                                 <input id="input-password" type="password" class="form-control" name="password">
+                                <span class="control-label">
+                                    <p>{{ $errors->first('password') }}</p>
+                                </span>
                             </div>
                         </div>
 
@@ -45,6 +55,9 @@
                                             </label>
                                         </div>
                                     @endforeach
+                                        <span class="control-label">
+                                    <p>{{ $errors->first('roles') }}</p>
+                                </span>
                                 </div>
                             </div>
                         </div>

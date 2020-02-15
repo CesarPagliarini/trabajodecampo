@@ -1,7 +1,7 @@
 <?php return array (
   'app' => 
   array (
-    'name' => 'Genesis proyect',
+    'name' => 'Genesis',
     'env' => 'local',
     'debug' => true,
     'url' => 'http://localhost',
@@ -10,7 +10,7 @@
     'locale' => 'en',
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
-    'key' => 'base64:fNiynOOXAONOWtYtxKUul2i61hRo8ZxXd7u3K7Qs648=',
+    'key' => 'base64:rmC7XHq90FVHI326oFrSbuZJ6GkIqIaRuM33sWAk2+4=',
     'cipher' => 'AES-256-CBC',
     'providers' => 
     array (
@@ -175,7 +175,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\xampp\\htdocs\\genesis\\storage\\framework/cache/data',
+        'path' => 'F:\\programas\\xampp\\htdocs\\genesis\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -214,7 +214,7 @@
         'endpoint' => NULL,
       ),
     ),
-    'prefix' => 'genesis_proyect_cache',
+    'prefix' => 'genesis_cache',
   ),
   'database' => 
   array (
@@ -285,7 +285,7 @@
       'options' => 
       array (
         'cluster' => 'predis',
-        'prefix' => 'genesis_proyect_database_',
+        'prefix' => 'genesis_database_',
       ),
       'default' => 
       array (
@@ -314,12 +314,12 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\genesis\\storage\\app',
+        'root' => 'F:\\programas\\xampp\\htdocs\\genesis\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\genesis\\storage\\app/public',
+        'root' => 'F:\\programas\\xampp\\htdocs\\genesis\\storage\\app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
       ),
@@ -365,13 +365,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\xampp\\htdocs\\genesis\\storage\\logs/laravel.log',
+        'path' => 'F:\\programas\\xampp\\htdocs\\genesis\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\xampp\\htdocs\\genesis\\storage\\logs/laravel.log',
+        'path' => 'F:\\programas\\xampp\\htdocs\\genesis\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -419,23 +419,23 @@
   'mail' => 
   array (
     'driver' => 'smtp',
-    'host' => 'smtp.gmail.com',
-    'port' => '587',
+    'host' => 'smtp.mailtrap.io',
+    'port' => '2525',
     'from' => 
     array (
       'address' => 'hello@example.com',
       'name' => 'Example',
     ),
-    'encryption' => 'tls',
-    'username' => 'tomasitorebot@gmail.com',
-    'password' => 'tomasito5365',
+    'encryption' => NULL,
+    'username' => NULL,
+    'password' => NULL,
     'sendmail' => '/usr/sbin/sendmail -bs',
     'markdown' => 
     array (
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\xampp\\htdocs\\genesis\\resources\\views/vendor/mail',
+        0 => 'F:\\programas\\xampp\\htdocs\\genesis\\resources\\views/vendor/mail',
       ),
     ),
     'log_channel' => NULL,
@@ -517,7 +517,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'C:\\xampp\\htdocs\\genesis\\storage\\framework/sessions',
+    'files' => 'F:\\programas\\xampp\\htdocs\\genesis\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -526,7 +526,7 @@
       0 => 2,
       1 => 100,
     ),
-    'cookie' => 'genesis_proyect_session',
+    'cookie' => 'genesis_session',
     'path' => '/',
     'domain' => NULL,
     'secure' => false,
@@ -537,9 +537,9 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\genesis\\resources\\views',
+      0 => 'F:\\programas\\xampp\\htdocs\\genesis\\resources\\views',
     ),
-    'compiled' => 'C:\\xampp\\htdocs\\genesis\\storage\\framework\\views',
+    'compiled' => 'F:\\programas\\xampp\\htdocs\\genesis\\storage\\framework\\views',
   ),
   'debug-server' => 
   array (

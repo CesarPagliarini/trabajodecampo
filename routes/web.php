@@ -11,6 +11,7 @@
 |
 */
 Auth::routes();
+
 Route::namespace('Frontend')->group(function(){
     Route::post('/client/register', 'ProfileController@register')->name('frontend.clients.register');
     Route::get('/', 'HomeController@index')->name('frontend.home');
@@ -20,13 +21,13 @@ Route::namespace('Frontend')->group(function(){
     Route::get('/client-profile', 'ProfileController@profile')->name('frontend.client.profile')->middleware(['auth']);
 });
 
-Route::namespace('Backend\Sales')->group(function () {
-    Route::post('generate-order-sale', 'SalesOrderController@generateOrderSale')->name('client.sent.order');
-});
 
 
-Route::get('forbidden','PanelController@forbidden')->name('forbidden');
+
+//Route::get('forbidden','PanelController@forbidden')->name('forbidden');
+
 Route::middleware(['auth','checkPermissions'])->prefix('panel')->group(function () {
+
     Route::get('/home', 'PanelController@index')->name('panel');
     Route::post('/bulk-delete', 'PanelController@bulkDelete')->name('bulk-delete');
 
@@ -51,9 +52,10 @@ Route::middleware(['auth','checkPermissions'])->prefix('panel')->group(function 
         Route::resource('subcategories', 'SubcategoryController');
         Route::resource('brands', 'BrandController');
     });
-    Route::namespace('Backend\Sales')->group(function () {
-        Route::post('/reject-order', 'SalesOrderController@reject')->name('reject-order');
 
+    Route::namespace('Backend\Sales')->group(function () {
+        Route::post('generate-order-sale', 'SalesOrderController@generateOrderSale')->name('client.sent.order');
+        Route::post('/reject-order', 'SalesOrderController@reject')->name('reject-order');
         Route::get('pending-orders', 'SalesOrderController@index')->name('backend.pending.orders');
         Route::get('rejected-orders', 'SalesOrderController@index')->name('backend.rejected.orders');
         Route::get('accepted-orders', 'SalesOrderController@index')->name('backend.accepted.orders');
@@ -61,6 +63,7 @@ Route::middleware(['auth','checkPermissions'])->prefix('panel')->group(function 
         Route::get('in-prepare-orders', 'SalesOrderController@index')->name('backend.inprepare.orders');
         Route::resource('orders', 'SalesOrderController')->only(['update', 'edit']);
     });
+
 
     Route::namespace('Backend\Reports')->group(function () {
         Route::post('/reports', 'ReportController@report')->name('backend.reports');
