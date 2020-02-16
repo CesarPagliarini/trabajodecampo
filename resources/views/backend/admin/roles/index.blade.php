@@ -92,23 +92,15 @@
     </tfoot>
     </table>
     @component('backend.modals.sure-delete')
-        @slot('modelToDelete')
-            deleteRoles
-        @endslot
         @slot('question')
             ¿Esta seguro de eliminar este rol?
         @endslot
+        @slot('model')
+            role
+        @endslot
     @endcomponent
-
 @endsection
 
 @section('custom-scripts')
-    <script>
-        const bulkConfig = {
-            'model': 'role',
-            'soft':true,
-            'modalName':'deleteRoles'
-        }
-    </script>
     <script src="{{asset('js/requests/bulk-delete.js')}}"></script>
 @endsection

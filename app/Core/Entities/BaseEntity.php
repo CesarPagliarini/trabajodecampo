@@ -12,6 +12,8 @@ abstract class BaseEntity extends Model
 {
     use UserExtensions;
 
+    public $onSoftDelete = 'toggleState';
+
 
     public static function actives()
     {

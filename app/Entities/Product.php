@@ -9,7 +9,9 @@ use Carbon\Carbon;
 class Product extends BaseEntity
 {
 
+
     protected $table = 'products';
+
     protected $fillable = [
         'description',
         'name',

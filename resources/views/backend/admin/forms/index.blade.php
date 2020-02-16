@@ -105,23 +105,15 @@
     </tfoot>
     </table>
     @component('backend.modals.sure-delete')
-        @slot('modelToDelete')
-            deleteForms
-        @endslot
         @slot('question')
             ¿Esta seguro de eliminar este formulario?
         @endslot
+        @slot('model')
+            form
+        @endslot
     @endcomponent
-
 @endsection
 
 @section('custom-scripts')
-    <script>
-        const bulkConfig = {
-            'model': 'form',
-            'soft':true,
-            'modalName':'deleteForms'
-        }
-    </script>
     <script src="{{asset('js/requests/bulk-delete.js')}}"></script>
 @endsection

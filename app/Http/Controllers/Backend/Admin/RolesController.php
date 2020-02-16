@@ -93,7 +93,7 @@ class RolesController extends BaseController implements ControllerContract
      */
     public function update(Request $request, Role $role)
     {
-        dd($request->all());
+
 
         DB::beginTransaction();
         try{

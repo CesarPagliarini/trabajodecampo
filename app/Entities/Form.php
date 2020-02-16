@@ -12,6 +12,8 @@ use Illuminate\Support\Str;
 
 class Form extends BaseEntity implements ComponentInterface
 {
+
+
     protected $fillable = [
         'module_id',
         'name',

@@ -82,23 +82,16 @@
     </tfoot>
     </table>
     @component('backend.modals.sure-delete')
-        @slot('modelToDelete')
-            deleteCategory
-        @endslot
         @slot('question')
-            ¿Esta seguro de eliminar este editar?
+            ¿Esta seguro de eliminar esta categoria?
+        @endslot
+        @slot('model')
+            category
         @endslot
     @endcomponent
-
 @endsection
 
 @section('custom-scripts')
-    <script>
-        const bulkConfig = {
-            'model': 'category',
-            'soft':true,
-            'modalName':'deleteCategory'
-        }
-    </script>
     <script src="{{asset('js/requests/bulk-delete.js')}}"></script>
 @endsection
+

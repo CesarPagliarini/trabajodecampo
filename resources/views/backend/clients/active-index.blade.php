@@ -81,23 +81,15 @@
     </tfoot>
     </table>
     @component('backend.modals.sure-delete')
-        @slot('modelToDelete')
-            deleteClient
-        @endslot
         @slot('question')
-            ¿Esta seguro de suspender este usuario?
+            ¿Esta seguro de eliminar este usuario?
+        @endslot
+        @slot('model')
+            user
         @endslot
     @endcomponent
-
 @endsection
 
 @section('custom-scripts')
-    <script>
-        const bulkConfig = {
-            'model': 'user',
-            'soft':true,
-            'modalName':'deleteClient'
-        }
-    </script>
     <script src="{{asset('js/requests/bulk-delete.js')}}"></script>
 @endsection

@@ -108,23 +108,15 @@
         </tfoot>
     </table>
     @component('backend.modals.sure-delete')
-        @slot('modelToDelete')
-            deleteProduct
-        @endslot
         @slot('question')
-            ¿Esta seguro de eliminar este producto, esta accion es irreversible?
+            ¿Esta seguro de eliminar este producto?
+        @endslot
+        @slot('model')
+            product
         @endslot
     @endcomponent
-
 @endsection
 
 @section('custom-scripts')
-    <script>
-        const bulkConfig = {
-            'model': 'product',
-            'soft':true,
-            'modalName':'deleteProduct'
-        }
-    </script>
     <script src="{{asset('js/requests/bulk-delete.js')}}"></script>
 @endsection

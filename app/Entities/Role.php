@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Role extends BaseEntity
 {
-    use SoftDeletes , RulesManager;
+    use RulesManager;
 
 
     protected $fillable = [

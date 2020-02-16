@@ -7,6 +7,7 @@ use App\Core\Entities\BaseEntity;
 
 class Permission extends BaseEntity
 {
+
     protected $fillable = [
         'action',
         'icon',

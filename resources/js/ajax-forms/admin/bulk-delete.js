@@ -11,19 +11,26 @@ $('button[data-action=delete]').click(function(e) {
     if(!ids.length){
         $("#resultado").html("Debe seleccionar algo a eliminar");
     }else{
+        const restore = $('#restore');
+
         const token = $('meta[name="csrf-token"]').attr('content');
         $.ajaxSetup({
             headers:{
                 'X-CSRF-TOKEN': token}
         });
+        const data ={
+            'ids':ids,
+            _method:'POST',
+            'model':this.id,
+        };
+        if(restore.length && (restore.val() === "true")){
+            data.restore = true;
+        }
+
         $.ajax({
             type: "POST",
             url: "bulk-delete",
-            data: {
-                'ids':ids,
-                _method:'POST',
-                'model':this.id,
-            },
+            data: data,
             beforeSend: function () {
                 $("#resultado").html("Procesando, espere por favor...");
             },
@@ -36,7 +43,7 @@ $('button[data-action=delete]').click(function(e) {
                     toastr.success(response.message);
                 }
                 setTimeout(()=>{
-                    location.reload();
+                   location.reload();
                 },300);
 
             }

@@ -34,24 +34,35 @@ trait DeleteHandlerTrait
         $this->request = $request;
         $this->entity = new $class();
 
-        return $this->handle();
+        return $this->checkRequest();
+    }
+
+    private function checkRequest()
+    {
+        return isset($this->entity->onSoftDelete) ? property_exists($this->entity,'onSoftDelete') ?
+            $this->handle()
+            :  (new NonModelForSoftDeleteException('Requested class dosnt implemnnts soft deletes correctly.'))->render()
+            :  (new NonModelForSoftDeleteException('Requested class dosnt support soft deletign feature.'))->render();
     }
 
 
     private function handle()
     {
 
-        return isset($this->entity->onSoftDelete) ? property_exists($this->entity,'onSoftDelete') ?
-            call_user_func(array($this, $this->entity->onSoftDelete), $this->entity)
-            :  (new NonModelForSoftDeleteException('Requested class dosnt implemnnts soft deletes correctly.'))->render()
-            :  (new NonModelForSoftDeleteException('Requested class dosnt support soft deletign feature.'))->render();
-
+        if($this->request->has('restore'))
+        {
+            return $this->toggleState('1');
+        }
+        else
+        {
+            return call_user_func(array($this, $this->entity->onSoftDelete));
+        }
     }
 
-    protected function delete(BaseEntity $entity)
+    protected function delete()
     {
         try{
-            DB::table($entity->getTable())->whereIn('id',$this->request->ids)->delete();
+            DB::table($this->entity->getTable())->whereIn('id',$this->request->ids)->delete();
             return response()->json([
                 'error' => false,
                 'message' => 'Se han eliminado los registros correctamente'
@@ -62,15 +73,17 @@ trait DeleteHandlerTrait
     }
 
 
-    protected function active()
+    protected function toggleState($state = '0')
     {
+
         DB::beginTransaction();
         try{
-            DB::table($this->entity->getTable())->whereIn('id',$this->request->ids)->update(['state' => '0']);
+            DB::table($this->entity->getTable())->whereIn('id',$this->request->ids)->update(['state' => $state]);
             DB::commit();
+            $message = ($state ==='0') ? 'Se han desactivado los registros correctamente' : 'Se han activado los registros correctamente';
             return response()->json([
                 'error' => false,
-                'message' => 'Se han desactivado los registros correctamente'
+                'message' => $message,
             ]);
         }
         catch(\Exception $e){
@@ -79,22 +92,6 @@ trait DeleteHandlerTrait
         }
     }
 
-    protected function unactive()
-    {
-        DB::beginTransaction();
-        try{
-            DB::table($this->entity->getTable())->whereIn('id',$this->request->ids)->update(['state' => '1']);
-            DB::commit();
-            return response()->json([
-                'error' => false,
-                'message' => 'Se han activado los registros correctamente'
-            ]);
-        }
-        catch(\Exception $e){
-            DB::rollBack();
-            throw new NonModelForSoftDeleteException('No se han podido activar los registros seleccionados');
-        }
-    }
 
 
 }

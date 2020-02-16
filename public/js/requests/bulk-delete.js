@@ -107,20 +107,27 @@ $('button[data-action=delete]').click(function (e) {
   if (!ids.length) {
     $("#resultado").html("Debe seleccionar algo a eliminar");
   } else {
+    var restore = $('#restore');
     var token = $('meta[name="csrf-token"]').attr('content');
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': token
       }
     });
+    var data = {
+      'ids': ids,
+      _method: 'POST',
+      'model': this.id
+    };
+
+    if (restore.length && restore.val() === "true") {
+      data.restore = true;
+    }
+
     $.ajax({
       type: "POST",
       url: "bulk-delete",
-      data: {
-        'ids': ids,
-        _method: 'POST',
-        'model': this.id
-      },
+      data: data,
       beforeSend: function beforeSend() {
         $("#resultado").html("Procesando, espere por favor...");
       },

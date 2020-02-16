@@ -17,12 +17,11 @@ class User extends BaseEntity implements Authenticatable
 
 
     /**
-     * The softDeleting handler association (delete or updateState)
+     * The softDeleting handler association (delete or toggleState)
      *
      * @var string
      */
 
-    public $onSoftDelete = 'updateState';
 
     /**
      * The attributes that are mass assignable.
