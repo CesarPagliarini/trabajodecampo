@@ -13,11 +13,11 @@
                         <div class="">
                             <div>
                                 <h2 class="no-margins">
-                                    {{$user->name}}
+                                    {{$client->name}}
                                 </h2>
-                                <h4>{{$user->last_name}}</h4>
+                                <h4>{{$client->last_name}}</h4>
                                 <small>
-                                    Usuario de Genesis desde {{$user->createdParsed}}
+                                    Usuario de Genesis desde {{$client->createdParsed}}
                                 </small>
                             </div>
                         </div>
@@ -28,27 +28,27 @@
                         <tbody>
                         <tr>
                             <td>
-                                <strong>Nombre: </strong> {{$user->name}}
+                                <strong>Nombre: </strong> {{$client->name}}
                             </td>
                             <td>
-                                <strong>Apellido: </strong> {{$user->last_name}}
+                                <strong>Apellido: </strong> {{$client->last_name}}
                             </td>
 
                         </tr>
                         <tr>
                             <td>
-                                <strong>Direccion: </strong> {{$user->address}}
+                                <strong>Direccion: </strong> {{$client->address}}
                             </td>
                             <td>
-                                <strong>Email: </strong> {{$user->email}}
+                                <strong>Email: </strong> {{$client->email}}
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <strong>DNI</strong> {{$user->document}}
+                                <strong>DNI</strong> {{$client->document}}
                             </td>
                             <td>
-                                <strong>Fecha de nacimiento</strong> {{$user->birthday_date}}
+                                <strong>Fecha de nacimiento</strong> {{$client->birthday_date}}
                             </td>
                         </tr>
                         <tr>
@@ -61,14 +61,14 @@
                 </div>
                 <div class="col-md-3">
                     <h3>Ordenes de pedido totales</h3>
-                    <h1 class="no-margins">{{$user->salesOrders->count()}}</h1>
+                    <h1 class="no-margins">{{$client->salesOrders->count()}}</h1>
                     <div id="sparkline1"><canvas style="display: inline-block; width: 247.25px; height: 50px; vertical-align: top;" width="247" height="50"></canvas></div>
                 </div>
             </div>
             <div class="ibox-content">
 
-                @if($user->hasOrders())
-                @foreach($user->salesOrders->sortByDesc('created_at') as $order)
+
+                @forelse($client->salesOrders->sortByDesc('created_at') as $order)
                 <table class="footable table"
                        data-page-size="8" data-filter=#filter >
                     <thead>
@@ -131,8 +131,10 @@
                         </tr>
                     </tfoot>
                 </table>
-                @endforeach
-                @endif
+                @empty
+
+                @endforelse
+
             </div>
         </div>
     </section>

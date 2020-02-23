@@ -95,6 +95,14 @@
 
 var productsInCart = [];
 var order = [];
+
+function removeFromCart(id) {
+  productsInCart = productsInCart.filter(function (item) {
+    console.log($('#itemWrapper' + id), id);
+    return item.id != id;
+  });
+}
+
 $(document).ready(function () {
   $('.cartButtonWrapper').removeClass('hidden');
   $(document).bind('sentSaleOrder', function (e, obj) {
@@ -114,9 +122,8 @@ $(document).ready(function () {
       success: function success(data) {
         if (data.success) {
           toastr.success('Excelente, estaremos en contacto, puedes seguir tu orden de compra en tu perfil');
-        }
+        } //window.location.replace('/client-profile');
 
-        window.location.replace('/client-profile');
       }
     });
   });
@@ -127,9 +134,10 @@ $(document).ready(function () {
         return el.id == item.id;
       }
     });
+    debugger;
 
     if (item !== undefined && item !== 'undefined' && !inCart) {
-      $('#productCartContainer').append("\n                 <div class=\"ibox-content\">\n                        <div class=\"table-responsive\">\n                            <table class=\"table shoping-cart-table\">\n                                <tbody>\n                                <tr>\n                                    <td width=\"90\">\n                                        <div class=\"cart-product-imitation\">\n                                        </div>\n                                    </td>\n                                    <td class=\"desc\">\n                                        <h3>\n                                            <a href=\"#\" class=\"text-navy\">\n                                                ".concat(item.name, "\n                                            </a>\n                                        </h3>\n\n                                        <dl class=\"small m-b-none\">\n                                            <dt>Descripci\xF3n</dt>\n                                            <dd>").concat(item.description, "</dd>\n                                        </dl>\n\n                                        <div class=\"m-t-sm\">\n                                            <a  class=\"text-muted removeItem\" value=\"").concat(item.id, "\"><i class=\"fa fa-trash\"></i> Quitar del carrito</a>\n                                        </div>\n                                    </td>\n\n                                    <td >\n                                        $ ").concat(item.precio, "\n                                    </td>\n                                    <td width=\"65\">\n                                        <input id=\"itemUnitPrice").concat(item.id, "\" type=\"number\" min=1 value=1 class=\"form-control\">\n                                    </td>\n                                    <td>\n                                        <input type=\"text\" class=\"form-control\" disabled=\"disabled\" id=\"itemTotalPrice").concat(item.id, "\">\n                                    </td>\n                                </tr>\n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                "));
+      $('#productCartContainer').append("\n                 <div class=\"ibox-content\" id=\"itemWrapper".concat(item.id, ">\n                        <div class=\"table-responsive\">\n                            <table class=\"table shoping-cart-table\">\n                                <tbody>\n                                <tr>\n                                    <td width=\"90\">\n                                        <div class=\"cart-product-imitation\">\n                                        </div>\n                                    </td>\n                                    <td class=\"desc\">\n                                        <h3>\n                                            <a href=\"#\" class=\"text-navy\">\n                                                ").concat(item.name, "\n                                            </a>\n                                        </h3>\n\n                                        <dl class=\"small m-b-none\">\n                                            <dt>Descripci\xF3n</dt>\n                                            <dd>").concat(item.description, "</dd>\n                                        </dl>\n\n                                        <div class=\"m-t-sm\">\n                                            <a  class=\"text-muted\" onclick=\"removeFromCart(").concat(item.id, ")\" ><i class=\"fa fa-trash\"></i> Quitar del carrito</a>\n                                        </div>\n                                    </td>\n\n                                    <td >\n                                        $ ").concat(item.precio, "\n                                    </td>\n                                    <td width=\"65\">\n                                        <input id=\"itemUnitPrice").concat(item.id, "\" type=\"number\" min=1 value=1 class=\"form-control\">\n                                    </td>\n                                    <td>\n                                        <input type=\"text\" class=\"form-control\" disabled=\"disabled\" id=\"itemTotalPrice").concat(item.id, "\">\n                                    </td>\n                                </tr>\n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                "));
       productsInCart.push(item);
       $('#cartItemCount').text(productsInCart.length);
       toastr.success('Se ha agregado ' + item.name + ' al carrito');
@@ -167,6 +175,7 @@ $(document).ready(function () {
     }
   });
   $('.addToCartButton').click(function (ev) {
+    debugger;
     var clicked = $(ev.target).attr('id');
     var item = products.find(function (el) {
       return el.id == clicked;

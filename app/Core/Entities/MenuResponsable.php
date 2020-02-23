@@ -26,9 +26,6 @@ class MenuResponsable implements ComponentInterface
             }
         });
         $this->componentList = $modules->sortBy('order');
-
-
-        ;
     }
 
     public static function make(){

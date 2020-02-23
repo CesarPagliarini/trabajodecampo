@@ -42,9 +42,16 @@ class implementModules extends Command
     {
 
         try{
-            $this->implementClientModule();
-            $this->implementHomeForm();
-            $this->implementsProductModule();
+
+            $this->implementHomeForm('0');
+            $this->implementClientModule('2');
+            $this->implementsProfessionalsModule('3');
+            $this->implementsProductModule('4');
+            $this->implementsOrdersModule('5');
+            $this->implementsShiftsModule('6');
+
+
+
             $this->info('Modules successfully implementeds');
         }catch (\Exception $e){
             $this->info('Failed modules implementation');

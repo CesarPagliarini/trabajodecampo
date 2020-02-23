@@ -86,6 +86,4 @@
             background-color: #2f4050!important;
         }
     </style>
-
-
 @endsection

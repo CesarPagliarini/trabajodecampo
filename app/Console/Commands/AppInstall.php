@@ -11,7 +11,7 @@ class AppInstall extends Command
      *
      * @var string
      */
-    protected $signature = 'app:install';
+    protected $signature = 'app:install {--new=false}';
 
     /**
      * The console command description.
@@ -37,11 +37,18 @@ class AppInstall extends Command
      */
     public function handle()
     {
-        //TODO AGREGAR MIGRACION OPCIONAL
         $this->info('Installing application');
-        $this->call("migrate:fresh", ['--seed' => true]);
-        $this->info('Database created, implementing modules ... ');
+
+        if($this->option('new') === 'true')
+        {
+            $this->info('Creating database ...');
+            $this->call("migrate:fresh", ['--seed' => true]);
+//            $this->call("migrate:fresh", ['--seed' => true]);
+            $this->info('Database created successfully');
+
+        }
+
+        $this->info('Implementing modules ... ');
         $this->call("implement:modules");
-        return true;
     }
 }

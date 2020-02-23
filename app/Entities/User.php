@@ -29,6 +29,7 @@ class User extends BaseEntity implements Authenticatable
      * @var array
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'state',
@@ -105,15 +106,11 @@ class User extends BaseEntity implements Authenticatable
         return "{$this->name} {$this->last_name}";
     }
 
-    public function salesOrders(){
-        return $this->hasMany(SaleOrder::class, 'client_id', 'id');
-    }
 
-    public function hasOrders(){
-        if(count($this->salesOrders)){
-            return true;
-        }
-        return false;
+
+    public function specialties()
+    {
+        return $this->belongsToMany(Specialty::class, 'specialty_user','user_id', 'specialty_id');
     }
 
 

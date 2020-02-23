@@ -21,5 +21,13 @@ trait UserExtensions
         })->where('state' , $state)->get();
     }
 
+    public static function allProfessionals($state)
+    {
+        $state = $state === 'active' ? '1' : '0';
+        return self::whereHas('roles', function($q){
+            return $q->where('name', 'Profesional');
+        })->where('state' , $state)->get();
+    }
+
 
 }

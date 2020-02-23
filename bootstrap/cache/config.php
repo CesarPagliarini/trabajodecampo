@@ -4,7 +4,7 @@
     'name' => 'Genesis',
     'env' => 'local',
     'debug' => true,
-    'url' => 'http://localhost',
+    'url' => 'http:127.0.0.1',
     'asset_url' => NULL,
     'timezone' => 'UTC',
     'locale' => 'en',
@@ -320,7 +320,7 @@
       array (
         'driver' => 'local',
         'root' => 'F:\\programas\\xampp\\htdocs\\genesis\\storage\\app/public',
-        'url' => 'http://localhost/storage',
+        'url' => 'http:127.0.0.1/storage',
         'visibility' => 'public',
       ),
       's3' => 

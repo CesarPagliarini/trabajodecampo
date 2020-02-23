@@ -21,14 +21,12 @@ class DatabaseSeeder extends Seeder
             FormsTableSeeder::class,
             RolePermissionFormTableSeeder::class,
 
-            //BrandTableSeeder::class,
             CategoryTableSeeder::class,
             SubcategoryTableSeeder::class,
             CurrencyTableSeeder::class,
             ProductTableSeeder::class,
             PriceTableSeeder::class,
 
-            ModuleTableSeeder::class
         ]);
 
     }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Core\Controllers\BaseController;
 use App\Core\Interfaces\ControllerContract;
 use App\Entities\Role;
-use App\Entities\User;
+use App\Entities\Client;
 use App\Jobs\RegistrationRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -21,7 +21,7 @@ class ProfileController extends BaseController implements ControllerContract
 
         try{
             DB::beginTransaction();
-            $client = User::create($request->all());
+            $client = Client::create($request->all());
             $client->roles()->sync(Role::where('name', 'Cliente')->first()->id);
             $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
             $token = '';
@@ -47,7 +47,7 @@ class ProfileController extends BaseController implements ControllerContract
 
     public function confirmToken($token){
 
-        $user = User::where('email_verification_token', $token)->first();
+        $user = Client::where('email_verification_token', $token)->first();
         if($user){
             try{
                 DB::beginTransaction();
@@ -75,8 +75,8 @@ class ProfileController extends BaseController implements ControllerContract
     }
 
     public function profile(){
-        $user = Auth::user();
-        return view('frontend.pages.profile', compact('user'));
+        $client =  new Client(Auth::user()->toArray());
+        return view('frontend.pages.profile', compact('client'));
     }
 
 

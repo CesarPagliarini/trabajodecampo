@@ -15,7 +15,7 @@ class ModulesTableSeeder extends Seeder
         DB::table('modules')->insert([
             'name' => 'Configuraciones',
             'description' => 'admin/roles',
-            'internal_handler' => 'configModule',
+            'internal_handler' => 'config_handler',
             'icon' => 'fa fa-cog',
             'order' => '1'
         ]);

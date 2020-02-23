@@ -14,7 +14,6 @@ abstract class BaseEntity extends Model
 
     public $onSoftDelete = 'toggleState';
 
-
     public static function actives()
     {
         return self::where('state', '1')->get();

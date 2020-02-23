@@ -1,32 +1,29 @@
-
-
 $(document).ready(()=>{
     $('#orderCanvasListener').click(()=>{
-        $('#orderCanvas').toggleClass('hidden');
-    });
-    const token = $('meta[name="csrf-token"]').attr('content');
-    $.ajaxSetup({
-        headers:{
-            'X-CSRF-TOKEN': token}
-    });
-    $.ajax({
-        type: "POST",
-        url: "reports",
-        data: {
-            'endpoint':'forCanvas',
-            _method:'POST',
-            'resource':'sale-order',
-        },
-        success:  function (response) {
-            let dataset = [];
-            let labels = [];
-            response.forEach((item) => {
-                dataset.push(item.quantity);
-                labels.push(item.name);
-            })
-            let item = {'dataset': dataset, 'labels': labels};
-            $(document).trigger('instanceChart', [ { item }]);
-        }
+        const token = $('meta[name="csrf-token"]').attr('content');
+        $.ajaxSetup({
+            headers:{
+                'X-CSRF-TOKEN': token}
+        });
+        $.ajax({
+            type: "POST",
+            url: "reports",
+            data: {
+                'endpoint':'forCanvas',
+                _method:'POST',
+                'resource':'sale-order',
+            },
+            success:  function (response) {
+                let dataset = [];
+                let labels = [];
+                response.forEach((item) => {
+                    dataset.push(item.quantity);
+                    labels.push(item.name);
+                })
+                let item = {'dataset': dataset, 'labels': labels};
+                $(document).trigger('instanceChart', [ { item }]);
+            }
+        });
     });
 });
 
@@ -81,4 +78,5 @@ $(document).bind('instanceChart', function(e, obj) {
             }
         }
     });
+    $('#orderCanvas').toggleClass('hidden');
 });

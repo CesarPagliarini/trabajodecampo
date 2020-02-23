@@ -1,6 +1,6 @@
 @extends('layouts.content-panel')
 @section('page-name')
-    Dato a editar
+    Categorias
 @endsection
 @section('content')
 

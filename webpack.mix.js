@@ -23,9 +23,13 @@ mix.styles([
     'resources/template/css/table-css/footable.core.css',
     'resources/template/css/style.css',
     'resources/template/css/plugins/toastr/toastr.min.css',
+    'resources/template/css/plugins/daterangepicker/dateranger.css',
+    'resources/template/css/plugins/select2/select2.css',
 
 ], 'public/css/panel.css')
+
 .scripts([
+    'resources/template/js/plugins/moment/moment.js',
     'resources/template/js/jquery-3.1.1.min.js',
     'resources/template/js/popper.min.js',
     'resources/template/js/bootstrap.min.js',
@@ -41,12 +45,13 @@ mix.styles([
     'resources/template/js/plugins/toastr/toastr.min.js',
     'resources/template/js/plugins/datepicker/bootstrap-datepicker.js',
     'resources/template/js/plugins/summernote/summernote-bs4.js',
-    'resources/template/js/plugins/chartJs/Chart.min.js'
+    'resources/template/js/plugins/chartJs/Chart.min.js',
+    'resources/template/js/plugins/daterangepicker/daterangepicker.js',
+    'resources/template/js/plugins/select2/select2.js',
 ], 'public/js/panel.js');
 
 mix.js([
     'resources/js/ajax-forms/admin/bulk-delete.js',
-
 ], 'public/js/requests/bulk-delete.js');
 
 mix.js([
