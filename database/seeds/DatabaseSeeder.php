@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
             ModulesTableSeeder::class,
             FormsTableSeeder::class,
             RolePermissionFormTableSeeder::class,
-
             CategoryTableSeeder::class,
             SubcategoryTableSeeder::class,
             CurrencyTableSeeder::class,

@@ -2,22 +2,9 @@
 
 namespace App\Providers;
 
-use App\Console\Commands\ModelMakeCommand;
-use App\Entities\Form;
-use App\Entities\Module;
-use App\Entities\Permission;
-use App\Entities\Product;
-use App\Entities\Role;
-use App\Entities\User;
-use DOMDocument;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
-use Psy\Util\Json;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Session::flush();
+
     }
 
     /**
@@ -38,8 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-
         Schema::defaultStringLength(191);
     }
 }

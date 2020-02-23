@@ -2,9 +2,10 @@
 
 namespace App\Entities;
 
+use App\Core\Entities\BaseEntity;
 use Illuminate\Database\Eloquent\Model;
 
-class Specialty extends Model
+class Specialty extends BaseEntity
 {
     protected $table = 'specialties';
     protected $fillable = [

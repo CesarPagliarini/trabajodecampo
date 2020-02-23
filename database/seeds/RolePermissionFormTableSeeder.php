@@ -15,28 +15,28 @@ class RolePermissionFormTableSeeder extends Seeder
      */
     public function run()
     {
-        $idSuperAdmin = Role::where('name','Super administrador')->first()->id;
-        $idAdmin = Role::where('name', 'Administrador')->first()->id;
-
-        $permissions = Permission::all()->pluck('id')->toArray();
-        $forms = Form::all()->pluck('id')->toArray();
-
-        foreach($forms as $form){
-            for($i = 0 ; $i < count($permissions) ;$i++){
-                DB::table('role_permissions_forms')->insert([
-                    'role_id' => intval($idSuperAdmin),
-                    'permission_id' => intval($permissions[$i]),
-                    'form_id' => intval($form),
-                ]);
-            }
-            for($i = 0 ; $i < count($permissions) ;$i++){
-                DB::table('role_permissions_forms')->insert([
-                    'role_id' => intval($idAdmin),
-                    'permission_id' => intval($permissions[$i]),
-                    'form_id' => intval($form),
-                ]);
-            }
-
-        }
+//        $idSuperAdmin = Role::where('name','Super administrador')->first()->id;
+//        $idAdmin = Role::where('name', 'Administrador')->first()->id;
+//
+//        $permissions = Permission::all()->pluck('id')->toArray();
+//        $forms = Form::all()->pluck('id')->toArray();
+//
+//        foreach($forms as $form){
+//            for($i = 0 ; $i < count($permissions) ;$i++){
+//                DB::table('role_permissions_forms')->insert([
+//                    'role_id' => intval($idSuperAdmin),
+//                    'permission_id' => intval($permissions[$i]),
+//                    'form_id' => intval($form),
+//                ]);
+//            }
+//            for($i = 0 ; $i < count($permissions) ;$i++){
+//                DB::table('role_permissions_forms')->insert([
+//                    'role_id' => intval($idAdmin),
+//                    'permission_id' => intval($permissions[$i]),
+//                    'form_id' => intval($form),
+//                ]);
+//            }
+//
+//        }
     }
 }

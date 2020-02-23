@@ -2,7 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Core\SystemBuilder\SystemCreators\FullAppCreator;
+use App\Core\SystemBuilder\SystemCreators\ScheduleCreator;
+use App\Core\SystemBuilder\SystemCreators\StoreCreator;
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 
 class AppInstall extends Command
 {
@@ -20,6 +24,13 @@ class AppInstall extends Command
      */
     protected $description = 'Install clean application V 1.0';
 
+
+    protected $systemCreators = [
+        'Full app' => FullAppCreator::class,
+        'Schedule app' => ScheduleCreator::class,
+        'Store app' => StoreCreator::class,
+
+    ];
     /**
      * Create a new command instance.
      *
@@ -43,12 +54,16 @@ class AppInstall extends Command
         {
             $this->info('Creating database ...');
             $this->call("migrate:fresh", ['--seed' => true]);
-//            $this->call("migrate:fresh", ['--seed' => true]);
             $this->info('Database created successfully');
 
         }
+        $appType = $this->choice('Select type of application', ['Full app', 'Schedule app', 'Store app']);
 
-        $this->info('Implementing modules ... ');
-        $this->call("implement:modules");
+        $configType = $this->choice('Select type of configuration to applys', ['full', 'standar', 'limited']);
+
+        (new $this->systemCreators[$appType](new Collection()))->setConfig($configType)->run();
+
+
+
     }
 }

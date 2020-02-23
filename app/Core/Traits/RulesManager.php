@@ -47,6 +47,7 @@ trait RulesManager
         $form = $searched[0];
         $action = $searched[1];
 
+
         $permission = DB::table('permissions')->where('action', $searched[1])->first('id');
         $form = DB::table('forms')->where('key', $searched[0])->first('id');
 

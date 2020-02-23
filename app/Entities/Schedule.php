@@ -2,9 +2,22 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\Entities\BaseEntity;
 
-class Schedule extends Model
+class Schedule extends BaseEntity
 {
-    //
+    protected $table = 'schedules';
+
+    protected $fillable = [
+        'id',
+        'schedule_header',
+        'professional_id',
+        'specialty_id',
+        'attention_place_id',
+        'shift_id',
+        'date',
+        'disponible',
+        'cancel_date',
+        'observation',
+    ];
 }
