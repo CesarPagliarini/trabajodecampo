@@ -3,6 +3,7 @@
 namespace App\Entities;
 use App\Core\Entities\BaseEntity;
 use App\Core\Traits\RulesManager;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -106,7 +107,9 @@ class User extends BaseEntity implements Authenticatable
         return "{$this->name} {$this->last_name}";
     }
 
-
+    public function getBirthDayAttribute(){
+        return Carbon::parse($this->date_of_birthday)->format('d/m/y');
+    }
 
     public function specialties()
     {
