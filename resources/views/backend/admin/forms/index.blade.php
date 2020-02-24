@@ -4,12 +4,12 @@
 @endsection
 @section('content')
 
-    @create('forms')
+    @create('formsForm')
     <a href="{{ route('forms.create') }}"
        class="btn btn-primary">Nuevo
     </a>
     @endcreate
-    @delete('forms')
+    @delete('formsForm')
     <button data-placement="bottom"
             title="Borrar"
             type="button"
@@ -54,31 +54,31 @@
 
             <td>
                 <a class="accion"
-                   @update('forms') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
+                   @update('formsForm') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
                 {{$form->name}}
                 </a>
             </td>
             <td>
                 <a class="accion"
-                   @update('forms') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
+                   @update('formsForm') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
                 {{$form->module? $form->module->name : 'Menu lateral'}}
                 </a>
             </td>
             <td>
                 <a class="accion"
-                   @update('forms') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
+                   @update('formsForm') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
                 {{$form->key}}
                 </a>
             </td>
             <td>
                 <a class="accion"
-                   @update('forms') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
+                   @update('formsForm') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
                 {{$form->target}}
                 </a>
             </td>
             <td>
                 <a class="accion"
-                   @update('forms') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
+                   @update('formsForm') href="{{route('forms.edit', ['id'=>$form->id])}}" @endif >
                 {{$form->order}}
                 </a>
             </td>

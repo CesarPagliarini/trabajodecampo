@@ -16,7 +16,7 @@ class ShiftForm extends FormBuilder
         'name' => 'Turnos',
         'key' => 'shiftForm',
         'target' => 'panel/shifts',
-        'icon' => 'fa fa-calendar',
+        'icon' => 'fa fa-bell',
         'state' => '1',
     ];
 

@@ -19,13 +19,6 @@ use Illuminate\Support\Collection;
 class StoreCreator extends SystemCreator
 {
 
-
-    public function __construct(Collection $builders)
-    {
-        parent::__construct($builders);
-    }
-
-
     public function run()
     {
         $this->add(new HomeForm())

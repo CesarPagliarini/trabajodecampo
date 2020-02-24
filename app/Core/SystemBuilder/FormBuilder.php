@@ -8,7 +8,6 @@ abstract class FormBuilder extends AbstractBuilder
 {
     function build(int $order = 0, $parentId = null)
     {
-
         $this->addField('order', $order);
         $this->addField('module_id', $parentId);
         $this->transact();

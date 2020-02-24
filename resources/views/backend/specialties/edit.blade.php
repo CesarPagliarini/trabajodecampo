@@ -10,6 +10,7 @@
         <div class="tab-content">
             <div id="general" class="tab-pane active">
                 <div class="panel-body" style="padding-top:25px">
+
                     <form action="{{route('specialties.update', [$specialty])}}"
                           class="form-horizontal offset-1"
                           method="POST">
@@ -31,6 +32,33 @@
                                        name="description">
                             </div>
                         </div>
+
+
+
+                        <div class="form-group row @if ($errors->has('services')) has-error @endif">
+                            <label class="col-sm-2 control-label" for="input-email">Servicios <span class="oblig">*</span></label>
+                            <div class="col-sm-8">
+
+                                @if(count($specialty->services))
+                                    <select class="specialties_select form-control" name="services[]" multiple="multiple">
+                                        @foreach($specialty->services as $service)
+                                            <option
+                                                @if($service->hasSpecialty($specialty->id))
+                                                selected
+                                                @endif
+                                                value="{{$specialty->id}}">{{$specialty->name}}</option>
+                                        @endforeach
+                                    </select>
+                                @else
+                                    <a class="btn btn-primary btn-rounded btn-block" href="{{route('services.index')}}">
+                                        <i class="fa fa-info-circle"></i>
+                                        No existen servicios para esta especialidad, haz click para agregar.
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+
+
                         <div class="form-group row">
                             <label class="col-sm-2 control-label">Estado</label>
                             <div class="col-sm-3">
@@ -56,3 +84,15 @@
         </div>
     </div>
 @endsection
+@section('custom-scripts')
+    <script>
+        $.fn.select2.defaults.set('language', 'es');
+
+        $(document).ready(function(){
+            $(".specialties_select").select2(
+                {width: '100%'}
+            );
+        })
+    </script>
+@endsection
+

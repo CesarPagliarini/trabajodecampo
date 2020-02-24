@@ -50,9 +50,11 @@
                             <label class="col-sm-2 control-label" for="input-email">Categoria <span class="oblig">*</span></label>
                             <div class="col-sm-8">
                                 <select class="form-control m-b" name="category_id">
-                                    @foreach($categorias as $categoria)
+                                    @forelse($categorias as $categoria)
                                         <option value="{{$categoria->id}}">{{$categoria->name}}</option>
-                                    @endforeach
+                                        @empty
+                                            <option selected disabled value="null">Aun no hay categorias cargadas</option>
+                                    @endforelse
                                 </select>
                             </div>
                         </div>

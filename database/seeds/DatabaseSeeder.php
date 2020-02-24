@@ -25,6 +25,9 @@ class DatabaseSeeder extends Seeder
             CurrencyTableSeeder::class,
             ProductTableSeeder::class,
             PriceTableSeeder::class,
+            AttentionCenterSeeder::class,
+            SpecialtiesSeeder::class,
+            ServicesSeeder::class,
 
         ]);
 

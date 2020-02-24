@@ -31,7 +31,6 @@ class FullConfigModule extends ModuleBuilder
             PermissionForm::class,
             ModuleForm::class,
             FormForm::class,
-
         ]);
 
     }

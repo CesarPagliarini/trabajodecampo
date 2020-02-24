@@ -3,6 +3,7 @@
 
 namespace App\Core\SystemBuilder\SystemCreators;
 
+use App\Core\SystemBuilder\AttentionPlaces\AttentionPlacesModule;
 use App\Core\SystemBuilder\Client\ClientModule;
 
 
@@ -18,11 +19,6 @@ class FullAppCreator extends SystemCreator
 {
 
 
-    public function __construct(Collection $builders)
-    {
-        parent::__construct($builders);
-    }
-
     public function run()
     {
 
@@ -32,6 +28,7 @@ class FullAppCreator extends SystemCreator
             ->add(new OrderModule())
             ->add(new ProfessionalModule())
             ->add(new ShiftModule())
+            ->add(new AttentionPlacesModule())
             ->build();
     }
 }

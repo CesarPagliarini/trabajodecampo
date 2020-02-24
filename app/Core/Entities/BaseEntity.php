@@ -32,4 +32,5 @@ abstract class BaseEntity extends Model
 
 
 
+
 }

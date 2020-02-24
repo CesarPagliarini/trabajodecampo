@@ -55,6 +55,7 @@ class ProfessionalController extends  BaseController implements ControllerContra
             $request->session()->flash('flash_message', 'El Profesional se ha creado exitosamente!');
             return redirect()->route('professionals.index');
         }catch (\Exception $e){
+
             DB::rollBack();
             $request->session()->flash('flash_error', 'El Profesional no se pudo crear!');
             return redirect()->route('professionals.index');

@@ -57,15 +57,13 @@ class ProductController extends Controller
                 'vigency_from' => Carbon::now(),
                 'vigency_to' => Carbon::now()->addCenturies(1)
             ]);
-
             DB::commit();
             $request->session()->flash('flash_message', 'El usuario se ha creado exitosamente!');
-            return redirect()->route('users.index');
+            return redirect()->route('products.index');
         }catch (\Exception $e){
             DB::rollBack();
-            dd($e->getMessage());
             $request->session()->flash('flash_error', 'El usuario no se pudo crear!');
-            return redirect()->route('users.index');
+            return redirect()->route('products.index')->withErrors();
         }
     }
 

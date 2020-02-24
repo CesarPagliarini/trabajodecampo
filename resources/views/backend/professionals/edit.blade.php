@@ -13,10 +13,10 @@
 @section('content')
     <div class="tabs-container">
         <ul class="nav nav-tabs">
-            <li><a class="nav-link  " data-toggle="tab" href="#general"><i class="fa fa-user"></i> Datos generales</a></li>
-            <li><a class="nav-link active show" data-toggle="tab" href="#schedules"><i class="fa fa-briefcase"></i> Horarios</a></li>
+            <li><a class="nav-link" data-toggle="tab" href="#general"><i class="fa fa-user"></i> Datos generales</a></li>
+            <li><a class="nav-link" data-toggle="tab" href="#schedules"><i class="fa fa-briefcase"></i> Horarios</a></li>
+            <li><a class="nav-link active show" data-toggle="tab" href="#settings"><i class="fa fa-cog"></i> Configuracion</a></li>
         </ul>
-
         <div class="tab-content">
             <div id="general" class="tab-pane ">
                 <div class="panel-body" style="padding-top:25px">
@@ -131,7 +131,9 @@
                 </div>
             </div>
             @include('backend.partials.tabs.professional.schedules-tab')
+            @include('backend.partials.tabs.professional.settings-tab')
         </div>
+
     </div>
 @endsection
 

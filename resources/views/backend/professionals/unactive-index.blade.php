@@ -3,12 +3,12 @@
     Profesionales inactivos
 @endsection
 @section('content')
-    @create('unactiveProfessionals')
+    @create('unactiveProfessionalsForm')
     <a href="{{ route('professionals.create') }}"
        class="btn btn-primary">Nuevo
     </a>
     @endcreate
-    @delete('unactiveProfessionals')
+    @delete('unactiveProfessionalsForm')
     <button data-placement="bottom"
             title="Borrar"
             type="button"
@@ -49,13 +49,13 @@
                 </td>
                 <td>
                     <a class="accion"
-                       @update('unactiveProfessionals') href="{{route('professionals.edit', ['id'=>$professional->id])}}" @endif >
+                       @update('unactiveProfessionalsForm') href="{{route('professionals.edit', ['id'=>$professional->id])}}" @endif >
                     {{$professional->fullname}}
                     </a>
                 </td>
                 <td>
                     <a class="accion"
-                       @update('unactiveProfessionals')href="{{route('professionals.edit', ['id'=>$professional->id])}}" @endif >
+                       @update('unactiveProfessionalsForm')href="{{route('professionals.edit', ['id'=>$professional->id])}}" @endif >
                     {{$professional->email}}
                     </a>
                 </td>

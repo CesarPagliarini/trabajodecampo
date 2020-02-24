@@ -18,7 +18,6 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12">
                                     <select class="middle-select form-control">
-
                                         @forelse($professional->specialties as $specialty)
                                             <option value="1">{{$specialty->name}}</option>
                                         @empty

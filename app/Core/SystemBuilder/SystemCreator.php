@@ -34,14 +34,18 @@ abstract class SystemCreator
         });
     }
 
-    public function setConfig($configFile)
+    public function configureCreator($configFile)
     {
         switch ($configFile){
             case 'full' : $this->add(new FullConfigModule());break;
             case 'standar' : $this->add(new StandarConfigModule());break;
             case 'limited': $this->add(new LimitedConfigModule());break;
+            default: $this->add(new LimitedConfigModule());break;
         }
         return $this;
     }
+
+
+
 
 }

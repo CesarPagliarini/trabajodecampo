@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Specialty;
 use App\Core\Controllers\BaseController;
 use App\Core\Interfaces\ControllerContract;
 use App\Entities\Specialty;
+use App\Http\Requests\Backend\specialties\SpecialtiesCreateFormRequest;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +43,7 @@ class SpecialtyController extends BaseController implements ControllerContract
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SpecialtiesCreateFormRequest $request)
     {
         DB::beginTransaction();
         try {
@@ -66,6 +67,8 @@ class SpecialtyController extends BaseController implements ControllerContract
      */
     public function edit(Specialty $specialty)
     {
+
+        $specialty = $specialty::with('services')->first();
         return view('backend.specialties.edit', compact('specialty'));
     }
 
@@ -81,6 +84,7 @@ class SpecialtyController extends BaseController implements ControllerContract
         DB::beginTransaction();
         try {
             $specialty->update($request->all());
+            $specialty->services()->sync($request->services);
             DB::commit();
             $request->session()->flash('flash_message', 'La especialidad se ha actualizado exitosamente!');
             return redirect()->route('specialties.index');

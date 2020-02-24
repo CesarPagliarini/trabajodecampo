@@ -33,7 +33,13 @@ abstract class AbstractBuilder
 
     function exist()
     {
-        return DB::table($this->table)->where($this->keys)->first() ? true : false;
+        $id =  DB::table($this->table)->where($this->keys)->first();
+        $exist = $id ? true : false;
+        if($exist){
+            $this->id = $id;
+            return true;
+        }
+        return false;
     }
 
 

@@ -16,7 +16,7 @@ class SchedulesForm extends FormBuilder
         'name' => 'Horarios',
         'key' => 'scheduleForm',
         'target' => 'panel/schedules',
-        'icon' => 'fa fa-clock',
+        'icon' => 'fa fa-calendar',
         'state' => '1',
     ];
 

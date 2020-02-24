@@ -20,7 +20,11 @@
                                 <input id="input-name" type="text" class="form-control"
                                        value=""
                                        name="name">
+                                <span class="control-label">
+                                    <p>{{ $errors->first('name') }}</p>
+                                </span>
                             </div>
+
                         </div>
                         <div class="form-group row @if ($errors->has('description')) has-error @endif">
                             <label class="col-sm-2 control-label" for="input-email">Descripcion <span class="oblig">*</span></label>
@@ -28,12 +32,14 @@
                                 <input id="input-email" type="text" class="form-control"
                                        value=""
                                        name="description">
+                                <span class="control-label">
+                                    <p>{{ $errors->first('description') }}</p>
+                                </span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 control-label">Estado</label>
                             <div class="col-sm-3">
-
                                 <div class="i-checks"><label> <input type="radio" value="1" name="state" checked > <i></i> Activo </label></div>
                             </div>
                             <div class="col-sm-3">

@@ -51,8 +51,13 @@
     Route::namespace('Backend\Shift')->group(function () {
         Route::resource('shifts', 'ShiftController');
         Route::resource('schedules', 'ScheduleController');
+        Route::resource('attention-places', 'AttentionPlaceController');
+
 
     });
+
+
+
 
 
     Route::namespace('Backend\Reports')->group(function () {

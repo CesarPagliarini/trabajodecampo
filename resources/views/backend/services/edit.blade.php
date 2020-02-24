@@ -31,6 +31,29 @@
                                        name="description">
                             </div>
                         </div>
+
+                        <div class="form-group row @if ($errors->has('specialties')) has-error @endif">
+                            <label class="col-sm-2 control-label" for="input-email">Especialidades <span class="oblig">*</span></label>
+                            <div class="col-sm-8">
+                                @if(count($specialties))
+                                <select class="specialties_select form-control" name="specialties[]" multiple="multiple">
+                                    @foreach($specialties as $specialty)
+                                        <option
+                                            @if($service->hasSpecialty($specialty->id))
+                                                selected
+                                            @endif
+                                            value="{{$specialty->id}}">{{$specialty->name}}</option>
+                                    @endforeach
+                                    @else
+                                        <a class="btn btn-primary btn-rounded btn-block" href="{{route('specialties.create')}}">
+                                            <i class="fa fa-info-circle"></i>
+                                            Aun no existen servicios cargados.
+                                        </a>
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label class="col-sm-2 control-label">Estado</label>
                             <div class="col-sm-3">
@@ -55,4 +78,15 @@
             </div>
         </div>
     </div>
+@endsection
+@section('custom-scripts')
+    <script>
+        $.fn.select2.defaults.set('language', 'es');
+
+        $(document).ready(function(){
+            $(".specialties_select").select2(
+                {width: '100%'}
+            );
+        })
+    </script>
 @endsection

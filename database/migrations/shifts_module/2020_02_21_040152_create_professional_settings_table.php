@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProfessionalConfigurationsTable extends Migration
+class CreateProfessionalSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateProfessionalConfigurationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('professional_configurations', function (Blueprint $table) {
+        Schema::create('professional_settings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('professional_id');
             $table->unsignedBigInteger('specialty_id');
             $table->unsignedBigInteger('service_id');
             $table->unsignedBigInteger('attention_place_id');
             $table->unsignedBigInteger('time_unit');
-            $table->boolean('work_holiday')->default(0);
-            $table->boolean('show_amount')->default(0);
+            $table->boolean('work_holiday')->default(0)->index();
+            $table->boolean('show_amount')->default(0)->index();
+            $table->boolean('is_highlighted')->default(0)->index();
             $table->unsignedBigInteger('currency_id')->default(1);
             $table->unsignedDecimal('amount');
             $table->boolean('is_temporal')->default(0);
