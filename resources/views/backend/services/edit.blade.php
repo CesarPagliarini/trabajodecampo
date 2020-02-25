@@ -47,7 +47,7 @@
                                     @else
                                         <a class="btn btn-primary btn-rounded btn-block" href="{{route('specialties.create')}}">
                                             <i class="fa fa-info-circle"></i>
-                                            Aun no existen servicios cargados.
+                                            Aun no existen especialidades cargados.
                                         </a>
                                     @endif
                                 </select>

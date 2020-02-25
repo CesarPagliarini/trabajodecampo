@@ -16,7 +16,7 @@ class SpecialtyForm extends FormBuilder
         'name' => 'Especialidades',
         'key' => 'specialtiesForm',
         'target' => 'panel/specialties',
-        'icon' => 'fa fa-trash',
+        'icon' => 'fa fa-wrench',
         'state' => '1',
     ];
 

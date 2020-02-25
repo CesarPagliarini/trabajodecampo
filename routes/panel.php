@@ -25,8 +25,12 @@
     Route::namespace('Backend\Professional')->group(function () {
         Route::get('unactive-professionals', 'ProfessionalController@unactives')->name('professionals.unactives');
         Route::get('requests-professionals', 'ProfessionalController@requestClients')->name('professionals.requests');
+        Route::post('update-professionals-specialties', 'ProfessionalController@updateSpecialties')->name('professionals.update-specialties');
         Route::resource('professionals', 'ProfessionalController');
-
+        Route::group(['prefix' => 'ajax/settings'], function () {
+            Route::post('professional-specialties' ,'ProfessionalSettingsController@getProfessionalSpecialties')->name('professional-settings.get.specialty.list');
+            Route::post('specialty-services' ,'ProfessionalSettingsController@getSpecialtyServices')->name('professionals-settings.specialty.services');
+        });
     });
 
 

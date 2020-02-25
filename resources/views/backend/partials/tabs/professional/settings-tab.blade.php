@@ -1,104 +1,121 @@
-<div id="settings" class="tab-pane ">
+<div id="settings" class="tab-pane active show">
     <div class="panel-body" style="padding-top:25px">
-        <div class="ibox">
-            <div class="row">
-                <div class="col-md-3 col-lg-3 float-right">
-                    <button class="btn btn-primary dim" type="button"><i class="fa fa-plus"></i></button>
-                </div>
+        <div class="ibox-content" id="professional-settings-wrapper">
+            <div class="sk-spinner sk-spinner-wave">
+                <div class="sk-rect1"></div>
+                <div class="sk-rect2"></div>
+                <div class="sk-rect3"></div>
+                <div class="sk-rect4"></div>
+                <div class="sk-rect5"></div>
             </div>
-        </div>
-        <div class="ibox">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            Selecciona la especialidad
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12">
-                                    <select class="middle-select form-control">
-                                        @forelse($professional->specialties as $specialty)
-                                            <option value="1">{{$specialty->name}}</option>
-                                        @empty
-                                            <option value="" selected="true" disabled="true">
-                                                Aun no tienes especialidades asignadas
-                                            </option>
-                                        @endforelse
-                                    </select>
-                                </div>
-                                <div class="col-lg-12 col-md-12">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-12">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            Selecciona un rango de fechas
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-7">
-                                    <div id="schedule-interval-container"></div>
-                                    <input id="schedule-interval" value="" hidden>
-                                </div>
-                                <div class="col-md-5">
-                                    <select class="select2_demo_2 form-control" multiple="multiple">
-                                        <option value="" selected >Lunes</option>
-                                        <option value="" selected >Martes</option>
-                                        <option value="" selected >Míercoles</option>
-                                        <option value="" selected >Jueves</option>
-                                        <option value="" selected >Viernes</option>
-                                        <option value="" selected >Sabado</option>
-                                        <option value="" selected >Domingo</option>
-                                        <option value="" selected >Feriados</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
 
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="col-form-label">Especialidad</label>
                         </div>
-                        <div class="panel-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                        <div class="col-md-8">
+                            <select class="settings_specialty_select form-control"
+                                    id="settings_specialty_select">
+                                <option value="">Selecciona una especialidad</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="col-form-label">Servicio</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="settings_service_select form-control"
+                                    id="settings_service_select">
+                            </select>
                         </div>
                     </div>
                 </div>
             </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            @if(count($professional->settings))
+            <input type="text" class="form-control
+                searchform col-md-3 pull-right"
+                               id="filter" placeholder="Buscar...">
+
+            <table class="footable table table-stripped"
+                   data-page-size="8" data-filter=#filter >
+                <thead>
+                <tr>
+                    <th>Especialidad</th>
+                    <th>Servicios</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($professional->settings as $setting)
+                    <tr>
+                        <td>
+                            <a class="accion">
+                                <select name="specialty_id"
+                                        class="settings_specialty form-control select2-hidden-accessible"
+                                        id="settings_specialty_{{$setting->id}}"
+                                        tabindex="-1" aria-hidden="true">
+                                    @foreach($professional->specialties as $specialty)
+                                        <option
+                                            @if($professional->hasSpecialty($specialty->id))
+                                                selected
+                                            @endif
+                                            value="{{$specialty->id}}">{{$specialty->name}}</option>
+                                    @endforeach
+                                </select>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="accion">
+
+                            </a>
+                        </td>
+                        <td>
+                            <a class="accion">
+
+                            </a>
+                        </td>
+
+                    </tr>
+                @endforeach
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="6">
+                        <ul class="pagination pull-right"></ul>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+            @else
+                <div class="row">
+                    <div class="col-md-12">
+                        <a class="btn btn-primary btn-rounded btn-block" href="#"><i class="fa fa-info-circle"></i> Block rounded with icon button</a>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </div>
-
-@section('custom-scripts')
-    <script>
-        $.fn.select2.defaults.set('language', 'es');
-
-        $(document).ready(function(){
-            $(".middle-select").select2(
-                {width: '48%'}
-            );
-            $(".select2_demo_2").select2(
-                {width: '100%'}
-            );
-
-            $('#schedule-interval').dateRangePicker({
-                    inline:true,
-                    container: '#schedule-interval-container',
-                    alwaysOpen:true,
-
-            });
-
-        })
-    </script>
-@endsection
-@section('custom-styles')
-
-@endsection

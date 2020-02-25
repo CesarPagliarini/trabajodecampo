@@ -2,13 +2,6 @@
     <div class="panel-body" style="padding-top:25px">
         <div class="ibox">
             <div class="row">
-                <div class="col-md-3 col-lg-3 float-right">
-                    <button class="btn btn-primary dim" type="button"><i class="fa fa-plus"></i></button>
-                </div>
-            </div>
-        </div>
-        <div class="ibox">
-            <div class="row">
                 @forelse($attention_place->professionals as $professional)
                 <div class="col-lg-4">
                     <div class="contact-box center-version">
@@ -39,7 +32,14 @@
                     </div>
                 </div>
                 @empty
-
+                    <col-lg-12 class="col-md-12">
+                        <div class="alert alert-success">
+                            Este centro de atencion no tiene profesionales todavia
+                            <a class="alert-link" href="#">
+                                Cada profesional debe darse de alta.
+                            </a>
+                        </div>
+                    </col-lg-12>
                 @endforelse
             </div>
 

@@ -68,7 +68,6 @@ class SpecialtyController extends BaseController implements ControllerContract
     public function edit(Specialty $specialty)
     {
 
-        $specialty = $specialty::with('services')->first();
         return view('backend.specialties.edit', compact('specialty'));
     }
 

@@ -24,6 +24,11 @@ abstract class BaseEntity extends Model
         return Carbon::parse($this->created_at)->format('d/m/y');
     }
 
+    public function hasSpecialty($specialty_id)
+    {
+        return $this->specialties->pluck('id')->contains($specialty_id);
+    }
+
 
 
 

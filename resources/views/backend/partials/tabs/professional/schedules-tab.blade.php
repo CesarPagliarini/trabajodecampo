@@ -1,4 +1,4 @@
-<div id="schedules" class="tab-pane active show">
+<div id="schedules" class="tab-pane ">
     <div class="panel-body" style="padding-top:25px">
         <div class="ibox">
             <div class="row">
@@ -18,6 +18,7 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12">
                                     <select class="middle-select form-control">
+
                                         @forelse($professional->specialties as $specialty)
                                             <option value="1">{{$specialty->name}}</option>
                                         @empty
@@ -71,34 +72,8 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
 
-@section('custom-scripts')
-    <script>
-        $.fn.select2.defaults.set('language', 'es');
 
-        $(document).ready(function(){
-            $(".middle-select").select2(
-                {width: '48%'}
-            );
-            $(".select2_demo_2").select2(
-                {width: '100%'}
-            );
-
-            $('#schedule-interval').dateRangePicker({
-                    inline:true,
-                    container: '#schedule-interval-container',
-                    alwaysOpen:true,
-
-            });
-
-        })
-    </script>
-@endsection
-@section('custom-styles')
-
-@endsection

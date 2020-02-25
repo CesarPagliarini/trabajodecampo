@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend\Service;
 
 use App\Core\Controllers\BaseController;
 use App\Core\Interfaces\ControllerContract;
-use App\Entities\AttentionPlace;
+use App\Entities\AttentionCenter;
 use App\Entities\Service;
 use App\Entities\Specialty;
 use App\Http\Requests\Backend\services\ServicesCreateFormRequest;
@@ -71,6 +71,7 @@ class ServiceController extends BaseController implements ControllerContract
      */
     public function edit(Service $service)
     {
+
         $specialties = Specialty::actives();
         return view('backend.services.edit', compact('service', 'specialties'));
     }

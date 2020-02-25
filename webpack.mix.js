@@ -25,6 +25,7 @@ mix.styles([
     'resources/template/css/plugins/toastr/toastr.min.css',
     'resources/template/css/plugins/daterangepicker/dateranger.css',
     'resources/template/css/plugins/select2/select2.css',
+    'resources/template/css/plugins/steps/jquery.steps.css',
 
 ], 'public/css/panel.css')
 
@@ -48,6 +49,7 @@ mix.styles([
     'resources/template/js/plugins/chartJs/Chart.min.js',
     'resources/template/js/plugins/daterangepicker/daterangepicker.js',
     'resources/template/js/plugins/select2/select2.js',
+    'resources/template/js/plugins/steps/jquery.steps.js',
 ], 'public/js/panel.js');
 
 mix.js([

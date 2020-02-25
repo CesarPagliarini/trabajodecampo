@@ -111,10 +111,6 @@ class User extends BaseEntity implements Authenticatable
         return Carbon::parse($this->date_of_birthday)->format('d/m/y');
     }
 
-    public function specialties()
-    {
-        return $this->belongsToMany(Specialty::class, 'specialty_user','user_id', 'specialty_id');
-    }
 
 
 

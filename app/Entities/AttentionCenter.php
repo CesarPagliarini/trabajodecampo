@@ -3,11 +3,20 @@
 namespace App\Entities;
 
 use App\Core\Entities\BaseEntity;
+use App\Core\Repositories\ProfessionalSettingRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class AttentionPlace extends BaseEntity
+class AttentionCenter extends BaseEntity
 {
+
+    protected $shiftRepository;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->shiftRepository = new ProfessionalSettingRepository(new ProfessionalSetting());
+    }
     protected $table = 'attention_places';
 
     protected $fillable=[
@@ -32,18 +41,7 @@ class AttentionPlace extends BaseEntity
 
     public function getProfessionalsAttribute()
     {
-
-        $query =  DB::table('users')
-            ->join('professional_settings', 'users.id', '=', 'professional_settings.professional_id')
-            ->where('professional_settings.attention_place_id', '=',$this->id)
-            ->get();
-
-        $professionals = $query->map(function($item){
-            return (new Professional((array) $item));
-        });
-        return $professionals;
-
-
+        return $this->shiftRepository->attentionCenterProfessionals($this->id);
     }
 
 

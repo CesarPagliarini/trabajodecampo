@@ -191,6 +191,7 @@ return [
         //customs
 
         App\Providers\CustomBladeServiceProvider::class,
+        App\Providers\ProfessionalSettingRepositoryServiceProvider::class
 
 
     ],

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Shift;
 
-use App\Entities\AttentionPlace;
+use App\Entities\AttentionCenter;
 use App\Http\Requests\Backend\attentionplaces\AttentionplacesCreateFormRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\attentionplaces\AttentionplacesUpdateFormRequest;
@@ -17,7 +17,7 @@ class AttentionplaceController extends Controller
      */
     public function index()
     {
-        $attention_places = AttentionPlace::all();
+        $attention_places = AttentionCenter::all();
         return view('backend.attention-places.index',compact('attention_places'));
     }
 
@@ -41,7 +41,7 @@ class AttentionplaceController extends Controller
     {
         DB::beginTransaction();
         try{
-            AttentionPlace::create($request->all());
+            AttentionCenter::create($request->all());
             DB::commit();
             $request->session()->flash('flash_message', 'El Centro de atencion se ha creado exitosamente!');
             return redirect()->route('attention-places.index');
@@ -57,11 +57,13 @@ class AttentionplaceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param AttentionPlace $attention_place
+     * @param AttentionCenter $attention_place
      * @return \Illuminate\Http\Response
      */
-    public function edit(AttentionPlace $attention_place)
+    public function edit(AttentionCenter $attention_place)
     {
+
+
         return view('backend.attention-places.edit', compact('attention_place'));
     }
 
@@ -72,7 +74,7 @@ class AttentionplaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AttentionplacesUpdateFormRequest $request, AttentionPlace $attention_place)
+    public function update(AttentionplacesUpdateFormRequest $request, AttentionCenter $attention_place)
     {
         DB::beginTransaction();
         try{

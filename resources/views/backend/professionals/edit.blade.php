@@ -14,8 +14,9 @@
     <div class="tabs-container">
         <ul class="nav nav-tabs">
             <li><a class="nav-link" data-toggle="tab" href="#general"><i class="fa fa-user"></i> Datos generales</a></li>
+            <li><a class="nav-link " data-toggle="tab" href="#specialties"><i class="fa fa-wrench"></i> Especialidades</a></li>
             <li><a class="nav-link" data-toggle="tab" href="#schedules"><i class="fa fa-briefcase"></i> Horarios</a></li>
-            <li><a class="nav-link active show" data-toggle="tab" href="#settings"><i class="fa fa-cog"></i> Configuracion</a></li>
+            <li><a class="nav-link  active " data-toggle="tab" href="#settings"><i class="fa fa-cog"></i> Configuracion</a></li>
         </ul>
         <div class="tab-content">
             <div id="general" class="tab-pane ">
@@ -25,6 +26,13 @@
                           method="POST">
                         @csrf
                         @method('PUT')
+
+                        <div class="form-group row  @if ($errors->has('id')) has-error @endif">
+                            <label class="col-sm-2 control-label" for="input-name">Código profesional </label>
+                            <div class="col-sm-8">
+                                <input id="input-name" value="{{$professional->id}}" type="text" class="form-control" name="name">
+                            </div>
+                        </div>
 
                         <div class="form-group row  @if ($errors->has('name')) has-error @endif">
                             <label class="col-sm-2 control-label" for="input-name">Nombre <span class="oblig">*</span></label>
@@ -132,9 +140,38 @@
             </div>
             @include('backend.partials.tabs.professional.schedules-tab')
             @include('backend.partials.tabs.professional.settings-tab')
+            @update('activeProfessionalsForm')
+                @include('backend.partials.tabs.professional.specialties-tab')
+            @endif
         </div>
-
     </div>
 @endsection
+
+@section('custom-scripts')
+    <script>
+        const professional = '@json($professional)';
+        const specialtyurl = "{{route('professionals.update-specialties')}}"
+        const professionalSpecialtiesUrl = "{{route('professional-settings.get.specialty.list')}}"
+        const specialtyServicesUrl = "{{route('professionals-settings.specialty.services')}}"
+    </script>
+    <script>
+        $.fn.select2.defaults.set('language', 'es');
+        $(document).ready(function(){
+
+            $(document).ready(function(){
+                $(".specialties_professional_select").select2({width: '100%'});
+            });
+
+            $('#schedule-interval').dateRangePicker({
+                inline:true,
+                container: '#schedule-interval-container',
+                alwaysOpen:true,
+            });
+        });
+    </script>
+    @include('backend.partials.tabs.professional.components.specialties-tab-scripts')
+    @include('backend.partials.tabs.professional.components.settings-tab-scripts')
+@endsection
+
 
 

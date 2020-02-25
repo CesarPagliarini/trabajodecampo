@@ -1,6 +1,6 @@
 @extends('layouts.content-panel')
 @section('page-name')
-    Editar especialidad
+    Editar especialidad {{$specialty->name}}
 @stop
 @section('content')
     <div class="tabs-container">
@@ -38,7 +38,6 @@
                         <div class="form-group row @if ($errors->has('services')) has-error @endif">
                             <label class="col-sm-2 control-label" for="input-email">Servicios <span class="oblig">*</span></label>
                             <div class="col-sm-8">
-
                                 @if(count($specialty->services))
                                     <select class="specialties_select form-control" name="services[]" multiple="multiple">
                                         @foreach($specialty->services as $service)
@@ -46,7 +45,7 @@
                                                 @if($service->hasSpecialty($specialty->id))
                                                 selected
                                                 @endif
-                                                value="{{$specialty->id}}">{{$specialty->name}}</option>
+                                                value="{{$service->id}}">{{$service->name}}</option>
                                         @endforeach
                                     </select>
                                 @else

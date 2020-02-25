@@ -35,6 +35,7 @@
     31 => 'App\\Providers\\RouteServiceProvider',
     32 => 'App\\Providers\\ViewServiceProvider',
     33 => 'App\\Providers\\CustomBladeServiceProvider',
+    34 => 'App\\Providers\\ProfessionalSettingRepositoryServiceProvider',
   ),
   'eager' => 
   array (
@@ -57,6 +58,7 @@
     16 => 'App\\Providers\\RouteServiceProvider',
     17 => 'App\\Providers\\ViewServiceProvider',
     18 => 'App\\Providers\\CustomBladeServiceProvider',
+    19 => 'App\\Providers\\ProfessionalSettingRepositoryServiceProvider',
   ),
   'deferred' => 
   array (

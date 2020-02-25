@@ -41,7 +41,7 @@ class ProfessionalSetting extends BaseEntity
 
     public function attentionPlace()
     {
-        return $this->hasOne(AttentionPlace::class, 'id', 'attention_place_id');
+        return $this->hasOne(AttentionCenter::class, 'id', 'attention_place_id');
     }
 
     public function currency()
