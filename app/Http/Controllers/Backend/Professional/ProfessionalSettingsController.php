@@ -28,8 +28,25 @@ class ProfessionalSettingsController extends Controller implements ShiftsModuleC
 
     public function getProfessionalSpecialties(Request $request)
     {
-
         $data = $this->repository->professionalSpecialtiesAttachedList($request->professional_id);
         return response()->json($data);
     }
+    public function getAttentionPlaces()
+    {
+        $data = $this->repository->getAttentionPlaces();
+        return response()->json($data);
+    }
+
+    public function getCurrenciesList()
+    {
+        $data = $this->repository->getCurrencies();
+        return response()->json($data);
+    }
+
+    public function addSettings(Request $request)
+    {
+        return response()->json($request->all());
+    }
+
+
 }

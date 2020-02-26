@@ -26,6 +26,8 @@ mix.styles([
     'resources/template/css/plugins/daterangepicker/dateranger.css',
     'resources/template/css/plugins/select2/select2.css',
     'resources/template/css/plugins/steps/jquery.steps.css',
+    'resources/template/css/plugins/touchspin/jquery.bootstrap-touchspin.css',
+    'resources/template/css/plugins/switchery/switchery.css',
 
 ], 'public/css/panel.css')
 
@@ -50,6 +52,8 @@ mix.styles([
     'resources/template/js/plugins/daterangepicker/daterangepicker.js',
     'resources/template/js/plugins/select2/select2.js',
     'resources/template/js/plugins/steps/jquery.steps.js',
+    'resources/template/js/plugins/touchspin/jquery.bootstrap-touchspin.js',
+    'resources/template/js/plugins/switchery/switchery.js',
 ], 'public/js/panel.js');
 
 mix.js([

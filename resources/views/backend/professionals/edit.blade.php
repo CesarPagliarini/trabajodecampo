@@ -14,9 +14,11 @@
     <div class="tabs-container">
         <ul class="nav nav-tabs">
             <li><a class="nav-link" data-toggle="tab" href="#general"><i class="fa fa-user"></i> Datos generales</a></li>
-            <li><a class="nav-link " data-toggle="tab" href="#specialties"><i class="fa fa-wrench"></i> Especialidades</a></li>
+            @if(Auth::user()->hasRole('Administrador'))
+                <li><a class="nav-link " data-toggle="tab" href="#specialties"><i class="fa fa-wrench"></i> Especialidades</a></li>
+            @endif
             <li><a class="nav-link" data-toggle="tab" href="#schedules"><i class="fa fa-briefcase"></i> Horarios</a></li>
-            <li><a class="nav-link  active " data-toggle="tab" href="#settings"><i class="fa fa-cog"></i> Configuracion</a></li>
+            <li><a class="nav-link active " data-toggle="tab" id="settings_tab_listener" href="#settings"><i class="fa fa-cog"></i> Configuracion</a></li>
         </ul>
         <div class="tab-content">
             <div id="general" class="tab-pane ">
@@ -140,8 +142,9 @@
             </div>
             @include('backend.partials.tabs.professional.schedules-tab')
             @include('backend.partials.tabs.professional.settings-tab')
-            @update('activeProfessionalsForm')
+            @if(Auth::user()->hasRole('Administrador'))
                 @include('backend.partials.tabs.professional.specialties-tab')
+
             @endif
         </div>
     </div>
@@ -153,6 +156,9 @@
         const specialtyurl = "{{route('professionals.update-specialties')}}"
         const professionalSpecialtiesUrl = "{{route('professional-settings.get.specialty.list')}}"
         const specialtyServicesUrl = "{{route('professionals-settings.specialty.services')}}"
+        const attentionCentersUrl = "{{route('professionals-settings.get.attention.places.list')}}"
+        const getCurrenciesUrl = "{{route('professionals-settings.get.currencies.list')}}"
+        const addSettingsRoute = "{{route('professionals-settings.add-settings')}}"
     </script>
     <script>
         $.fn.select2.defaults.set('language', 'es');
@@ -167,10 +173,21 @@
                 container: '#schedule-interval-container',
                 alwaysOpen:true,
             });
+            $('#settings_tab_listener').click(()=>{
+
+            });
         });
     </script>
     @include('backend.partials.tabs.professional.components.specialties-tab-scripts')
     @include('backend.partials.tabs.professional.components.settings-tab-scripts')
+@endsection
+@section('custom-styles')
+    <style>
+        .bg-danger{
+            padding:2px;
+            border-radius: 5px;
+        }
+    </style>
 @endsection
 
 

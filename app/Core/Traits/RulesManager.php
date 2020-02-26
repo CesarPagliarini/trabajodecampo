@@ -14,7 +14,8 @@ trait RulesManager
 
     public function hasRole($role): bool
     {
-        $founded = $this->roles->find($role) ? true : false;
+
+        $founded = $this->roles->where('name', $role)->first()   ? true : false;
         return is_null($founded) ? false : $founded;
     }
 
@@ -82,7 +83,6 @@ trait RulesManager
                 return false;
             }
         }
-
         return true;
     }
 

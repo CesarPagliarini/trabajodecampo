@@ -106,6 +106,21 @@ class ProfessionalSettingRepository implements ProfessionalSettingRepositoryInte
             ->select('specialties.*')
             ->get();
     }
+    public function getAttentionPlaces()
+    {
+        return DB::table('attention_places')
+            ->where('state', '1')
+            ->select('*')
+            ->get();
+    }
+
+    public function getCurrencies()
+    {
+        return DB::table('currencies')
+            ->where('state', '1')
+            ->select('*')
+            ->get();
+    }
 
 
 }

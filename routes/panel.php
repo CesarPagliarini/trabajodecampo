@@ -30,6 +30,9 @@
         Route::group(['prefix' => 'ajax/settings'], function () {
             Route::post('professional-specialties' ,'ProfessionalSettingsController@getProfessionalSpecialties')->name('professional-settings.get.specialty.list');
             Route::post('specialty-services' ,'ProfessionalSettingsController@getSpecialtyServices')->name('professionals-settings.specialty.services');
+            Route::post('attention-places' ,'ProfessionalSettingsController@getAttentionPlaces')->name('professionals-settings.get.attention.places.list');
+            Route::post('currencies-list' ,'ProfessionalSettingsController@getCurrenciesList')->name('professionals-settings.get.currencies.list');
+            Route::post('add-settings' ,'ProfessionalSettingsController@addSettings')->name('professionals-settings.add-settings');
         });
     });
 

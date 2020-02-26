@@ -82,7 +82,7 @@ class ProfessionalController extends  BaseController implements ControllerContra
     {
         $professional = Professional::where('id', $professional->id)->with('settings')->first();
 
-        $specialties = Specialty::whereHas('services')->get();
+        $specialties = $professional->specialties;
         return view('backend.professionals.edit', compact('professional', 'specialties'));
     }
 
