@@ -45,7 +45,21 @@ class ProfessionalSettingsController extends Controller implements ShiftsModuleC
 
     public function addSettings(Request $request)
     {
-        return response()->json($request->all());
+        $data = $request->all();
+        return $this->repository->addSettings($data);
+    }
+
+    public function delete(Request $request)
+    {
+        return $this->repository->removeSetting( $request->id);
+    }
+
+    public function professionalConfig(Request $request)
+    {
+
+        return  $this->repository->getSettings($request->professional_id);
+
+
     }
 
 

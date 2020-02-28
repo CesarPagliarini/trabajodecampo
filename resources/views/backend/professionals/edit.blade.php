@@ -30,9 +30,9 @@
                         @method('PUT')
 
                         <div class="form-group row  @if ($errors->has('id')) has-error @endif">
-                            <label class="col-sm-2 control-label" for="input-name">Código profesional </label>
+                            <label class="col-sm-2 control-label" for="input-id">Código profesional </label>
                             <div class="col-sm-8">
-                                <input id="input-name" value="{{$professional->id}}" type="text" class="form-control" name="name">
+                                <input id="input-id" value="{{$professional->id}}" type="text" class="form-control" name="id">
                             </div>
                         </div>
 
@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="form-group row  @if ($errors->has('document')) has-error @endif">
-                            <label class="col-sm-2 control-label" for="input-name">Document <span class="oblig">*</span></label>
+                            <label class="col-sm-2 control-label" for="input-document">Document <span class="oblig">*</span></label>
                             <div class="col-sm-8">
                                 <input id="input-document"  value="{{$professional->document}}" type="text" class="form-control" name="document">
                             </div>
@@ -68,9 +68,9 @@
 
 
                         <div class="form-group row  @if ($errors->has('cuit_cuil')) has-error @endif">
-                            <label class="col-sm-2 control-label" for="input-name">Cuit / Cuil <span class="oblig">*</span></label>
+                            <label class="col-sm-2 control-label" for="input-cuit_cuil">Cuit / Cuil <span class="oblig">*</span></label>
                             <div class="col-sm-8">
-                                <input id="input-name" value="{{$professional->cuit_cuil}}" type="text" class="form-control" name="cuit_cuil">
+                                <input id="input-cuit_cuil" value="{{$professional->cuit_cuil}}" type="text" class="form-control" name="cuit_cuil">
                             </div>
                         </div>
 
@@ -148,7 +148,9 @@
             @endif
         </div>
     </div>
+    @include('backend.modals.shure-delete-professional-setting')
 @endsection
+
 
 @section('custom-scripts')
     <script>
@@ -159,7 +161,10 @@
         const attentionCentersUrl = "{{route('professionals-settings.get.attention.places.list')}}"
         const getCurrenciesUrl = "{{route('professionals-settings.get.currencies.list')}}"
         const addSettingsRoute = "{{route('professionals-settings.add-settings')}}"
+        const removeRoute = "{{route('professionals-settings.remove-settings')}}"
+        const professionalConfigs = "{{route('professionals-settings.configs')}}"
     </script>
+
     <script>
         $.fn.select2.defaults.set('language', 'es');
         $(document).ready(function(){
@@ -180,6 +185,7 @@
     </script>
     @include('backend.partials.tabs.professional.components.specialties-tab-scripts')
     @include('backend.partials.tabs.professional.components.settings-tab-scripts')
+
 @endsection
 @section('custom-styles')
     <style>

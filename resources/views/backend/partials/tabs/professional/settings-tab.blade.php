@@ -8,18 +8,14 @@
                 <div class="sk-rect4"></div>
                 <div class="sk-rect5"></div>
             </div>
-
-
             <div class="row">
-                <div class="col-md-12">
-                    <a class="btn btn-primary btn-rounded btn-block add-new-config" href="#">
-                        <i class="fa fa-plus" id="icon-add-new-config"></i> Agregar
-                    </a>
-                </div>
-            </div>
-
-
-            <div class="container-fluid mt-5 " id="new-config-container">
+                    <div class="col-md-12">
+                        <a class="btn btn-primary btn-rounded btn-block add-new-config" href="#">
+                            <i class="fa fa-plus" id="icon-add-new-config"></i> Agregar
+                        </a>
+                    </div>
+                {{--     aca va el hidden           --}}
+                <div class="container-fluid mt-5  animated fadeInDown hidden " id="new-config-container">
                 <div class="row hidden" id="settings-alert-span" >
                     <div class="col-md-12">
                         <div class="alert alert-danger">
@@ -34,7 +30,7 @@
                                 <p> <b>Destacada </b></p>
                             </div>
                             <div class="col-md-1">
-                                <input type="checkbox" class="js-switch settings_is_highlighted" checked />
+                                <input type="checkbox" class="js-switch settings_is_highlighted" id="settings_is_highlighted" checked />
                             </div>
                         </div>
                     </div>
@@ -44,7 +40,7 @@
                                 <p> <b>Actividad temporal </b></p>
                             </div>
                             <div class="col-md-8">
-                                <input type="checkbox" class="js-switch settings_is_temporal" checked />
+                                <input type="checkbox" id="settings_is_temporal" class="js-switch settings_is_temporal" checked />
                             </div>
                         </div>
                     </div>
@@ -93,8 +89,7 @@
                         </div>
                     </div>
                 </div>
-                                <div class="col-md-6 form-group">
-
+                <div class="col-md-6 form-group">
                     <div class="row">
                         <div class="col-md-4">
                             <label class="col-form-label">Tiempo estimado</label>
@@ -132,7 +127,7 @@
                         <div class="col-md-8">
                             <div class="input-group-prepend">
                                 <span class="input-group-addon">$</span>
-                                <input type="number" id="settings_amount_input" class="form-control">
+                                <input type="number" id="settings_amount_input" value="15" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -150,7 +145,7 @@
                                 <div class="col-md-4 ">
                                     <div class="i-checks">
                                         <label >
-                                            <input type="radio" value="1" name="work_holiday" class="work_holiday"><i></i> si
+                                            <input type="radio" value="1" name="work_holiday" id="work_holiday" class="work_holiday"><i></i> si
                                         </label>
                                     </div>
                                 </div>
@@ -175,7 +170,7 @@
                                 <div class="col-md-4">
                                     <div class="i-checks">
                                         <label>
-                                            <input type="radio" value="1" name="show_amount" class="show_amount"><i></i> si
+                                            <input type="radio" value="1" id="show_amount" name="show_amount" class="show_amount"><i></i> si
                                         </label>
                                     </div>
                                 </div>
@@ -191,8 +186,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="row mt-3">
                 <div class="col-md-6 offset-9 ">
                     <a class="btn btn-white" id="cancel_settings" >Cancelar</a>
@@ -200,6 +193,33 @@
                 </div>
             </div>
         </div>
+            </div>
+            {{--    start table     --}}
+            <div class="row mt-5">
+                <table class="table-responsive table settings-table table-stripped"
+                       data-page-size="5" data-filter=#filter >
+                    <tr>
+                        <th>Especialidad</th>
+                        <th>Servicio</th>
+                        <th>Centro de atencion</th>
+                        <th>Tiempo estimado</th>
+                        <th>Costo promedio</th>
+                        <th>Feriados y domingos</th>
+                        <th>Muestra monto</th>
+                        <th>Destacada</th>
+                        <th>Acciones</th>
+                    </tr>
+                    <tbody id="settings-table-body">
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="12">
+                            <ul class="pagination pull-right"></ul>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
 </div>

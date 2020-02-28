@@ -1,5 +1,4 @@
 <script>
-
     const newSpecialtySelect = $('.settings_specialty_select');
     const newServiceSelect = $('.settings_service_select');
     const newAttentionPlaceSelect = $(".settings_attentionPlace_select");
@@ -11,20 +10,18 @@
     const newIsHighlightedSelect = $('.settings_is_highlighted');
     const newIsTemporal = $('.settings_is_temporal');
     const currentProfessionalId =JSON.parse(professional).id;
-
+    const modalShureDelete = $('#professional-settings-delete-modal')
+    const table = $('#settings-table-body');
     data = {
         specialties:{},
         attentionPlaces:{},
         time_units:[],
+        lastConfig:{},
     }
-
     switchers = [
         {element:document.querySelector('.settings_is_highlighted')},
         {element:document.querySelector('.settings_is_temporal')},
     ];
-
-
-
     $(document).ready(() =>{
         /**
         * starts script
@@ -37,8 +34,20 @@
          * event bindings
          * */
 
+        $('.settings-table').footable();
+
         $(document).on("allowTimeUnits", checkAllowTimeUnits);
         $(document).on("refresh-specialties",currentProfessionalId, getProfessionalSpecialties);
+        $(document).on("handle-api-response", handleApiErrors);
+        $(document).on("append-to-table", appendToTable);
+        $(document).on("remove-row-item", removeThisItem);
+
+        $(document).on("generate-table", generateTable);
+
+
+
+
+
         $('#save_settings').click(()=>{saveForm();});
         $('#cancel_settings').click(()=>{cancelForm();})
         $('.add-new-config').click(()=>{toggleForm();})
@@ -50,6 +59,7 @@
         newSpecialtySelect.on('select2:select', function (e) {
             let data = e.params.data;
             getSpecialtyServices(data.id)
+
         });
         newAttentionPlaceSelect.on('select2:select', function (e) {
             $.event.trigger({type:'allowTimeUnits'});
@@ -57,19 +67,20 @@
         newServiceSelect.on('select2:select', function (e) {
             $.event.trigger({type:'allowTimeUnits'});
         });
-
         /**
          * Trigger events
          * */
-        $(document).trigger('refresh-specialties');
+        $.event.trigger('refresh-specialties')
+
+        $.when(getConfigs()).done(() => {
+            $.when(setUnitTimeIntervals()).done(()=>{
+                $.event.trigger('generate-table')
+            }); })
         getCurrencies()
+
         getAttentionPlaces()
 
     })
-
-
-
-    /***getters*/
     function getSpecialtyServices(specialty_id){
         callApi(specialtyServicesUrl,{specialty_id :specialty_id }).then((response) => {
             newServiceSelect.clearSelect()
@@ -123,56 +134,64 @@
                 control:"especialty_id",
                 input: newSpecialtySelect,
                 value: newSpecialtySelect.find(':selected').val(),
+                label: 'Especialidad'
             },
             {
                 control:"service_id",
                 input:newServiceSelect,
                 value:newServiceSelect.find(':selected').val(),
+                label: 'Servicio'
             },
             {
                 control:"attention_place_id",
                 input:newAttentionPlaceSelect,
                 value:newAttentionPlaceSelect.find(':selected').val(),
+                label: 'Centro de atencion',
             },
             {
                 control:"unit_time",
                 input:newTimeUnitSelect,
                 value:newTimeUnitSelect.find(':selected').val(),
+                label: 'Tiempo estimado',
             },
             {
                 control:"work_holiday",
                 input:newWorkHolidaySelect,
                 value:newWorkHolidaySelect.val(),
+                label: 'Trabaja domingos y feriados',
             },
             {
                 control:"show_amount",
                 input:newShowAmountSelect,
                 value:newShowAmountSelect.val(),
+                label: 'Muestra precio en web',
             },
             {
                 control:"currency_id",
                 input:newCurrencySelect,
                 value:newCurrencySelect.find(':selected').val(),
+                label: 'Moneda',
+
             },
             {
                 control:"amount",
                 input:newAmountSelect,
                 value:newAmountSelect.val(),
+                label: 'Costo promedio',
             },
             {
                 control:"is_highlighted",
                 input:newIsHighlightedSelect,
                 value:newIsHighlightedSelect.is(':checked'),
+                label: 'Destacada',
             },{
                 control:"is_temporal",
                 input:newIsTemporal,
                 value:newIsTemporal.is(':checked'),
+                label: 'Actividad temporal',
             },
         ]
     }
-
-
-
     /**setters and behavoirals*/
     function setUnitTimeIntervals(){
         const intervals = [];
@@ -251,11 +270,11 @@
             : validInputs.push(input);
         });
 
+
         showErrors(inValidInputs, validInputs)
 
         return ( ! inValidInputs.length);
     }
-
     function showErrors(invalidInputs, validInputs){
         if(invalidInputs.length){
             invalidInputs.filter((input) => {
@@ -265,20 +284,28 @@
             });
             $('#settings-alert-span').removeClass('hidden');
         }
+
         validInputs.filter((input)=>{
             (input.control ==='amount')
                 ? $('#settings_amount_input_label').removeClass('bg-danger')
                 : input.input.parent().parent().find('.col-form-label').removeClass('bg-danger')
         });
         let allInputs = invalidInputs.length + validInputs.length;
-        (allInputs.length === validInputs.length && ! validInputs.length)
+        if(allInputs === validInputs.length)
         {
+
             $('#settings-alert-span').addClass('hidden');
         }
-        return;
     }
-
-
+    function handleApiErrors(event, data){
+        let response = data.response;
+        if(response.error === 'true'){
+            toastr.error(response.message);
+        }else{
+            toastr.success(response.message);
+        }
+        $('#professional-settings-wrapper').removeClass('sk-loading')
+    }
     function callApi(url, params = {}){
         const token = $('meta[name="csrf-token"]').attr('content');
         $.ajaxSetup({
@@ -310,19 +337,32 @@
         };
         if(validateForm()){
             callApi(addSettingsRoute, params).then((response) => {
-                $('#professional-settings-wrapper').removeClass('sk-loading')
+                console.log(response);
+                    $.event.trigger('handle-api-response', [{response:response}]);
+                if(response.error === "false"){
+
+                    $.when($.event.trigger('append-to-table', [{id:response.itemId}])).done(()=>{
+                        cancelForm();
+                    });
+                }
             })
-        };
+        }
     }
     function cancelForm(){
         newSpecialtySelect.val('').trigger('change');
-        newServiceSelect.val('').trigger('change');
+        newServiceSelect.clearSelect();
         newAttentionPlaceSelect.val('').trigger('change');
         newTimeUnitSelect.val('').trigger('change');
         newCurrencySelect.val('').trigger('change');
-        newWorkHolidaySelect.val('').trigger('change');
-        newShowAmountSelect.val('').trigger('change');
+        newAmountSelect.val('').trigger('change');
+
+        newTimeUnitSelect.clearSelect()
+        newTimeUnitSelect.append(new Option('Selecciona primero una especialidad', '','selected'))
         newServiceSelect.append(new Option('Selecciona primero una especialidad','','selected')).trigger('change');
+
+        let inputs = getCurrentInputs()
+        showErrors([], getCurrentInputs());
+
         toggleForm();
     }
     function toggleForm(){
@@ -332,7 +372,8 @@
     function setExtends(){
         jQuery.fn.extend({
             clearSelect: function() {
-                return this.children().remove()
+                this.children().remove()
+                return this;
             },
         });
     }
@@ -342,6 +383,162 @@
         })
 
     }
+    function appendToTable(event, params){
+        let insertedId = params.id;
+        let inputs = getCurrentInputs();
+        let newRow = {}
+
+        inputs.filter((item)=>{
+
+            if(item.input.is('select'))
+            {
+                let name = item.control;
+                let value = item.value
+                let label = item.label
+                let text = item.input.find(':selected').text();
+                newRow[name]  = {name:name,value:value, label:label, text:text};
+            }else{
+                let name = item.control;
+                let value = item.value;
+                let label = item.label;
+                let text = onCheckHtml(value);
+
+                newRow[name]  = {name:name,value:value, label:label, text:text};
+            }
+
+        });
+        addRow(newRow, insertedId);
+    }
+    function onCheckHtml(value){
+        if(value === '' || value === 'undefined' || value === undefined || value > 1) return value;
+        if( value === 1 || value === true){
+            return `<button class="btn btn-default" type="button"><i class="fa fa-thumbs-o-up"></i></button>`
+        }else{
+            return `<button class="btn btn-default" type="button"><i class="fa fa-thumbs-o-down"></i></button>`
+        }
+    }
+
+
+
+    const barreda = {
+        victim:{id:''},
+        setVictim : function (data) { this.victim.id = data.id },
+        hideVictim : function() { this.victim.id = ''},
+        killWife : function (){
+            let victim = this.victim;
+            $.event.trigger('remove-row-item',[{id:victim.id}])
+        },
+        suspect: function() { return this.victim.id === ''}
+    };
+    function barredasTime(){
+        if( ! barreda.suspect() ){
+            barreda.killWife();
+            barreda.hideVictim();
+        }
+        modalShureDelete.modal('hide');
+        return false;
+    };
+    function showModal(data){
+        barreda.setVictim(data);
+        modalShureDelete.modal();
+    };
+
+    function removeThisItem(event, data){
+        callApi(removeRoute,{id:data.id}).done((response)=>{
+            if(response.error === 'false'){
+                $.when($('#row-'+data.id).remove()).done(()=>{
+                    $('.settings-table').trigger('footable_redraw');
+                });
+            }
+            $.event.trigger('handle-api-response', [{response:response}]);
+        })
+    }
+
+    function addRow(row, insertedId){
+        table.prepend(`
+            <tr id="row-${insertedId}">
+                <td>${row.especialty_id.text}</td>
+                <td>${row.service_id.text}</td>
+                <td>${row.attention_place_id.text}</td>
+                <td>${row.unit_time.text}</td>
+                <td>${row.currency_id.text} ${row.amount.value}</td>
+                <td>${row.work_holiday.text}</td>
+                <td>${row.show_amount.text}</td>
+                <td>${row.is_highlighted.text}</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-xs full-width"   >
+                        Editar
+                    </button>
+                    <button type="button" class="btn btn-danger btn-xs full-width"  onclick="showModal({id:${insertedId}})">
+                        Eliminar
+                    </button>
+                </td>
+            </tr>
+        `);
+        $('.settings-table').trigger('footable_redraw');
+    }
+    async function getConfigs(){
+       await callApi(professionalConfigs, {professional_id:currentProfessionalId}).done((response) => {
+            if(response.error === 'true'){
+                $.event.trigger('handle-api-response', [{response:response}]);
+            }
+            data.lastConfigs = response.data;
+       })
+    }
+    function generateTable(){
+
+        const inputs = getCurrentInputs();
+        intervals = data.time_units;
+        data.lastConfigs.filter((config) => {
+            config.time_unit = intervals.find(id => config.time_unit).text;
+            console.log(config.time_unit)
+            config.show_amount = onCheckHtml(config.show_amount);
+            config.work_holiday = onCheckHtml(config.work_holiday);
+            config.is_highlighted = onCheckHtml(config.is_highlighted);
+             table.prepend(`
+                 <tr id="row-${config.line}">
+                     <td>${config.specialty.name}</td>
+                     <td>${config.service.name}</td>
+                     <td>${config.attention_place.name}</td>
+                     <td>${config.time_unit}</td>
+                     <td>${config.currency.name} ${config.amount}</td>
+                     <td>${config.work_holiday}</td>
+                     <td>${config.show_amount}</td>
+                     <td>${config.is_highlighted}</td>
+                     <td>
+                         <button type="button" class="btn btn-primary btn-xs full-width"   >
+                             Editar
+                         </button>
+                         <button type="button" class="btn btn-danger btn-xs full-width"  onclick="showModal({id:${config.line}})">
+                             Eliminar
+                         </button>
+                     </td>
+                 </tr>
+             `);
+            $('.settings-table').trigger('footable_redraw');
+        })
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </script>

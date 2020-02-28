@@ -7,13 +7,18 @@ namespace App\Core\Repositories;
 use App\Core\interfaces\ProfessionalSettingRepositoryInterface;
 use App\Entities\Professional;
 use App\Entities\ProfessionalSetting;
-use App\Entities\Service;
+
 use App\Entities\Specialty;
+use App\Http\Resources\ProfessionalSettingResource;
+use App\Http\Resources\ProfessionalSettingsApiResource;
+use App\Http\Resources\ProfessionalSettingsResource;
+use App\Http\Resources\ProfessionalSettingsResourceCollection;
 use Illuminate\Support\Facades\DB;
 
 class ProfessionalSettingRepository implements ProfessionalSettingRepositoryInterface
 {
     protected $model;
+
 
     public function __construct(ProfessionalSetting $professiona_setting)
     {
@@ -73,7 +78,6 @@ class ProfessionalSettingRepository implements ProfessionalSettingRepositoryInte
         return $professionals;
     }
 
-
     public function serviceProfessionals($service_id)
     {
         $query =  DB::table('users')
@@ -97,7 +101,6 @@ class ProfessionalSettingRepository implements ProfessionalSettingRepositoryInte
             ->get();
     }
 
-
     public function professionalSpecialtiesAttachedList($professional_id)
     {
         return DB::table('specialty_user')
@@ -106,6 +109,7 @@ class ProfessionalSettingRepository implements ProfessionalSettingRepositoryInte
             ->select('specialties.*')
             ->get();
     }
+
     public function getAttentionPlaces()
     {
         return DB::table('attention_places')
@@ -120,6 +124,106 @@ class ProfessionalSettingRepository implements ProfessionalSettingRepositoryInte
             ->where('state', '1')
             ->select('*')
             ->get();
+    }
+
+    public function addSettings($data)
+    {
+       $validate = [
+            'professional_id' => $data['professional_id'],
+            'specialty_id' => $data['specialty_id'],
+            'service_id' => $data['service_id'],
+            'attention_place_id' => $data['attention_place_id'],
+        ];
+
+        DB::beginTransaction();
+        try{
+            $this->checkExistance('professional_settings', $validate);
+            $id = DB::table('professional_settings')->insertGetId($data);
+            DB::commit();
+            return response()->json([
+                'error' => 'false',
+                'message' => 'Se ha agregado con exito',
+                'itemId' => $id
+            ]);
+        }catch (\Exception $e){
+            DB::rollBack();
+            return response()->json([
+                'error' => 'true',
+                'message' => $e->getMessage(),
+                'itemId' => null
+            ]);
+        }
+    }
+
+    public function removeSetting($setting_id)
+    {
+        DB::beginTransaction();
+        try{
+            //todo validar que no tenga horarios con turno,
+            //todo fijarse que sea especialidad servicio profesional  centro de atencion y (auth que elimina)
+            DB::table('professional_settings')->where('id', $setting_id)->delete();
+
+            DB::commit();
+            return response()->json([
+                'error' => 'false',
+                'message' => 'Se ha eliminado con exito',
+            ]);
+        }catch (\Exception $e){
+            DB::rollBack();
+            return response()->json([
+                'error' => 'true',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function checkExistance($table, $values)
+    {
+        $isAssoc = true;
+        foreach(array_keys($values) as $key)
+        {
+            if (is_int($key))
+            {
+                $isAssoc = false;
+            }
+        }
+        if( ! $isAssoc)
+        {
+            throw new \Exception('No es un array asociativo');
+        }
+
+        $finded = DB::table($table)->where($values)->get();
+
+        if(count($finded))
+        {
+            throw new \Exception('Ya existe el registro');
+        }
+
+        return true;
+    }
+
+    public function getSettings($professional_id)
+    {
+        try{
+            $settings = $this->model->where('professional_id',$professional_id)->get();
+
+            $data = $settings->map(function($item){
+                return new ProfessionalSettingResource($item);
+            });
+
+            return response()->json([
+                'error' => 'false',
+                'message' => 'List incoming',
+                'data' => $data,
+            ]);
+        }catch (\Exception $e){
+            DB::rollBack();
+            return response()->json([
+                'error' => 'true',
+                'message' => $e->getMessage()
+            ]);
+        }
+
     }
 
 

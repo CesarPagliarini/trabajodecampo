@@ -33,6 +33,8 @@
             Route::post('attention-places' ,'ProfessionalSettingsController@getAttentionPlaces')->name('professionals-settings.get.attention.places.list');
             Route::post('currencies-list' ,'ProfessionalSettingsController@getCurrenciesList')->name('professionals-settings.get.currencies.list');
             Route::post('add-settings' ,'ProfessionalSettingsController@addSettings')->name('professionals-settings.add-settings');
+            Route::post('remove-settings' ,'ProfessionalSettingsController@delete')->name('professionals-settings.remove-settings');
+            Route::post('get-professional-configs' ,'ProfessionalSettingsController@professionalConfig')->name('professionals-settings.configs');
         });
     });
 

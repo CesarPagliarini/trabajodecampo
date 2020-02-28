@@ -26,7 +26,7 @@ class ProfessionalSetting extends BaseEntity
 
     public function professional()
     {
-        return $this->hasOne(Professional::class, 'id', 'professiona_id');
+        return $this->hasOne(Professional::class, 'id', 'professional_id');
     }
 
     public function specialty()
