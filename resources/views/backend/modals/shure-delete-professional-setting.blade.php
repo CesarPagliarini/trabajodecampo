@@ -9,7 +9,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
 
-                <button type="button" class="btn btn-primary btn-danger" data-action="delete" onclick="barredasTime()">Eliminar</button>
+                <button type="button" class="btn btn-primary btn-danger" data-action="delete" id="modal-delete-setting">Eliminar</button>
             </div>
         </div>
     </div>

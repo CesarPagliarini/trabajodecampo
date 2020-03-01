@@ -28,6 +28,7 @@ mix.styles([
     'resources/template/css/plugins/steps/jquery.steps.css',
     'resources/template/css/plugins/touchspin/jquery.bootstrap-touchspin.css',
     'resources/template/css/plugins/switchery/switchery.css',
+    'resources/template/css/plugins/timepicker/jquery.timepicker.css',
 
 ], 'public/css/panel.css')
 
@@ -54,16 +55,35 @@ mix.styles([
     'resources/template/js/plugins/steps/jquery.steps.js',
     'resources/template/js/plugins/touchspin/jquery.bootstrap-touchspin.js',
     'resources/template/js/plugins/switchery/switchery.js',
+    'resources/template/js/plugins/timepicker/jquery.timepicker.js',
 ], 'public/js/panel.js');
 
 mix.js([
     'resources/js/ajax-forms/admin/bulk-delete.js',
 ], 'public/js/requests/bulk-delete.js');
 
+
+mix.js([
+    'resources/js/ajax-forms/professional-settings/settings-tab.js',
+], 'public/js/professional/settings-tab.js');
+mix.js([
+    'resources/js/ajax-forms/professional-settings/specialty-tab.js',
+], 'public/js/professional/specialty-tab.js');
+
+mix.js([
+    'resources/js/ajax-forms/professional-settings/schedules-tab.js',
+], 'public/js/professional/schedules-tab.js');
+
+
+
+
+
+
+
+
 mix.js([
         'resources/js/miscellaneous.js',
         'resources/js/ajax-forms/admin/order-reporter.js'
-
     ], 'public/js/general.js');
 mix.js('resources/js/ajax-forms/admin/rejection-handler.js', 'public/js/reject.js');
 

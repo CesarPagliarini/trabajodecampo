@@ -62,6 +62,12 @@
         Route::resource('schedules', 'ScheduleController');
         Route::resource('attention-places', 'AttentionPlaceController');
 
+        Route::group(['prefix' => 'ajax/schedules'], function () {
+            Route::post('professional-schedules' ,'ScheduleController@getProfessionalSchedules')->name('professional-schedules.get.schedule.list');
+            Route::post('add-schedule' ,'ScheduleController@addSchedule')->name('professionals-schedules.add.schedule');
+            Route::post('remove-schedule' ,'ScheduleController@removeSchedule')->name('professionals-schedules.remove.schedule');
+        });
+
 
     });
 

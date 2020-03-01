@@ -15,6 +15,7 @@ class Schedule extends BaseEntity
         'specialty_id',
         'attention_place_id',
         'shift_id',
+        'hour',
         'date',
         'disponible',
         'cancel_date',

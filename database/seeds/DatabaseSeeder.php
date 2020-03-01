@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             AttentionCenterSeeder::class,
             SpecialtiesSeeder::class,
             ServicesSeeder::class,
-
+            SpecialtyServiceSeeder::class,
         ]);
 
     }

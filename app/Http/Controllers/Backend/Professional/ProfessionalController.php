@@ -128,18 +128,23 @@ class ProfessionalController extends  BaseController implements ControllerContra
             ($request->action === 'attach')
                 ? $query->insert(['user_id' =>  $professional_id, 'specialty_id' => $specialty_id])
                 : $delete->delete();
-
             DB::commit();
+            $message = 'Se ha eliminado con exito';
+           if($request->action === 'attach')
+           {
+               $message = 'Se ha actualizado con exito';
+           }
             return response()->json([
                 'error' => false,
-                'message' => 'success',
+                'message' => $message,
+                'action' => $request->action
             ]);
 
         }catch (\Exception $e){
             DB::rollBack();
             return response()->json([
                 'error' => true,
-                'message' => $e->getMessage(),
+                'message' => 'Han ocurrido errores',
             ]);
         }
 

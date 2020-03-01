@@ -1,4 +1,4 @@
-<div id="settings" class="tab-pane active show">
+<div id="settings" class="tab-pane ">
     <div class="panel-body" style="padding-top:25px">
         <div class="ibox-content" id="professional-settings-wrapper">
             <div class="sk-spinner sk-spinner-wave">
@@ -195,7 +195,15 @@
         </div>
             </div>
             {{--    start table     --}}
+
             <div class="row mt-5">
+                <div class="col-md-12">
+                    <input type="text" class="form-control
+                            searchform col-md-3 pull-right"
+                           id="filter" placeholder="Buscar...">
+                </div>
+            </div>
+            <div class="row mt-2">
                 <table class="table-responsive table settings-table table-stripped"
                        data-page-size="5" data-filter=#filter >
                     <tr>

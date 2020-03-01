@@ -17,8 +17,8 @@
             @if(Auth::user()->hasRole('Administrador'))
                 <li><a class="nav-link " data-toggle="tab" href="#specialties"><i class="fa fa-wrench"></i> Especialidades</a></li>
             @endif
-            <li><a class="nav-link" data-toggle="tab" href="#schedules"><i class="fa fa-briefcase"></i> Horarios</a></li>
-            <li><a class="nav-link active " data-toggle="tab" id="settings_tab_listener" href="#settings"><i class="fa fa-cog"></i> Configuracion</a></li>
+            <li><a class="nav-link active" data-toggle="tab" id="schedule_tab_listener" href="#schedules"><i class="fa fa-briefcase"></i> Horarios</a></li>
+            <li><a class="nav-link  " data-toggle="tab" id="setting_tab_listener" href="#settings"><i class="fa fa-cog"></i> Configuracion</a></li>
         </ul>
         <div class="tab-content">
             <div id="general" class="tab-pane ">
@@ -61,7 +61,7 @@
                             <label class="col-sm-2 control-label" for="input-name">Fecha de nacimiento</label>
                             <div class="input-group date col-sm-8">
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                <input type="text" value="{{$professional->date_of_birthday}}" class="form-control" name="date_of_birthday" id="dateProfessionalBirth">
+                                <input type="text" value="{{$professional->birthDay}}" class="form-control" name="date_of_birthday" id="dateProfessionalBirth">
                             </div>
                         </div>
 
@@ -154,8 +154,8 @@
 
 @section('custom-scripts')
     <script>
-        const professional = '@json($professional)';
-        const specialtyurl = "{{route('professionals.update-specialties')}}"
+        const professional = JSON.parse('@json($professional->only('id', 'name'))');
+        const updateSpecialtyProfessionalUrl = "{{route('professionals.update-specialties')}}"
         const professionalSpecialtiesUrl = "{{route('professional-settings.get.specialty.list')}}"
         const specialtyServicesUrl = "{{route('professionals-settings.specialty.services')}}"
         const attentionCentersUrl = "{{route('professionals-settings.get.attention.places.list')}}"
@@ -163,28 +163,16 @@
         const addSettingsRoute = "{{route('professionals-settings.add-settings')}}"
         const removeRoute = "{{route('professionals-settings.remove-settings')}}"
         const professionalConfigs = "{{route('professionals-settings.configs')}}"
+
+
+        const scheduleListUrl = "{{route('professional-schedules.get.schedule.list')}}"
+        const scheduleAddUrl = "{{route('professionals-schedules.add.schedule')}}"
+        const scheduleRemoveUrl = "{{route('professionals-schedules.remove.schedule')}}"
     </script>
+    <script src="{{asset('js/professional/settings-tab.js')}}"></script>
+    <script src="{{asset('js/professional/specialty-tab.js')}}"></script>
+    <script src="{{asset('js/professional/schedules-tab.js')}}"></script>
 
-    <script>
-        $.fn.select2.defaults.set('language', 'es');
-        $(document).ready(function(){
-
-            $(document).ready(function(){
-                $(".specialties_professional_select").select2({width: '100%'});
-            });
-
-            $('#schedule-interval').dateRangePicker({
-                inline:true,
-                container: '#schedule-interval-container',
-                alwaysOpen:true,
-            });
-            $('#settings_tab_listener').click(()=>{
-
-            });
-        });
-    </script>
-    @include('backend.partials.tabs.professional.components.specialties-tab-scripts')
-    @include('backend.partials.tabs.professional.components.settings-tab-scripts')
 
 @endsection
 @section('custom-styles')

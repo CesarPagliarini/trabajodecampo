@@ -81,120 +81,79 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/frontend/miscellaneous.js":
-/*!************************************************!*\
-  !*** ./resources/js/frontend/miscellaneous.js ***!
-  \************************************************/
+/***/ "./resources/js/ajax-forms/professional-settings/specialty-tab.js":
+/*!************************************************************************!*\
+  !*** ./resources/js/ajax-forms/professional-settings/specialty-tab.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$(document).ready(function () {
-  $('body').scrollspy({
-    target: '#navbar',
-    offset: 80
-  }); // Page scrolling feature
-
-  $('a.page-scroll').bind('click', function (event) {
-    var link = $(this);
-    $('html, body').stop().animate({
-      scrollTop: $(link.attr('href')).offset().top - 50
-    }, 500);
-    event.preventDefault();
-    $("#navbar").collapse('hide');
-  });
+$(".specialties_professional_select").select2({
+  width: '100%'
+});
+$('#specialties_professional_select').on('select2:select', function (e) {
+  var data = e.params.data;
+  var source = {
+    specialty_id: data.id,
+    action: 'attach'
+  };
+  updateProfessionalSpecialties(source);
+});
+$('#specialties_professional_select').on('select2:unselect', function (e) {
+  var data = e.params.data;
+  var source = {
+    specialty_id: data.id,
+    action: 'dettach'
+  };
+  updateProfessionalSpecialties(source);
 });
 
-var cbpAnimatedHeader = function () {
-  var docElem = document.documentElement,
-      header = document.querySelector('.navbar-default'),
-      didScroll = false,
-      changeHeaderOn = 200;
-
-  function init() {
-    window.addEventListener('scroll', function (event) {
-      if (!didScroll) {
-        didScroll = true;
-        setTimeout(scrollPage, 250);
-      }
-    }, false);
-  }
-
-  function scrollPage() {
-    var sy = scrollY();
-
-    if (sy >= changeHeaderOn) {
-      $(header).addClass('navbar-scroll');
-    } else {
-      $(header).removeClass('navbar-scroll');
+function callApi(url) {
+  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var token = $('meta[name="csrf-token"]').attr('content');
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': token
     }
-
-    didScroll = false;
-  }
-
-  function scrollY() {
-    return window.pageYOffset || docElem.scrollTop;
-  }
-
-  init();
-}(); // Activate WOW.js plugin for animation on scrol
-
-
-new WOW().init();
-
-/***/ }),
-
-/***/ "./resources/js/frontend/register-form.js":
-/*!************************************************!*\
-  !*** ./resources/js/frontend/register-form.js ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-$(document).ready(function () {
-  $('#registerButton').click(function (e) {
-    e.preventDefault();
-    $('#registerForm').addClass('hidden');
-    $('#registerLoading').removeClass('hidden');
-    var data = {
-      'email': $('#registerEmail').val(),
-      'password': $('#registerPassword').val(),
-      'name': $('#registerName').val()
-    };
-    var csrf = $('meta[name="csrf-token"]').attr('content');
-    var url = $('#registerUrl').val();
-    console.log(url);
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': csrf
-      }
-    });
-    $.ajax({
-      type: 'POST',
-      url: url,
-      data: data,
-      success: function success(data) {
-        window.location.replace(data);
-      }
-    });
   });
-});
+  return $.ajax({
+    beforeSend: function beforeSend() {
+      $('#professional-settings-wrapper').addClass('sk-loading');
+    },
+    type: "POST",
+    url: url,
+    data: params
+  });
+}
+
+function updateProfessionalSpecialties(source) {
+  var data = {
+    professional_id: professional.id,
+    specialty_id: source.specialty_id,
+    action: source.action
+  };
+  callApi(updateSpecialtyProfessionalUrl, data).done(function (response) {
+    $.event.trigger('handle-api-response', [{
+      response: response
+    }]);
+  });
+}
 
 /***/ }),
 
-/***/ 6:
-/*!***********************************************************************************************!*\
-  !*** multi ./resources/js/frontend/miscellaneous.js ./resources/js/frontend/register-form.js ***!
-  \***********************************************************************************************/
+/***/ 2:
+/*!******************************************************************************!*\
+  !*** multi ./resources/js/ajax-forms/professional-settings/specialty-tab.js ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\programas\xampp\htdocs\genesis\resources\js\frontend\miscellaneous.js */"./resources/js/frontend/miscellaneous.js");
-module.exports = __webpack_require__(/*! F:\programas\xampp\htdocs\genesis\resources\js\frontend\register-form.js */"./resources/js/frontend/register-form.js");
+module.exports = __webpack_require__(/*! F:\programas\xampp\htdocs\genesis\resources\js\ajax-forms\professional-settings\specialty-tab.js */"./resources/js/ajax-forms/professional-settings/specialty-tab.js");
 
 
 /***/ })

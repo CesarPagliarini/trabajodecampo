@@ -191,7 +191,9 @@ return [
         //customs
 
         App\Providers\CustomBladeServiceProvider::class,
-        App\Providers\ProfessionalSettingRepositoryServiceProvider::class
+        App\Providers\ProfessionalSettingRepositoryServiceProvider::class,
+        App\Providers\ProfessionalScheduleProvider::class,
+        App\Providers\QueuedJobsServiceProvider::class
 
 
     ],

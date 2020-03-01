@@ -51,6 +51,11 @@ return [
             'path' => storage_path('logs/module-implementation.log'),
             'level' => 'debug',
         ],
+        'queues-status' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/queues_status.log'),
+            'level' => 'debug',
+        ],
 
         'daily' => [
             'driver' => 'daily',

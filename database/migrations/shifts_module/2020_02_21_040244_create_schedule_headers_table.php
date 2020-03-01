@@ -20,10 +20,16 @@ class CreateScheduleHeadersTable extends Migration
             $table->unsignedBigInteger('attention_place_id');
             $table->date('from');
             $table->date('to');
-            $table->string('days');
-            $table->string('morning_schedule');
-            $table->string('afternoon_schedule');
-            $table->string('run_schedule');
+            $table->boolean('monday')->default(0)->index();
+            $table->boolean('tuesday')->default(0)->index();
+            $table->boolean('wednesday')->default(0)->index();
+            $table->boolean('thursday')->default(0)->index();
+            $table->boolean('friday')->default(0)->index();
+            $table->boolean('saturday')->default(0)->index();
+            $table->boolean('sunday')->default(0)->index();
+            $table->string('morning_schedule')->nullable()->default(null);
+            $table->string('afternoon_schedule')->nullable()->default(null);
+            $table->string('run_schedule')->nullable()->default(null);
 
 
             $table->timestamps();

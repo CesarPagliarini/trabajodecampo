@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Specialty;
 
 use App\Core\Controllers\BaseController;
 use App\Core\Interfaces\ControllerContract;
+use App\Entities\Service;
 use App\Entities\Specialty;
 use App\Http\Requests\Backend\specialties\SpecialtiesCreateFormRequest;
 use Illuminate\Http\Request;
@@ -67,8 +68,8 @@ class SpecialtyController extends BaseController implements ControllerContract
      */
     public function edit(Specialty $specialty)
     {
-
-        return view('backend.specialties.edit', compact('specialty'));
+        $services = Service::actives();
+        return view('backend.specialties.edit', compact('specialty','services'));
     }
 
     /**

@@ -38,9 +38,9 @@
                         <div class="form-group row @if ($errors->has('services')) has-error @endif">
                             <label class="col-sm-2 control-label" for="input-email">Servicios <span class="oblig">*</span></label>
                             <div class="col-sm-8">
-                                @if(count($specialty->services))
+                                @if(count($services))
                                     <select class="specialties_select form-control" name="services[]" multiple="multiple">
-                                        @foreach($specialty->services as $service)
+                                        @foreach($services as $service)
                                             <option
                                                 @if($service->hasSpecialty($specialty->id))
                                                 selected

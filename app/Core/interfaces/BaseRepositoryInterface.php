@@ -6,7 +6,7 @@ namespace App\Core\interfaces;
 
 interface BaseRepositoryInterface
 {
-    public function all();
+
 
     public function create(array  $data);
 

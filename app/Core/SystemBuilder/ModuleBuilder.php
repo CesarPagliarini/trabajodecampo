@@ -11,7 +11,6 @@ abstract class ModuleBuilder extends AbstractBuilder
 
     function build(int $order = 0)
     {
-
         $this->addField('order', $order);
         $this->transact();
         $this->callChilds();

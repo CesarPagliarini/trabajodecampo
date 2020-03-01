@@ -10,9 +10,6 @@ use App\Entities\ProfessionalSetting;
 
 use App\Entities\Specialty;
 use App\Http\Resources\ProfessionalSettingResource;
-use App\Http\Resources\ProfessionalSettingsApiResource;
-use App\Http\Resources\ProfessionalSettingsResource;
-use App\Http\Resources\ProfessionalSettingsResourceCollection;
 use Illuminate\Support\Facades\DB;
 
 class ProfessionalSettingRepository implements ProfessionalSettingRepositoryInterface
@@ -25,10 +22,6 @@ class ProfessionalSettingRepository implements ProfessionalSettingRepositoryInte
         $this->model = $professiona_setting;
     }
 
-    public function all()
-    {
-        // TODO: Implement all() method.
-    }
 
     public function create(array $data)
     {

@@ -4,10 +4,21 @@ namespace App\Http\Controllers\Backend\Shift;
 
 use App\Core\Controllers\BaseController;
 use App\Core\Interfaces\ControllerContract;
+use App\Core\interfaces\ProfessionalScheduleRepositoryInterface;
 use Illuminate\Http\Request;
 
 class ScheduleController extends BaseController implements ControllerContract
 {
+    protected $repository;
+
+    /**
+     * ShiftsModuleContract constructor.
+     * @param ProfessionalScheduleRepositoryInterface $scheduleRepo
+     */
+    public function __construct(ProfessionalScheduleRepositoryInterface $scheduleRepo)
+    {
+        $this->repository = $scheduleRepo;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,69 +29,20 @@ class ScheduleController extends BaseController implements ControllerContract
         return view('backend.shifts.schedules.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function getProfessionalSchedules(Request $request)
     {
-        //
+
+    }
+    public function addSchedule(Request $request)
+    {
+        return $this->repository->create($request->all());
+    }
+    public function removeSchedule(Request $request)
+    {
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

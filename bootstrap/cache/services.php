@@ -36,6 +36,8 @@
     32 => 'App\\Providers\\ViewServiceProvider',
     33 => 'App\\Providers\\CustomBladeServiceProvider',
     34 => 'App\\Providers\\ProfessionalSettingRepositoryServiceProvider',
+    35 => 'App\\Providers\\ProfessionalScheduleProvider',
+    36 => 'App\\Providers\\QueuedJobsServiceProvider',
   ),
   'eager' => 
   array (
@@ -59,6 +61,8 @@
     17 => 'App\\Providers\\ViewServiceProvider',
     18 => 'App\\Providers\\CustomBladeServiceProvider',
     19 => 'App\\Providers\\ProfessionalSettingRepositoryServiceProvider',
+    20 => 'App\\Providers\\ProfessionalScheduleProvider',
+    21 => 'App\\Providers\\QueuedJobsServiceProvider',
   ),
   'deferred' => 
   array (

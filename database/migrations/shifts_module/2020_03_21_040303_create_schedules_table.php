@@ -13,14 +13,16 @@ class CreateSchedulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('schedules_', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('schedule_header');
             $table->unsignedBigInteger('professional_id');
             $table->unsignedBigInteger('specialty_id');
             $table->unsignedBigInteger('attention_place_id');
             $table->unsignedBigInteger('shift_id')->nullable()->default(null);
+
             $table->date('date');
+            $table->string('hour')->index();
             $table->boolean('disponible')->default(1);
             $table->timestamp('cancel_date')->nullable()->default(null);
             $table->string('observation')->nullable()->default(null);
