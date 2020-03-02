@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('frontend.sites.product-store.layout')
 
 @section('content')
 <div class="container">

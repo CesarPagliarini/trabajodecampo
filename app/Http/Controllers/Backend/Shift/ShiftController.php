@@ -16,8 +16,8 @@ class ShiftController extends  BaseController implements ControllerContract
      */
     public function index()
     {
-        return redirect()->back();
-       // return view('backend.shifts.shifts.index');
+
+        return view('backend.shifts.shifts.index');
     }
 
     /**

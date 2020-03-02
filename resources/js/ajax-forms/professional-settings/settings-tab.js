@@ -138,6 +138,7 @@ function getSpecialtyServices(specialty_id){
 function getProfessionalSpecialties(e){
     callApi(professionalSpecialtiesUrl,{professional_id :e.data }).then((response) => {
         data.specialties = response;
+        newSpecialtySelect.clearSelect();
         response.filter((item) => {
             newSpecialtySelect.append(new Option(item.name, item.id))
         });

@@ -3,6 +3,7 @@
 
 namespace App\Core\SystemBuilder\SystemCreators;
 
+use App\Core\interfaces\SystemCreatorContract;
 use App\Core\SystemBuilder\AttentionPlaces\AttentionPlacesModule;
 use App\Core\SystemBuilder\Client\ClientModule;
 
@@ -15,9 +16,8 @@ use App\Core\SystemBuilder\StandAlone\HomeForm;
 use App\Core\SystemBuilder\SystemCreator;
 use Illuminate\Support\Collection;
 
-class FullAppCreator extends SystemCreator
+class FullAppCreator extends SystemCreator implements SystemCreatorContract
 {
-
 
     public function run()
     {
@@ -30,5 +30,14 @@ class FullAppCreator extends SystemCreator
             ->add(new ShiftModule())
             ->add(new AttentionPlacesModule())
             ->build();
+    }
+
+    public function skin() :string
+    {
+        return 'product-store';
+    }
+    public function name() :string
+    {
+        return 'full_aplication';
     }
 }

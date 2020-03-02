@@ -13,15 +13,15 @@
 @section('content')
     <div class="tabs-container">
         <ul class="nav nav-tabs">
-            <li><a class="nav-link" data-toggle="tab" href="#general"><i class="fa fa-user"></i> Datos generales</a></li>
+            <li><a class="nav-link active" data-toggle="tab" href="#general"><i class="fa fa-user"></i> Datos generales</a></li>
             @if(Auth::user()->hasRole('Administrador'))
                 <li><a class="nav-link " data-toggle="tab" href="#specialties"><i class="fa fa-wrench"></i> Especialidades</a></li>
             @endif
-            <li><a class="nav-link active" data-toggle="tab" id="schedule_tab_listener" href="#schedules"><i class="fa fa-briefcase"></i> Horarios</a></li>
-            <li><a class="nav-link  " data-toggle="tab" id="setting_tab_listener" href="#settings"><i class="fa fa-cog"></i> Configuracion</a></li>
+            <li><a class="nav-link" data-toggle="tab" id="schedule_tab_listener" href="#schedules"><i class="fa fa-briefcase"></i> Horarios</a></li>
+            <li><a class="nav-link" data-toggle="tab" id="setting_tab_listener" href="#settings"><i class="fa fa-cog"></i> Configuracion</a></li>
         </ul>
         <div class="tab-content">
-            <div id="general" class="tab-pane ">
+            <div id="general" class="tab-pane  active show">
                 <div class="panel-body" style="padding-top:25px">
                     <form action="{{route('professionals.update',$professional)}}"
                           class="form-horizontal offset-1"
@@ -32,7 +32,7 @@
                         <div class="form-group row  @if ($errors->has('id')) has-error @endif">
                             <label class="col-sm-2 control-label" for="input-id">Código profesional </label>
                             <div class="col-sm-8">
-                                <input id="input-id" value="{{$professional->id}}" type="text" class="form-control" name="id">
+                                <input id="input-id" disabled="disabled" value="{{$professional->id}}" type="text" class="form-control" name="id">
                             </div>
                         </div>
 
@@ -64,7 +64,6 @@
                                 <input type="text" value="{{$professional->birthDay}}" class="form-control" name="date_of_birthday" id="dateProfessionalBirth">
                             </div>
                         </div>
-
 
 
                         <div class="form-group row  @if ($errors->has('cuit_cuil')) has-error @endif">
@@ -163,11 +162,11 @@
         const addSettingsRoute = "{{route('professionals-settings.add-settings')}}"
         const removeRoute = "{{route('professionals-settings.remove-settings')}}"
         const professionalConfigs = "{{route('professionals-settings.configs')}}"
-
-
         const scheduleListUrl = "{{route('professional-schedules.get.schedule.list')}}"
         const scheduleAddUrl = "{{route('professionals-schedules.add.schedule')}}"
         const scheduleRemoveUrl = "{{route('professionals-schedules.remove.schedule')}}"
+
+        $(document).ready(()=>{$('#dateProfessionalBirth').datepicker({autoclose:true})})
     </script>
     <script src="{{asset('js/professional/settings-tab.js')}}"></script>
     <script src="{{asset('js/professional/specialty-tab.js')}}"></script>

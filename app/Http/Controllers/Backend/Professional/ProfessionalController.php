@@ -4,22 +4,32 @@ namespace App\Http\Controllers\Backend\Professional;
 
 use App\Core\Controllers\BaseController;
 use App\Core\Interfaces\ControllerContract;
+use App\Core\interfaces\ProfessionalScheduleRepositoryInterface;
 use App\Core\interfaces\ProfessionalSettingRepositoryInterface;
 use App\Core\interfaces\ShiftsModuleContract;
 use App\Entities\Professional;
 use App\Entities\Role;
 use App\Entities\Specialty;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ProfessionalController extends  BaseController implements ControllerContract, ShiftsModuleContract
+class ProfessionalController extends  BaseController implements ControllerContract
 {
 
     protected $shiftRepository;
 
-    public function __construct(ProfessionalSettingRepositoryInterface $shiftRepo)
+    protected $scheduleRepo;
+    /**
+     * ProfessionalController constructor.
+     * @param ProfessionalSettingRepositoryInterface $shiftRepo
+     * @param ProfessionalScheduleRepositoryInterface $scheduleRepo
+     */
+    public function __construct(ProfessionalSettingRepositoryInterface $shiftRepo,
+                                ProfessionalScheduleRepositoryInterface $scheduleRepo)
     {
         $this->shiftRepository = $shiftRepo;
+        $this->scheduleRepo = $scheduleRepo;
     }
 
     /**
@@ -83,7 +93,10 @@ class ProfessionalController extends  BaseController implements ControllerContra
         $professional = Professional::where('id', $professional->id)->with('settings')->first();
 
         $specialties = Specialty::whereHas('services')->get();
-        return view('backend.professionals.edit', compact('professional', 'specialties'));
+
+        $center_grouped_schedules = $this->scheduleRepo->getForProfessional($professional->id);
+
+        return view('backend.professionals.edit', compact('professional', 'specialties', 'center_grouped_schedules'));
     }
 
     /**
@@ -108,7 +121,7 @@ class ProfessionalController extends  BaseController implements ControllerContra
 
         }catch (\Exception $e){
             DB::rollBack();
-
+            dd($e);
             $request->session()->flash('flash_error', $e->getMessage());
             return redirect()->route('professionals.index');
         }

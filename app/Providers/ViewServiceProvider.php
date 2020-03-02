@@ -49,12 +49,7 @@ class ViewServiceProvider extends ServiceProvider
             $view->with('limit',$limit);
         });
 
-        View::composer([
-            'frontend.partials.product-slider-item',
-        ], function ($view) {
-            $products = Product::all();
-            $view->with('products',$products);
-        });
+
 
         View::composer([
             'backend.home'

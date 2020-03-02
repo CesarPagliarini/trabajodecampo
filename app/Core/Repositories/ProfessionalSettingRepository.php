@@ -99,7 +99,6 @@ class ProfessionalSettingRepository implements ProfessionalSettingRepositoryInte
         return DB::table('specialty_user')
             ->where('user_id',$professional_id)
             ->join('specialties', 'specialty_user.specialty_id', 'specialties.id')
-            ->select('specialties.*')
             ->get();
     }
 

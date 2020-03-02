@@ -17,6 +17,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -184,6 +186,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ViewServiceProvider::class,
+        App\Providers\ViewFrontServiceProvider::class,
 
 
 

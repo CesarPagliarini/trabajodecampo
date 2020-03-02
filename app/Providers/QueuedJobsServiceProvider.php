@@ -31,7 +31,6 @@ class QueuedJobsServiceProvider extends ServiceProvider
         Queue::failing(function (JobFailed $event) {
             $message = '['. Carbon::now()->format('d:m:y H:i') .'] ';
             $message .= $event->exception->getMessage() ."\n";
-            $message .=$event->exception->getTrace();
             Log::channel('queues-status')->critical($message);
 
             // $event->connectionName

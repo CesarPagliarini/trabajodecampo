@@ -36,8 +36,8 @@ class AppInstall extends Command
         'Full app' => FullAppCreator::class,
         'Schedule app' => ScheduleCreator::class,
         'Store app' => StoreCreator::class,
-
     ];
+
     /**
      * Create a new command instance.
      *
@@ -69,6 +69,8 @@ class AppInstall extends Command
         $this->handleMigration();
 
         $this->configureCreator();
+
+        $this->setSkin();
 
         $this->create();
 
@@ -257,6 +259,42 @@ class AppInstall extends Command
         return true;
     }
 
+    protected function setSkin()
+    {
+        $selected_skin = $this->choice('Select type of application', ['Product skin' , 'Shift skin']);
+        $this->updateDotEnv('APP_SITE', $this->creator->skin());
+        $this->updateDotEnv('APP_NAME', $this->creator->name());
+        $this->call('cache:clear');
+        $this->call('config:cache');
+        $this->call('config:clear');
+    }
+
+
+
+    protected function updateDotEnv($key, $newValue, $delim='')
+    {
+
+        $path = base_path('.env');
+        // get old value from current env
+        $oldValue = env($key);
+
+        // was there any change?
+        if ($oldValue === $newValue) {
+            return;
+        }
+
+        // rewrite file content with changed data
+        if (file_exists($path)) {
+            // replace current value with new value
+            file_put_contents(
+                $path, str_replace(
+                    $key.'='.$delim.$oldValue.$delim,
+                    $key.'='.$delim.$newValue.$delim,
+                    file_get_contents($path)
+                )
+            );
+        }
+    }
 
 
 }

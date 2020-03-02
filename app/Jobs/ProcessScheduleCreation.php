@@ -17,8 +17,6 @@ class ProcessScheduleCreation implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $scheduleHeader;
-
     protected $extradata;
 
     /**
@@ -27,26 +25,21 @@ class ProcessScheduleCreation implements ShouldQueue
      * @param ScheduleHeader $scheduleHeader
      * @param array $extradata
      */
-    public function __construct(ScheduleHeader $scheduleHeader, Array $extradata)
+    public function __construct(Array $extradata)
     {
-        $this->scheduleHeader = $scheduleHeader;
         $this->extradata = $extradata;
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
     public function handle()
     {
+
 
         // se crea una colleccion con los tiempos que vienen en el schedule header
         $scheduleIntervals = array();
         $times = collect([
-            $this->scheduleHeader->morning_schedule,
-            $this->scheduleHeader->afternoon_schedule,
-            $this->scheduleHeader->run_schedule])
+            $this->extradata['morning_schedule'],
+            $this->extradata['afternoon_schedule'],
+            $this->extradata['run_schedule']])
             ->filter(function($time){return $time != null;})
             ->map(function($time){ if($time != null) {return $time;} });
 
@@ -94,11 +87,20 @@ class ProcessScheduleCreation implements ShouldQueue
 
         //formateo las fechas al formato de la base de datos y creo un periodo
         $data = $this->extradata;
-        $user_selected_days = collect(json_decode($this->extradata['days']));
-        $from = Carbon::createFromFormat('d/m/Y', $data['from'])->format('Y-m-d');
-        $to = Carbon::createFromFormat('d/m/Y', $data['to'])->format('Y-m-d');
+
+
+        $user_selected_days = collect(json_decode($data['days']));
+
+
+
+
+
+        $from = Carbon::createFromFormat('Y-m-d', $data['from'])->format('Y-m-d');
+        $to = Carbon::createFromFormat('Y-m-d', $data['to'])->format('Y-m-d');
+
         $period = CarbonPeriod::create($from, $to);
         $sanatized = [];
+
 
         //aca esta la verdad de la milanesa
         // ya teniendo los intervalos de fechas separados, y los horarios separados
@@ -112,10 +114,10 @@ class ProcessScheduleCreation implements ShouldQueue
             if($shouldImpact){
                 foreach($scheduleIntervals as $hour){
                     $final_schedules[] = [
-                        'schedule_header' => $this->scheduleHeader->id,
-                        'professional_id' => $this->scheduleHeader->professional_id,
-                        'specialty_id' => $this->scheduleHeader->specialty_id,
-                        'attention_place_id' => $this->scheduleHeader->attention_place_id,
+                        'schedule_header' => $this->extradata['inserted_id'],
+                        'professional_id' => $this->extradata['professional_id'],
+                        'specialty_id' => $this->extradata['specialty_id'],
+                        'attention_place_id' => $this->extradata['attention_place_id'],
                         'date' => $date->format('Y-m-d'),
                         'hour' => $hour,
                     ];
@@ -124,13 +126,14 @@ class ProcessScheduleCreation implements ShouldQueue
             }
         }
 
+
         try{
             DB::beginTransaction();
                 DB::table('schedules')->insert($final_schedules);
             DB::commit();
 
         }catch (\Exception $e){
-            Log::channel('queues-status')->critical($e->getMessage());
+
             DB::rollBack();
             throw $e;
         }

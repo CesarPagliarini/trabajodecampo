@@ -5,6 +5,7 @@ namespace App\Core\SystemBuilder\SystemCreators;
 
 
 
+use App\Core\interfaces\SystemCreatorContract;
 use App\Core\SystemBuilder\Client\ClientModule;
 
 
@@ -16,7 +17,7 @@ use App\Core\SystemBuilder\Store\StoreModule;
 use App\Core\SystemBuilder\SystemCreator;
 use Illuminate\Support\Collection;
 
-class StoreCreator extends SystemCreator
+class StoreCreator extends SystemCreator implements SystemCreatorContract
 {
 
     public function run()
@@ -26,5 +27,15 @@ class StoreCreator extends SystemCreator
             ->add(new StoreModule())
             ->add(new OrderModule())
             ->build();
+    }
+
+    public function skin(): string
+    {
+        return 'product-store';
+    }
+
+    public function name(): string
+    {
+        return 'Greatfull Store';
     }
 }

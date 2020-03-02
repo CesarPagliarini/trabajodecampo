@@ -1010,6 +1010,7 @@ function getProfessionalSpecialties(e) {
     professional_id: e.data
   }).then(function (response) {
     data.specialties = response;
+    newSpecialtySelect.clearSelect();
     response.filter(function (item) {
       newSpecialtySelect.append(new Option(item.name, item.id));
     });

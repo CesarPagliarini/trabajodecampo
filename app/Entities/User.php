@@ -108,7 +108,7 @@ class User extends BaseEntity implements Authenticatable
     }
 
     public function getBirthDayAttribute(){
-        return Carbon::parse($this->date_of_birthday)->format('d/m/y');
+        return $this->date_of_birthday;
     }
 
 

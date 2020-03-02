@@ -29,5 +29,10 @@ trait UserExtensions
         })->where('state' , $state)->get();
     }
 
-
+    public function scopeFrontProfessionals($query)
+    {
+        return $query->whereHas('roles', function($q){
+            return $q->where('name', 'Profesional');
+        })->whereHas('specialties');
+    }
 }
