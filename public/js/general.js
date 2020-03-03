@@ -205,8 +205,8 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\miscellaneous.js */"./resources/js/miscellaneous.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\ajax-forms\admin\order-reporter.js */"./resources/js/ajax-forms/admin/order-reporter.js");
+__webpack_require__(/*! F:\programas\xampp\htdocs\genesis\resources\js\miscellaneous.js */"./resources/js/miscellaneous.js");
+module.exports = __webpack_require__(/*! F:\programas\xampp\htdocs\genesis\resources\js\ajax-forms\admin\order-reporter.js */"./resources/js/ajax-forms/admin/order-reporter.js");
 
 
 /***/ })

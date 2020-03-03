@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="{{asset('css/fullcalendar/fullcalendar.css')}}">
 @endsection
+@include('backend.modals.show-event-calendar')
 @section('custom-scripts')
 
 
@@ -24,6 +25,8 @@
 
 
     <script>
+
+        const events = @json($data);
         $(document).ready(()=>{
             $('#calendar').fullCalendar({
                 header: {
@@ -39,7 +42,23 @@
                 eventClick: function(info) {
                     const start = moment(info.start).format('h:mm:ss a')
                     const end = moment(info.end).format('h:mm:ss a')
-                    console.log(start);
+                    const registerAt = moment(info.registered_at).format('h:mm:ss a')
+                    console.log(info);
+                    $('#service_modal').text('')
+                    $('#attention_place_modal').text('')
+                    $('#client_modal').text('')
+                    $('#start_modal').text('')
+                    $('#end_modal').text('')
+                    $('#register_at').text('')
+                    const attention_place = info.attention_place+' '+ info.attention_place_address+' '+info.attention_place_number;
+                    $('#service_modal').text(info.title)
+                    $('#registered_at').text(registerAt)
+                    $('#attention_place_modal').text(attention_place)
+                    $('#client_modal').text(info.client)
+                    $('#start_modal').text(start)
+                    $('#end_modal').text(end)
+                    $('#event-calendar').modal();
+
                 },
 
 
@@ -57,30 +76,11 @@
 
             });
 
+            renderEvents()
         });
 
         function renderEvents(){
-
-            const source = [
-                {
-                    title:  'corte de pelo',
-                    start:  '2020-03-02T14:00:00',
-                    end: '2020-03-02T14:15:00',
-                    allDay: false
-                },
-                {
-                    title:  'tira de cola',
-                    start:  '2020-03-02T14:15:00',
-                    end: '2020-03-02T15:30:00',
-                    allDay: false
-                },
-                {
-                    title:  'corte de pelo',
-                    start:  '2020-03-04T18:30:00',
-                    end: '2020-03-02T19:00:00',
-                    allDay: false
-                },
-            ];
+            const source = events;
             $("#calendar").fullCalendar( 'addEventSource', source )
         }
 

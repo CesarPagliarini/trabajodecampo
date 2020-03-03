@@ -1343,7 +1343,13 @@ function removeThisItem(event, data) {
 }
 
 function addRow(row, insertedId) {
-  table.prepend("\n            <tr id='row-".concat(insertedId, "'>\n                <td>").concat(row.especialty_id.text, "</td>\n                <td>").concat(row.service_id.text, "</td>\n                <td>").concat(row.attention_place_id.text, "</td>\n                <td>").concat(row.unit_time.text, "</td>\n                <td>").concat(row.currency_id.text, " ").concat(row.amount.value, "</td>\n                <td>").concat(row.work_holiday.text, "</td>\n                <td>").concat(row.show_amount.text, "</td>\n                <td>").concat(row.is_highlighted.text, "</td>\n                <td>\n                    <button type='button' class='btn btn-primary btn-xs full-width'   >\n                        Editar\n                    </button>\n                    <button type='button' class='btn btn-danger btn-xs full-width buttonKiller'  id='").concat(insertedId, "'>\n                        Eliminar\n                    </button>\n                </td>\n            </tr>\n        "));
+  table.prepend("\n            <tr id='row-".concat(insertedId, "'>\n                <td>").concat(row.especialty_id.text, "</td>\n                <td>").concat(row.service_id.text, "</td>\n                <td>").concat(row.attention_place_id.text, "</td>\n                <td>").concat(row.unit_time.text, "</td>\n                <td>").concat(row.currency_id.text, " ").concat(row.amount.value, "</td>\n                <td>").concat(row.work_holiday.text, "</td>\n                <td>").concat(row.show_amount.text, "</td>\n                <td>").concat(row.is_highlighted.text, "</td>\n                <td>\n                  \n                    <button type='button' class='btn btn-danger btn-xs full-width buttonKiller'  id='").concat(insertedId, "'>\n                        Eliminar\n                    </button>\n                </td>\n            </tr>\n        "));
+  /*
+  *   <button type='button' class='btn btn-primary btn-xs full-width'   >
+                      Editar
+                  </button>
+  * */
+
   $('.settings-table').trigger('footable_redraw');
 }
 
@@ -1393,9 +1399,14 @@ function generateTable() {
     config.show_amount = onCheckHtml(config.show_amount);
     config.work_holiday = onCheckHtml(config.work_holiday);
     config.is_highlighted = onCheckHtml(config.is_highlighted);
-    table.prepend("\n                 <tr id='row-".concat(config.line, "'>\n                     <td>").concat(config.specialty.name, "</td>\n                     <td>").concat(config.service.name, "</td>\n                     <td>").concat(config.attention_place.name, "</td>\n                     <td>").concat(config.time_unit, "</td>\n                     <td>").concat(config.currency.name, " ").concat(config.amount, "</td>\n                     <td>").concat(config.work_holiday, "</td>\n                     <td>").concat(config.show_amount, "</td>\n                     <td>").concat(config.is_highlighted, "</td>\n                     <td>\n                         <button type='button' class='btn btn-primary btn-xs full-width'   >\n                             Editar\n                         </button>\n                         <button type='button' class='btn btn-danger btn-xs full-width buttonKiller'  id='").concat(config.line, "'>\n                             Eliminar\n                         </button>\n                     </td>\n                 </tr>\n             "));
+    table.prepend("\n                 <tr id='row-".concat(config.line, "'>\n                     <td>").concat(config.specialty.name, "</td>\n                     <td>").concat(config.service.name, "</td>\n                     <td>").concat(config.attention_place.name, "</td>\n                     <td>").concat(config.time_unit, "</td>\n                     <td>").concat(config.currency.name, " ").concat(config.amount, "</td>\n                     <td>").concat(config.work_holiday, "</td>\n                     <td>").concat(config.show_amount, "</td>\n                     <td>").concat(config.is_highlighted, "</td>\n                     <td>\n                        \n                         <button type='button' class='btn btn-danger btn-xs full-width buttonKiller'  id='").concat(config.line, "'>\n                             Eliminar\n                         </button>\n                     </td>\n                 </tr>\n             "));
     $('.settings-table').trigger('footable_redraw');
-  });
+  }); ///**
+  //  <button type='button' class='btn btn-primary btn-xs full-width'   >
+  //                              Editar
+  //                          </button>
+  //
+  // **///
 }
 
 /***/ }),
@@ -1407,7 +1418,7 @@ function generateTable() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\ajax-forms\professional-settings\settings-tab.js */"./resources/js/ajax-forms/professional-settings/settings-tab.js");
+module.exports = __webpack_require__(/*! F:\programas\xampp\htdocs\genesis\resources\js\ajax-forms\professional-settings\settings-tab.js */"./resources/js/ajax-forms/professional-settings/settings-tab.js");
 
 
 /***/ })

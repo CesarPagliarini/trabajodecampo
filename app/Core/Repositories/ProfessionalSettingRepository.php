@@ -11,6 +11,7 @@ use App\Entities\ProfessionalSetting;
 use App\Entities\Specialty;
 use App\Events\AuditProfessionalSetting;
 use App\Http\Resources\ProfessionalSettingResource;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -120,6 +121,9 @@ class ProfessionalSettingRepository implements ProfessionalSettingRepositoryInte
             ->get();
     }
 
+
+
+
     public function addSettings($data)
     {
        $validate = [
@@ -225,5 +229,82 @@ class ProfessionalSettingRepository implements ProfessionalSettingRepositoryInte
 
     }
 
+    public function aviableSchedules($specialty_id,$attention_place_id,$service_id)
+    {
+         [
+            $specialty_id,
+            $attention_place_id,
+            $service_id,
+        ];
+
+        $today  = Carbon::now();
+        $today_formated = $today->toDateString();
+
+        $schedules = DB::table('schedules')
+            ->where('disponible',1)
+            ->where('attention_place_id',$attention_place_id)
+            ->where('specialty_id',$specialty_id)
+            ->where('date','>', $today_formated)
+            ->join('users', 'schedules.professional_id', 'users.id')
+            ->select('users.name as professional_name' , 'users.id as professional_id', 'schedules.*')
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
+
+        $schedules = $schedules->map(function($schedule){
+            $date = Carbon::createFromFormat('Y-m-d', $schedule->date);
+            $month = $date->formatLocalized('%B');
+            $day = $date->day;
+            $week_day = $date->dayOfWeek;
+
+
+           return [
+                'schedule_id' => $schedule->id,
+                'professional_name' => $schedule->professional_name,
+                'professional_id' => $schedule->id,
+                'date' => $date->format('d/m/Y'),
+                'month' => $this->mapMonth($month),
+                'week_day' => $this->mapDay($week_day),
+               'day_number' => $day
+           ];
+
+        });
+
+        return $schedules;
+
+    }
+
+    public function mapMonth($month)
+    {
+        $month = strtolower($month);
+        $months = [
+          'january' => 'Enero',
+          'february' => 'Febrero',
+          'march' => 'Marzo',
+          'april' => 'Abril',
+          'may' => 'Mayo',
+          'june' => 'Junio',
+          'july' => 'Julio',
+          'august' => 'Agosto',
+          'september' => 'Septiembre',
+          'october' => 'Octubre',
+          'november' => 'Noviembre',
+          'december' => 'Diciembre',
+        ];
+        return $months[$month];
+    }
+    public function mapDay($day)
+    {
+        $weekMap = [
+            0 => 'Lunes',
+            1 => 'Martes',
+            2 => 'Miercoles',
+            3 => 'Jueves',
+            4 => 'Viernes',
+            5 => 'Sabados',
+            6 => 'Domingo',
+        ];
+        return $weekMap[$day];
+    }
 
 }

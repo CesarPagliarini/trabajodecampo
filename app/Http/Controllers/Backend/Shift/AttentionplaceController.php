@@ -62,8 +62,6 @@ class AttentionplaceController extends Controller
      */
     public function edit(AttentionCenter $attention_place)
     {
-
-
         return view('backend.attention-places.edit', compact('attention_place'));
     }
 

@@ -5,6 +5,7 @@
         <title>{{ str_replace('_', '', config('app.name')) }}</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:500,600,700&display=swap" rel="stylesheet">
@@ -20,6 +21,7 @@
         <link rel="stylesheet" href="{{asset('sites/shifts-store/css/flaticon.css')}}">
         <link rel="stylesheet" href="{{asset('sites/shifts-store/css/icomoon.css')}}">
         <link rel="stylesheet" href="{{asset('sites/shifts-store/css/style.css')}}">
+        <link rel="stylesheet" href="{{asset('sites/shifts-store/css/toastr/toastr.min.css')}}">
 
         @yield('custom-styles')
     </head>
@@ -50,13 +52,18 @@
     <script src="{{asset('sites/shifts-store/js/scrollax.min.js')}}"></script>
     <script src="{{asset('sites/shifts-store/js/main.js')}}"></script>
     <script src="{{asset('sites/shifts-store/js/custom-shifts-scripts.js')}}"></script>
+    <script src="{{asset('sites/shifts-store/js/toastr/toastr.min.js')}}"></script>
+
 
 
         @include('frontend.sites.shifts-store.modals.register')
 
         @include('frontend.sites.shifts-store.modals.loginmodal')
 
+        @include('frontend.sites.shifts-store.modals.shifts')
+
         @yield('custom-scripts')
+
     <style>
         a{
             cursor: pointer!important;

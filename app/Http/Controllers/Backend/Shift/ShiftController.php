@@ -4,11 +4,30 @@ namespace App\Http\Controllers\Backend\Shift;
 
 use App\Core\Controllers\BaseController;
 use App\Core\Interfaces\ControllerContract;
+use App\Core\interfaces\ProfessionalScheduleRepositoryInterface;
+use App\Core\interfaces\ProfessionalSettingRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class ShiftController extends  BaseController implements ControllerContract
 {
+
+    protected $settingRepository;
+    protected $scheduleRepository;
+
+    /**
+     * ShiftsModuleContract constructor.
+     * @param ProfessionalScheduleRepositoryInterface $scheduleRepository
+     * @param ProfessionalSettingRepositoryInterface $settingRepository
+     */
+    public function __construct(
+        ProfessionalScheduleRepositoryInterface $scheduleRepository,
+        ProfessionalSettingRepositoryInterface $settingRepository
+    ){
+        $this->settingRepository = $settingRepository;
+        $this->scheduleRepository = $scheduleRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +35,8 @@ class ShiftController extends  BaseController implements ControllerContract
      */
     public function index()
     {
-
-        return view('backend.shifts.shifts.index');
+        $data = $this->scheduleRepository->getShiftsForProfessional(Auth::user()->id);
+        return view('backend.shifts.shifts.index', compact('data'));
     }
 
     /**

@@ -31,8 +31,15 @@ Route::namespace('Frontend')->group(function() {
         Route::get('/galery', 'HomeController@galery')->name('frontend.galery');
         Route::get('/shifts', 'HomeController@shifts')->name('frontend.shifts');
         Route::get('/profile', 'HomeController@profile')->name('frontend.profile');
-
         Route::post('/client-shift-register', 'ProfileController@register')->name('frontend.register');
+
+        Route::post('/api-attention-places', 'ShiftsFormController@aviableAttentionPlaces')->name('frontend.attention.places');
+        Route::post('/api-specialties-for-attention-place', 'ShiftsFormController@aviableSpecialties')->name('frontend.specialties.for.attention.place');
+        Route::post('/api-services-for-specialty', 'ShiftsFormController@aviableServices')->name('frontend.services.for.specialty');
+        Route::post('/api-aviable-schedules', 'ShiftsFormController@aviableSchedules')->name('frontend.aviable.schedules');
+        Route::post('/api-get-shifts', 'ShiftsFormController@getShifts')->name('frontend.get.shifts');
+        Route::get('/select-shift', 'ShiftsFormController@selectShift')->name('frontend.select.shift');
+        Route::post('/api-reserve-shift', 'ShiftsFormController@reserveShift')->name('frontend.reserve.shift');
     });
 
 

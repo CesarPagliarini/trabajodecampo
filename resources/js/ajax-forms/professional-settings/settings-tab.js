@@ -483,15 +483,18 @@ function addRow(row, insertedId){
                 <td>${row.show_amount.text}</td>
                 <td>${row.is_highlighted.text}</td>
                 <td>
-                    <button type='button' class='btn btn-primary btn-xs full-width'   >
-                        Editar
-                    </button>
+                  
                     <button type='button' class='btn btn-danger btn-xs full-width buttonKiller'  id='${insertedId}'>
                         Eliminar
                     </button>
                 </td>
             </tr>
         `);
+    /*
+    *   <button type='button' class='btn btn-primary btn-xs full-width'   >
+                        Editar
+                    </button>
+    * */
     $('.settings-table').trigger('footable_redraw');
 }
 async function getConfigs(){
@@ -523,9 +526,7 @@ function generateTable(){
                      <td>${config.show_amount}</td>
                      <td>${config.is_highlighted}</td>
                      <td>
-                         <button type='button' class='btn btn-primary btn-xs full-width'   >
-                             Editar
-                         </button>
+                        
                          <button type='button' class='btn btn-danger btn-xs full-width buttonKiller'  id='${config.line}'>
                              Eliminar
                          </button>
@@ -534,6 +535,13 @@ function generateTable(){
              `);
         $('.settings-table').trigger('footable_redraw');
     });
+
+    ///**
+    //  <button type='button' class='btn btn-primary btn-xs full-width'   >
+    //                              Editar
+    //                          </button>
+    //
+    // **///
 
 
 

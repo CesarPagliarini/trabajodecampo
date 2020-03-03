@@ -1,6 +1,7 @@
 @extends('layouts.content-panel')
 @section('page-name')
 
+    @if(Auth::user()->hasRole('Administrador'))
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a>Editar Profesional</a>
@@ -9,6 +10,13 @@
             <a style="font-size: 16px">{{$professional->fullname}}</a>
         </li>
     </ol>
+    @else
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a>Bienvenido {{$professional->fullname}}</a>
+            </li>
+        </ol>
+    @endif
 @stop
 @section('content')
     <div class="tabs-container">
