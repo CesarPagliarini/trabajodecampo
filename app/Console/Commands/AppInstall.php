@@ -8,6 +8,7 @@ use App\Core\SystemBuilder\SystemCreators\StoreCreator;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 
 class AppInstall extends Command
@@ -149,7 +150,7 @@ class AppInstall extends Command
     protected function shouldSeed()
     {
         return ($this->choice('Should seed to ?', ['Yes', 'No']) === 'Yes')
-            ? true
+            ?true
             :false;
     }
 
@@ -162,6 +163,7 @@ class AppInstall extends Command
 
     protected function shouldMigrate()
     {
+
         return ($this->choice('Should migrate', ['Yes', 'No']) === 'Yes')
             ? true
             :false;
@@ -175,6 +177,7 @@ class AppInstall extends Command
         {
             case 'Schedule app':
             case'Full app':
+            case'Store app':
                 $scaffold = [
                     $basePath.'shifts_module'
                 ];
@@ -261,7 +264,7 @@ class AppInstall extends Command
 
     protected function setSkin()
     {
-        $selected_skin = $this->choice('Select type of application', ['Product skin' , 'Shift skin']);
+
         $this->updateDotEnv('APP_SITE', $this->creator->skin());
         $this->updateDotEnv('APP_NAME', $this->creator->name());
         $this->call('cache:clear');

@@ -65,6 +65,7 @@ class ProcessScheduleCreation implements ShouldQueue
             $min = $interval[0];
             $max = $interval[1];
             $unit_times = ($max->diffInMinutes($min)) / 15 ;
+            $min->subMinutes(15);
             for($i = 1 ; $i <= $unit_times ; $i++){
                 $date = $min->addMinutes(15)->format('H:i');
                 $scheduleIntervals[] = $date;

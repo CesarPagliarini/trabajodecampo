@@ -45,6 +45,16 @@ class ScheduleHeader extends Model
             ->get();
 
 
+
+        $data_from =Carbon::createFromFormat('d/m/Y', $data['from']);
+        $data_to =Carbon::createFromFormat('d/m/Y', $data['to']);
+        if($data_to->lessThanOrEqualTo($data_from)){
+            throw new \Exception('La fecha de inicio no puede ser mayor a la de finalizacion');
+        }
+
+
+
+
         if($registers->isNotEmpty())
         {
             $this->validateDateRange($registers);
@@ -59,12 +69,9 @@ class ScheduleHeader extends Model
 
     public function validateDateRange($db_register_collection)
     {
+
         $data_from =Carbon::createFromFormat('d/m/Y', $this->data['from']);
         $data_to =Carbon::createFromFormat('d/m/Y', $this->data['to']);
-
-        if($data_to->lessThanOrEqualTo($data_from)){
-            throw new \Exception('La fecha de inicio no puede ser mayor a la de finalizacion');
-        }
 
         $intervals_in_db = new Collection();
         foreach($db_register_collection as $db_register)

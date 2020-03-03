@@ -11,6 +11,7 @@ class SiteController extends BaseController
 
     public function index()
     {
+
         $homeView = 'frontend.sites.'.env('APP_SITE').'.home';
         return view($homeView);
     }

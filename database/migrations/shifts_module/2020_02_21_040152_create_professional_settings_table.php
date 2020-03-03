@@ -26,6 +26,7 @@ class CreateProfessionalSettingsTable extends Migration
             $table->unsignedBigInteger('currency_id')->default(1);
             $table->unsignedDecimal('amount');
             $table->boolean('is_temporal')->default(0);
+            $table->enum('state', [1,0])->default(1);
 
             $table->timestamps();
 

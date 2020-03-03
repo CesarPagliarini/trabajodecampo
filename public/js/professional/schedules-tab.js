@@ -566,7 +566,7 @@ jQuery(document).ready(ScheduleModule.init);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! F:\programas\xampp\htdocs\genesis\resources\js\ajax-forms\professional-settings\schedules-tab.js */"./resources/js/ajax-forms/professional-settings/schedules-tab.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\ajax-forms\professional-settings\schedules-tab.js */"./resources/js/ajax-forms/professional-settings/schedules-tab.js");
 
 
 /***/ })

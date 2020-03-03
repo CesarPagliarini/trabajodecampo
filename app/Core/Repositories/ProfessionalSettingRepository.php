@@ -9,7 +9,9 @@ use App\Entities\Professional;
 use App\Entities\ProfessionalSetting;
 
 use App\Entities\Specialty;
+use App\Events\AuditProfessionalSetting;
 use App\Http\Resources\ProfessionalSettingResource;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ProfessionalSettingRepository implements ProfessionalSettingRepositoryInterface
@@ -132,6 +134,8 @@ class ProfessionalSettingRepository implements ProfessionalSettingRepositoryInte
             $this->checkExistance('professional_settings', $validate);
             $id = DB::table('professional_settings')->insertGetId($data);
             DB::commit();
+            $data['id']  = $id;
+            event(new AuditProfessionalSetting( Auth::user(), 'INSERT' , $data ));
             return response()->json([
                 'error' => 'false',
                 'message' => 'Se ha agregado con exito',
@@ -153,7 +157,10 @@ class ProfessionalSettingRepository implements ProfessionalSettingRepositoryInte
         try{
             //todo validar que no tenga horarios con turno,
             //todo fijarse que sea especialidad servicio profesional  centro de atencion y (auth que elimina)
-            DB::table('professional_settings')->where('id', $setting_id)->delete();
+            $data = DB::table('professional_settings')->where('id', $setting_id);
+            $audit_data = $data->get()->first();
+            event(new AuditProfessionalSetting( Auth::user(), 'DELETE' , (array)$audit_data ));;
+            $data->delete();
 
             DB::commit();
             return response()->json([

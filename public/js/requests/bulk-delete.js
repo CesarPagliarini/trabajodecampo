@@ -157,7 +157,7 @@ $('button[data-action=delete]').click(function (e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! F:\programas\xampp\htdocs\genesis\resources\js\ajax-forms\admin\bulk-delete.js */"./resources/js/ajax-forms/admin/bulk-delete.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\ajax-forms\admin\bulk-delete.js */"./resources/js/ajax-forms/admin/bulk-delete.js");
 
 
 /***/ })

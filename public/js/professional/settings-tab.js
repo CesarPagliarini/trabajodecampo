@@ -1011,6 +1011,7 @@ function getProfessionalSpecialties(e) {
   }).then(function (response) {
     data.specialties = response;
     newSpecialtySelect.clearSelect();
+    newSpecialtySelect.append(new Option('Seleccione una especialidad', '', 'selected'));
     response.filter(function (item) {
       newSpecialtySelect.append(new Option(item.name, item.id));
     });
@@ -1406,7 +1407,7 @@ function generateTable() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! F:\programas\xampp\htdocs\genesis\resources\js\ajax-forms\professional-settings\settings-tab.js */"./resources/js/ajax-forms/professional-settings/settings-tab.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\genesis\resources\js\ajax-forms\professional-settings\settings-tab.js */"./resources/js/ajax-forms/professional-settings/settings-tab.js");
 
 
 /***/ })

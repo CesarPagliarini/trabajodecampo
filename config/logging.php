@@ -56,6 +56,11 @@ return [
             'path' => storage_path('logs/queues_status.log'),
             'level' => 'debug',
         ],
+        'audition_log' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/audition_logs.log'),
+            'level' => 'debug',
+        ],
 
         'daily' => [
             'driver' => 'daily',

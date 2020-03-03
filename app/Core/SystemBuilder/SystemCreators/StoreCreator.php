@@ -36,6 +36,6 @@ class StoreCreator extends SystemCreator implements SystemCreatorContract
 
     public function name(): string
     {
-        return 'Greatfull Store';
+        return 'Greatfull_Store';
     }
 }
