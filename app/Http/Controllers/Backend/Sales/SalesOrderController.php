@@ -5,11 +5,7 @@ namespace App\Http\Controllers\Backend\Sales;
 use App\Core\Controllers\BaseController;
 use App\Core\Entities\StateHanddler;
 use App\Core\Interfaces\ControllerContract;
-
-
-use App\Entities\Product;
 use App\Entities\SaleOrder;
-use App\Entities\SaleOrderDetail;
 use App\Entities\SaleOrderHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,16 +15,22 @@ use Illuminate\Support\Facades\DB;
 class SalesOrderController extends  BaseController implements ControllerContract
 {
 
+    protected $state_handler;
+
+    public function __construct(StateHanddler $state_handler)
+    {
+        $this->state_handler = $state_handler;
+    }
 
     public function index(Request $request)
     {
-        $data = StateHanddler::resolve($request, 'index');
+        $data = $this->state_handler::resolve($request, 'index');
         return view('backend.sales.orders.index', $data);
     }
 
     public function edit( Request $request, SaleOrder $order)
     {
-        $data = StateHanddler::resolve($request, 'edit' , $order);
+        $data = $this->state_handler::resolve($request, 'edit' , $order);
 
         return view('backend.sales.orders.edit', $data);
 
@@ -37,7 +39,7 @@ class SalesOrderController extends  BaseController implements ControllerContract
     public function update(Request $request, SaleOrder $order)
     {
 
-        $data = StateHanddler::resolve($request, 'update' , $order);
+        $data = $this->state_handler::resolve($request, 'update' , $order);
         if($data['status']){
 //            $request->session()->flash('flash_message', $data['message']);
             return redirect()->to($data['redirection'])->with('flash_message', $data['message']);

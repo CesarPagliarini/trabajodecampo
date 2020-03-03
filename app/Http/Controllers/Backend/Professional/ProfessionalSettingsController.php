@@ -56,10 +56,7 @@ class ProfessionalSettingsController extends Controller implements ShiftsModuleC
 
     public function professionalConfig(Request $request)
     {
-
         return  $this->repository->getSettings($request->professional_id);
-
-
     }
 
 
