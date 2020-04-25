@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Backend\Admin;
 use App\Core\Controllers\BaseController;
-use App\Core\Interfaces\ComponentInterface;
 use App\Core\interfaces\ControllerContract;
+
 use App\Entities\Role;
 use App\Entities\User;
 
@@ -17,6 +17,7 @@ class UsersController extends BaseController implements ControllerContract
 
     public function index()
     {
+
         $users = User::allAdmins();
         return view('backend.admin.users.index', compact('users'));
     }

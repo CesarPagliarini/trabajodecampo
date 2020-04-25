@@ -85,7 +85,7 @@
             ¿Esta seguro de eliminar este usuario?
         @endslot
         @slot('model')
-            user
+            client
         @endslot
     @endcomponent
 @endsection

@@ -7,6 +7,7 @@ use App\Entities\Form;
 use App\Entities\Module;
 
 use App\Entities\Product;
+use App\Entities\Professional;
 use App\Entities\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
@@ -49,13 +50,9 @@ class ViewServiceProvider extends ServiceProvider
             $view->with('limit',$limit);
         });
 
-        View::composer([
-            'frontend.partials.product-slider-item',
-        ], function ($view) {
-            $products = Product::all();
-            $view->with('products',$products);
-        });
 
+
+        if(env('APP_SITE') ==='product-store'){
         View::composer([
             'backend.home'
         ], function ($view) {
@@ -68,6 +65,23 @@ class ViewServiceProvider extends ServiceProvider
 
             $view->with($data);
         });
+        }
+
+        if(env('APP_SITE') ==='shifts-store') {
+            View::composer([
+                'backend.home'
+            ], function ($view) {
+                $data = [
+                    'clients' => User::allClients('active')->count(),
+                    'professionals' => Professional::allProfessionals('active')->count(),
+                    'aviable_shifts' => DB::table('schedules')->where('disponible', 1)->count(),
+                    'canceled_shifts' => DB::table('schedules')->where('cancel_date','!=', null)->count(),
+                ];
+
+                $view->with($data);
+            });
+        }
+
 
     }
 }

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Backend\Client;
 
 use App\Core\Controllers\BaseController;
 use App\Core\Interfaces\ControllerContract;
+use App\Entities\Client;
 use App\Entities\Role;
-use App\Entities\User;
-use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,12 +19,12 @@ class ClientController extends  BaseController implements ControllerContract
      */
     public function index()
     {
-        $clients = User::allClients('active');
+        $clients = Client::allClients('active');
         return view('backend.clients.active-index', compact('clients'));
     }
     public function unactives()
     {
-        $clients = User::allClients('unactive');
+        $clients = Client::allClients('unactive');
         return view('backend.clients.unactive-index', compact('clients'));
     }
 
@@ -48,9 +48,9 @@ class ClientController extends  BaseController implements ControllerContract
     {
         DB::beginTransaction();
         try{
-            $user = User::create($request->all());
-            $user->roles()->sync(Role::where('name', 'Cliente')->first()->id);
-            $user->save();
+            $client = Client::create($request->all());
+            $client->roles()->sync(Role::where('name', 'Cliente')->first()->id);
+            $client->save();
             DB::commit();
             $request->session()->flash('flash_message', 'El cliente se ha creado exitosamente!');
             return redirect()->route('clients.index');
@@ -64,10 +64,10 @@ class ClientController extends  BaseController implements ControllerContract
     /**
      * Show the form for editing the specified resource.
      *
-     * @param User $user
+     * @param Client $client
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $client)
+    public function edit(Client $client)
     {
 
         return view('backend.clients.edit', compact('client'));
@@ -76,11 +76,11 @@ class ClientController extends  BaseController implements ControllerContract
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param Client $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $client)
+    public function update(Request $request, Client $client)
     {
 
         DB::beginTransaction();

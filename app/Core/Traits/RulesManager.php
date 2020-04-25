@@ -14,7 +14,8 @@ trait RulesManager
 
     public function hasRole($role): bool
     {
-        $founded = $this->roles->find($role) ? true : false;
+
+        $founded = $this->roles->where('name', $role)->first()   ? true : false;
         return is_null($founded) ? false : $founded;
     }
 
@@ -46,6 +47,7 @@ trait RulesManager
         $roles = Auth::user()->roles->pluck('id')->unique();
         $form = $searched[0];
         $action = $searched[1];
+
 
         $permission = DB::table('permissions')->where('action', $searched[1])->first('id');
         $form = DB::table('forms')->where('key', $searched[0])->first('id');
@@ -81,7 +83,6 @@ trait RulesManager
                 return false;
             }
         }
-
         return true;
     }
 

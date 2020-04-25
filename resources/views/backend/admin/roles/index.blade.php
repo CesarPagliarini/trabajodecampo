@@ -4,12 +4,12 @@
 @endsection
 @section('content')
 
-    @create('roles')
+    @create('roleForm')
     <a href="{{ route('roles.create') }}"
        class="btn btn-primary">Nuevo
     </a>
     @endcreate
-    @delete('roles')
+    @delete('roleForm')
     <button data-placement="bottom"
             title="Borrar"
             type="button"
@@ -51,19 +51,19 @@
             </td>
            <td>
                 <a class="accion"
-                   @update('roles') href="{{route('roles.edit', ['id'=>$role->id])}}" @endif >
+                   @update('roleForm') href="{{route('roles.edit', ['id'=>$role->id])}}" @endif >
                     {{$role->name}}
                 </a>
             </td>
             <td>
                 <a class="accion"
-                   @update('roles') href="{{route('roles.edit', ['id'=>$role->id])}}" @endif >
+                   @update('roleForm') href="{{route('roles.edit', ['id'=>$role->id])}}" @endif >
                     {{$role->description}}
                 </a>
             </td>
             <td>
                 <a class="accion "
-                   @update('roles') href="{{route('roles.show', ['id'=>$role->id])}}" @endif >
+                   @update('roleForm') href="{{route('roles.show', ['id'=>$role->id])}}" @endif >
                 <div class="col-md-2 offset-1">
                     <i class="fa fa-key" aria-hidden="true"></i>
                 </div>

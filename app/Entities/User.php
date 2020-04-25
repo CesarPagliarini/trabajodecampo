@@ -3,6 +3,7 @@
 namespace App\Entities;
 use App\Core\Entities\BaseEntity;
 use App\Core\Traits\RulesManager;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -29,6 +30,7 @@ class User extends BaseEntity implements Authenticatable
      * @var array
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'state',
@@ -105,16 +107,10 @@ class User extends BaseEntity implements Authenticatable
         return "{$this->name} {$this->last_name}";
     }
 
-    public function salesOrders(){
-        return $this->hasMany(SaleOrder::class, 'client_id', 'id');
+    public function getBirthDayAttribute(){
+        return $this->date_of_birthday;
     }
 
-    public function hasOrders(){
-        if(count($this->salesOrders)){
-            return true;
-        }
-        return false;
-    }
 
 
 

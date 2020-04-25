@@ -4,12 +4,12 @@
 @endsection
 @section('content')
 
-    @create('forms')
+    @create('modulesForm')
     <a href="{{ route('modules.create') }}"
        class="btn btn-primary">Nuevo
     </a>
     @endcreate
-    @delete('permissions')
+    @delete('modulesForm')
     <button data-placement="bottom"
             title="Borrar"
             type="button"
@@ -54,32 +54,32 @@
 
             <td>
                 <a class="accion"
-                   @update('modules') href="{{route('modules.edit', ['id'=>$module->id])}}" @endif >
+                   @update('modulesForm') href="{{route('modules.edit', ['id'=>$module->id])}}" @endif >
                 {{$module->name}}
                 </a>
             </td>
             <td>
                 <a class="accion"
-                   @update('modules') href="{{route('modules.edit', ['id'=>$module->id])}}" @endif >
+                   @update('modulesForm') href="{{route('modules.edit', ['id'=>$module->id])}}" @endif >
                 {{$module->description}}
                 </a>
             </td>
             <td>
                 <a class="accion"
-                   @update('modules') href="{{route('modules.edit', ['id'=>$module->id])}}" @endif >
+                   @update('modulesForm') href="{{route('modules.edit', ['id'=>$module->id])}}" @endif >
                 {{$module->internal_handler}}
                 </a>
             </td>
             <td>
                 <a class="accion"
-                   @update('modules') href="{{route('modules.edit', ['id'=>$module->id])}}" @endif >
+                   @update('modulesForm') href="{{route('modules.edit', ['id'=>$module->id])}}" @endif >
                     <i class="{{$module->icon}}" aria-hidden="true"></i>
 
                 </a>
             </td>
             <td>
                 <a class="accion"
-                   @update('modules') href="{{route('modules.edit', ['id'=>$module->id])}}" @endif >
+                   @update('modulesForm') href="{{route('modules.edit', ['id'=>$module->id])}}" @endif >
                 {{$module->order}}
                 </a>
             </td>

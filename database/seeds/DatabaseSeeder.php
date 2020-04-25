@@ -20,15 +20,15 @@ class DatabaseSeeder extends Seeder
             ModulesTableSeeder::class,
             FormsTableSeeder::class,
             RolePermissionFormTableSeeder::class,
-
-            //BrandTableSeeder::class,
             CategoryTableSeeder::class,
             SubcategoryTableSeeder::class,
             CurrencyTableSeeder::class,
             ProductTableSeeder::class,
             PriceTableSeeder::class,
-
-            ModuleTableSeeder::class
+            AttentionCenterSeeder::class,
+            SpecialtiesSeeder::class,
+            ServicesSeeder::class,
+            SpecialtyServiceSeeder::class,
         ]);
 
     }

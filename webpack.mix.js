@@ -23,9 +23,17 @@ mix.styles([
     'resources/template/css/table-css/footable.core.css',
     'resources/template/css/style.css',
     'resources/template/css/plugins/toastr/toastr.min.css',
+    'resources/template/css/plugins/daterangepicker/dateranger.css',
+    'resources/template/css/plugins/select2/select2.css',
+    'resources/template/css/plugins/steps/jquery.steps.css',
+    'resources/template/css/plugins/touchspin/jquery.bootstrap-touchspin.css',
+    'resources/template/css/plugins/switchery/switchery.css',
+    'resources/template/css/plugins/timepicker/jquery.timepicker.css',
 
 ], 'public/css/panel.css')
+
 .scripts([
+    'resources/template/js/plugins/moment/moment.js',
     'resources/template/js/jquery-3.1.1.min.js',
     'resources/template/js/popper.min.js',
     'resources/template/js/bootstrap.min.js',
@@ -41,18 +49,41 @@ mix.styles([
     'resources/template/js/plugins/toastr/toastr.min.js',
     'resources/template/js/plugins/datepicker/bootstrap-datepicker.js',
     'resources/template/js/plugins/summernote/summernote-bs4.js',
-    'resources/template/js/plugins/chartJs/Chart.min.js'
+    'resources/template/js/plugins/chartJs/Chart.min.js',
+    'resources/template/js/plugins/daterangepicker/daterangepicker.js',
+    'resources/template/js/plugins/select2/select2.js',
+    'resources/template/js/plugins/steps/jquery.steps.js',
+    'resources/template/js/plugins/touchspin/jquery.bootstrap-touchspin.js',
+    'resources/template/js/plugins/switchery/switchery.js',
+    'resources/template/js/plugins/timepicker/jquery.timepicker.js',
 ], 'public/js/panel.js');
 
 mix.js([
     'resources/js/ajax-forms/admin/bulk-delete.js',
-
 ], 'public/js/requests/bulk-delete.js');
+
+
+mix.js([
+    'resources/js/ajax-forms/professional-settings/settings-tab.js',
+], 'public/js/professional/settings-tab.js');
+mix.js([
+    'resources/js/ajax-forms/professional-settings/specialty-tab.js',
+], 'public/js/professional/specialty-tab.js');
+
+mix.js([
+    'resources/js/ajax-forms/professional-settings/schedules-tab.js',
+], 'public/js/professional/schedules-tab.js');
+
+
+
+
+
+
+
 
 mix.js([
         'resources/js/miscellaneous.js',
         'resources/js/ajax-forms/admin/order-reporter.js'
-
     ], 'public/js/general.js');
 mix.js('resources/js/ajax-forms/admin/rejection-handler.js', 'public/js/reject.js');
 

@@ -1,13 +1,16 @@
 
-const productsInCart = [];
+let productsInCart = [];
 let order = [];
-
+function removeFromCart(id){
+    productsInCart = productsInCart.filter(function(item){
+        console.log( $('#itemWrapper'+id), id);
+        return item.id != id;
+    });
+}
 
 $(document).ready(function(){
     $('.cartButtonWrapper').removeClass('hidden');
     $(document).bind('sentSaleOrder', function(e, obj) {
-
-
         const data = obj;
         const csrf = $('meta[name="csrf-token"]').attr('content');
 
@@ -39,10 +42,11 @@ $(document).ready(function(){
                 return  el.id == item.id
             }
         });
+
         if(item !== undefined && item !== 'undefined' && !inCart)
         {
             $('#productCartContainer').append( `
-                 <div class="ibox-content">
+                 <div class="ibox-content" id="itemWrapper${item.id}>
                         <div class="table-responsive">
                             <table class="table shoping-cart-table">
                                 <tbody>
@@ -64,7 +68,7 @@ $(document).ready(function(){
                                         </dl>
 
                                         <div class="m-t-sm">
-                                            <a  class="text-muted removeItem" value="${item.id}"><i class="fa fa-trash"></i> Quitar del carrito</a>
+                                            <a  class="text-muted" onclick="removeFromCart(${item.id})" ><i class="fa fa-trash"></i> Quitar del carrito</a>
                                         </div>
                                     </td>
 
@@ -125,6 +129,7 @@ $(document).ready(function(){
     });
 
     $('.addToCartButton').click((ev) =>{
+
         let clicked = $(ev.target).attr('id');
         let item = products.find( (el) => { return  el.id == clicked } );
         $(document).trigger('addThisProductToCart', [ { item }]);

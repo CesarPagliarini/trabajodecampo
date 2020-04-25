@@ -12,65 +12,47 @@
 */
 Auth::routes();
 
-Route::namespace('Frontend')->group(function(){
-    Route::post('/client/register', 'ProfileController@register')->name('frontend.clients.register');
-    Route::get('/', 'HomeController@index')->name('frontend.home');
-    Route::get('/client/confirm-email/{token}', 'ProfileController@confirmToken')->name('frontend.clients.email.confirmation');
-    Route::get('/client/thanks-for-register', 'ProfileController@registerSuccess')->name('frontend.register-success');
-    Route::get('/products', 'HomeController@showProducts')->name('frontend.products');
-    Route::get('/client-profile', 'ProfileController@profile')->name('frontend.client.profile')->middleware(['auth']);
+
+Route::namespace('Frontend')->group(function() {
+    Route::get('/', 'SiteController@index')->name('frontend.home');
+
+
+    Route::namespace('Sites\ProductStore')->group(function(){
+        Route::post('/client/register', 'ProfileController@register')->name('frontend.clients.register');
+        Route::get('/client/confirm-email/{token}', 'ProfileController@confirmToken')->name('frontend.clients.email.confirmation');
+        Route::get('/client/thanks-for-register', 'ProfileController@registerSuccess')->name('frontend.register-success');
+        Route::get('/products', 'HomeController@showProducts')->name('frontend.products');
+        Route::get('/client-profile', 'ProfileController@profile')->name('frontend.client.profile')->middleware(['auth']);
+        Route::post('generate-order-sale', 'CartController@generateOrderSale')->name('client.sent.order');
+    });
+
+    Route::namespace('Sites\ShiftsStore')->group(function(){
+        Route::get('/about-us', 'HomeController@aboutUs')->name('frontend.about.us');
+        Route::get('/galery', 'HomeController@galery')->name('frontend.galery');
+        Route::get('/shifts', 'HomeController@shifts')->name('frontend.shifts');
+        Route::get('/profile', 'HomeController@profile')->name('frontend.profile');
+        Route::post('/client-shift-register', 'ProfileController@register')->name('frontend.register');
+
+        Route::post('/api-attention-places', 'ShiftsFormController@aviableAttentionPlaces')->name('frontend.attention.places');
+        Route::post('/api-specialties-for-attention-place', 'ShiftsFormController@aviableSpecialties')->name('frontend.specialties.for.attention.place');
+        Route::post('/api-services-for-specialty', 'ShiftsFormController@aviableServices')->name('frontend.services.for.specialty');
+        Route::post('/api-aviable-schedules', 'ShiftsFormController@aviableSchedules')->name('frontend.aviable.schedules');
+        Route::post('/api-get-shifts', 'ShiftsFormController@getShifts')->name('frontend.get.shifts');
+        Route::get('/select-shift', 'ShiftsFormController@selectShift')->name('frontend.select.shift');
+        Route::post('/api-reserve-shift', 'ShiftsFormController@reserveShift')->name('frontend.reserve.shift');
+    });
+
+
+
 });
 
 
 
 
-//Route::get('forbidden','PanelController@forbidden')->name('forbidden');
+
 
 Route::middleware(['auth','checkPermissions'])->prefix('panel')->group(function () {
-
-    Route::get('/home', 'PanelController@index')->name('panel');
-    Route::post('/bulk-delete', 'PanelController@bulkDelete')->name('bulk-delete');
-
-    Route::namespace('Backend\Admin')->group(function () {
-        Route::post('synchronizePermissions','RolesController@synchronizePermissions')->name('roles.synchronize');
-        Route::resource('users', 'UsersController');
-        Route::resource('roles', 'RolesController');
-        Route::resource('forms', 'FormsController');
-        Route::resource('modules', 'ModuleController');
-        Route::resource('permissions', 'PermissionsController');
-    });
-
-    Route::namespace('Backend\Client')->group(function () {
-        Route::get('unactive-clients', 'ClientController@unactives')->name('clients.unactives');
-        Route::get('requests-clients', 'ClientController@requestClients')->name('clients.requests');
-        Route::resource('clients', 'ClientController');
-    });
-
-    Route::namespace('Backend\Store')->group(function () {
-        Route::resource('products', 'ProductController');
-        Route::resource('categories', 'CategoryController');
-        Route::resource('subcategories', 'SubcategoryController');
-        Route::resource('brands', 'BrandController');
-    });
-
-    Route::namespace('Backend\Sales')->group(function () {
-        Route::post('generate-order-sale', 'SalesOrderController@generateOrderSale')->name('client.sent.order');
-        Route::post('/reject-order', 'SalesOrderController@reject')->name('reject-order');
-        Route::get('pending-orders', 'SalesOrderController@index')->name('backend.pending.orders');
-        Route::get('rejected-orders', 'SalesOrderController@index')->name('backend.rejected.orders');
-        Route::get('accepted-orders', 'SalesOrderController@index')->name('backend.accepted.orders');
-        Route::get('delivered-orders', 'SalesOrderController@index')->name('backend.delivered.orders');
-        Route::get('in-prepare-orders', 'SalesOrderController@index')->name('backend.inprepare.orders');
-        Route::resource('orders', 'SalesOrderController')->only(['update', 'edit']);
-    });
-
-
-    Route::namespace('Backend\Reports')->group(function () {
-        Route::post('/reports', 'ReportController@report')->name('backend.reports');
-        Route::post('/reports/single', 'ReportController@reportSingle')->name('backend.reports.single');
-    });
-
-
+    require(__DIR__.'/panel.php');
 });
 
 

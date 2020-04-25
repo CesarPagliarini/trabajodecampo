@@ -48,6 +48,7 @@ class RolesController extends BaseController implements ControllerContract
     {
         DB::beginTransaction();
         try{
+            $request['name'] = ucfirst(strtolower($request['name']));
             $rol = Role::create($request->all());
             DB::commit();
             $request->session()->flash('flash_message', 'El rol se ha creado exitosamente!');

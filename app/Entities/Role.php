@@ -13,6 +13,8 @@ class Role extends BaseEntity
     use RulesManager;
 
 
+
+
     protected $fillable = [
         'name',
         'description',

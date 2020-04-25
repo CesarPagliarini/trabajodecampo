@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -95,37 +95,36 @@
 
 $(document).ready(function () {
   $('#orderCanvasListener').click(function () {
-    $('#orderCanvas').toggleClass('hidden');
-  });
-  var token = $('meta[name="csrf-token"]').attr('content');
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': token
-    }
-  });
-  $.ajax({
-    type: "POST",
-    url: "reports",
-    data: {
-      'endpoint': 'forCanvas',
-      _method: 'POST',
-      'resource': 'sale-order'
-    },
-    success: function success(response) {
-      var dataset = [];
-      var labels = [];
-      response.forEach(function (item) {
-        dataset.push(item.quantity);
-        labels.push(item.name);
-      });
-      var item = {
-        'dataset': dataset,
-        'labels': labels
-      };
-      $(document).trigger('instanceChart', [{
-        item: item
-      }]);
-    }
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': token
+      }
+    });
+    $.ajax({
+      type: "POST",
+      url: "reports",
+      data: {
+        'endpoint': 'forCanvas',
+        _method: 'POST',
+        'resource': 'sale-order'
+      },
+      success: function success(response) {
+        var dataset = [];
+        var labels = [];
+        response.forEach(function (item) {
+          dataset.push(item.quantity);
+          labels.push(item.name);
+        });
+        var item = {
+          'dataset': dataset,
+          'labels': labels
+        };
+        $(document).trigger('instanceChart', [{
+          item: item
+        }]);
+      }
+    });
   });
 });
 $(document).bind('instanceChart', function (e, obj) {
@@ -165,6 +164,7 @@ $(document).bind('instanceChart', function (e, obj) {
       }
     }
   });
+  $('#orderCanvas').toggleClass('hidden');
 });
 
 /***/ }),
@@ -198,7 +198,7 @@ $(document).ready(function () {
 
 /***/ }),
 
-/***/ 1:
+/***/ 4:
 /*!***********************************************************************************************!*\
   !*** multi ./resources/js/miscellaneous.js ./resources/js/ajax-forms/admin/order-reporter.js ***!
   \***********************************************************************************************/

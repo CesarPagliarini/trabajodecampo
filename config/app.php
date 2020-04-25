@@ -1,5 +1,7 @@
 <?php
 
+
+
 return [
 
     /*
@@ -14,6 +16,8 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -166,6 +170,9 @@ return [
 
 
 
+
+
+
         /*
          * Package Service Providers...
          */
@@ -179,6 +186,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ViewServiceProvider::class,
+        App\Providers\ViewFrontServiceProvider::class,
 
 
 
@@ -186,6 +194,10 @@ return [
         //customs
 
         App\Providers\CustomBladeServiceProvider::class,
+        App\Providers\ProfessionalSettingRepositoryServiceProvider::class,
+        App\Providers\ProfessionalScheduleProvider::class,
+        App\Providers\QueuedJobsServiceProvider::class
+
 
     ],
 
@@ -237,6 +249,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
 
 
     ],

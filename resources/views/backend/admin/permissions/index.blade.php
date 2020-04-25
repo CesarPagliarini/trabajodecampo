@@ -4,12 +4,12 @@
 @endsection
 @section('content')
 
-    @create('forms')
+    @create('permissionsForm')
     <a href="{{ route('permissions.create') }}"
        class="btn btn-primary">Nuevo
     </a>
     @endcreate
-    @delete('permissions')
+    @delete('permissionsForm')
     <button data-placement="bottom"
             title="Borrar"
             type="button"
@@ -52,25 +52,25 @@
 
             <td>
                 <a class="accion"
-                   @update('permissions') href="{{route('permissions.edit', ['id'=>$permission->id])}}" @endif >
+                   @update('permissionsForm') href="{{route('permissions.edit', ['id'=>$permission->id])}}" @endif >
                 {{$permission->name}}
                 </a>
             </td>
             <td>
                 <a class="accion"
-                   @update('permissions') href="{{route('permissions.edit', ['id'=>$permission->id])}}" @endif >
+                   @update('permissionsForm') href="{{route('permissions.edit', ['id'=>$permission->id])}}" @endif >
                 {{$permission->description}}
                 </a>
             </td>
             <td>
                 <a class="accion"
-                   @update('permissions') href="{{route('permissions.edit', ['id'=>$permission->id])}}" @endif >
+                   @update('permissionsForm') href="{{route('permissions.edit', ['id'=>$permission->id])}}" @endif >
                 {{$permission->action}}
                 </a>
             </td>
             <td>
                 <a class="accion"
-                   @update('permissions') href="{{route('permissions.edit', ['id'=>$permission->id])}}" @endif >
+                   @update('permissionsForm') href="{{route('permissions.edit', ['id'=>$permission->id])}}" @endif >
                     <i class="{{$permission->icon}}" aria-hidden="true"></i>
 
                 </a>

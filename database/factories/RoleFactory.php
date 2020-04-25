@@ -9,10 +9,8 @@ use Faker\Generator as Faker;
 $factory->define(Role::class, function (Faker $faker) {
     $names = [
         'Administrador',
-        'Gestor de usuarios',
-        'Gestor de ventas',
-        'Super administrador',
-        'Cliente'
+        'Cliente',
+        'Profesional'
     ];
     return [
         'name'=>$faker->unique()->randomElement($names),

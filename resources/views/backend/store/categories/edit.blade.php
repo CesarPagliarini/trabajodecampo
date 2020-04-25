@@ -1,6 +1,6 @@
 @extends('layouts.content-panel')
 @section('page-name')
-    Editar rol
+    Editar categoria
 @stop
 @section('content')
     <div class="tabs-container">
@@ -46,7 +46,7 @@
                         <div class="clear"></div>
                         <div class="form-group row">
                             <div class="col-sm-4 col-sm-offset-2">
-                                <a href="{{ route('roles.index') }}" class="btn btn-white" type="submit">Cancelar</a>
+                                <a href="{{ route('categories.index') }}" class="btn btn-white" type="submit">Cancelar</a>
                                 <button class="btn btn-primary" type="submit">Guardar</button>
                             </div>
                         </div>

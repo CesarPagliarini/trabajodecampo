@@ -85,7 +85,7 @@
             ¿Esta seguro de reactivar este usuario?
         @endslot
         @slot('model')
-            user
+            client
         @endslot
         @slot('restore')
             true

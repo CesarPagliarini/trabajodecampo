@@ -14,7 +14,6 @@ abstract class BaseEntity extends Model
 
     public $onSoftDelete = 'toggleState';
 
-
     public static function actives()
     {
         return self::where('state', '1')->get();
@@ -24,6 +23,13 @@ abstract class BaseEntity extends Model
     public function getCreatedParsedAttribute(){
         return Carbon::parse($this->created_at)->format('d/m/y');
     }
+
+    public function hasSpecialty($specialty_id)
+    {
+        return $this->specialties->pluck('id')->contains($specialty_id);
+    }
+
+
 
 
 

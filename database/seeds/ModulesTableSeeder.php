@@ -12,12 +12,12 @@ class ModulesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('modules')->insert([
-            'name' => 'Configuraciones',
-            'description' => 'admin/roles',
-            'internal_handler' => 'configModule',
-            'icon' => 'fa fa-cog',
-            'order' => '1'
-        ]);
+//        DB::table('modules')->insert([
+//            'name' => 'Configuraciones',
+//            'description' => 'admin/roles',
+//            'internal_handler' => 'config_handler',
+//            'icon' => 'fa fa-cog',
+//            'order' => '1'
+//        ]);
     }
 }

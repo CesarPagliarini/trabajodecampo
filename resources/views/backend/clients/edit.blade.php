@@ -1,6 +1,6 @@
 @extends('layouts.content-panel')
 @section('page-name')
-    Editar Usuario
+    Editar cliente
 @stop
 @section('content')
     <div class="tabs-container">
