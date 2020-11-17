@@ -10,7 +10,7 @@
         <div class="row m-b-lg justify-content-center">
             <div class="col-lg-3 ">
                 <address>
-                    <strong><span class="navy">Genesis, Inc.</span></strong><br/>
+                    <strong><span class="navy">SGHPS, Inc.</span></strong><br/>
                     Calle 123<br/>
                     Rosario, Santa Fé<br/>
                     <abbr title="Telefono">Tel:</abbr> (123) 456-7890

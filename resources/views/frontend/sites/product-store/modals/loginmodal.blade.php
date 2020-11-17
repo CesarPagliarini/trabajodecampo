@@ -6,7 +6,7 @@
                 <div class="loginColumns animated fadeInDown">
                     <div class="row">
                         <div class="col-md-6">
-                            <h2 class="font-bold">Bienvenido a Genesis</h2>
+                            <h2 class="font-bold">Bienvenido a SGHPS</h2>
 
                             <p>
                                 Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.

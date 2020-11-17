@@ -4,10 +4,10 @@
     @include('frontend.sites.product-store.sliders.home-slider')
     <section id="store" class="gray-section" style="padding-top:25px!important;">
         <div class="container">
-            @include('frontend.sites.product-store.sliders.product-slider')
+
         </div>
     </section>
-    @include('frontend.sites.product-store.pages.our-team')
+
 @endsection
 
 
