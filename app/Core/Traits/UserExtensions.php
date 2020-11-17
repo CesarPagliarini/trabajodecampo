@@ -9,7 +9,7 @@ trait UserExtensions
     public static function allAdmins()
     {
         return self::whereHas('roles', function ($q) {
-            $q->whereNotIn('name', ['Cliente', 'Profesional']);
+            $q->whereNotIn('name', ['Cliente', 'Profesional', 'administrador' ]);
         })->get();
     }
 
