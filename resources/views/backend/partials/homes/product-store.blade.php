@@ -6,8 +6,8 @@
                     <i class="fa fa-cubes fa-3x"></i>
                 </div>
                 <div class="col-8 text-right">
-                    <span> Productos  </span>
-                    <h2 class="font-bold">{{$products}}</h2>
+                    <span> Habitaciones  </span>
+                    <h2 class="font-bold">18</h2>
                 </div>
             </div>
         </div>
@@ -32,8 +32,8 @@
                     <i class="fa fa-send-o fa-3x"></i>
                 </div>
                 <div class="col-8 text-right">
-                    <span>Entregados</span>
-                    <h2 class="font-bold">{{$delivered}}</h2>
+                    <span>Habitaciones ocupadas</span>
+                    <h2 class="font-bold">6</h2>
                 </div>
             </div>
         </div>
@@ -45,8 +45,8 @@
                     <i class="fa fa-bar-chart-o fa-3x"></i>
                 </div>
                 <div class="col-8 text-right">
-                    <span>Ordenes</span>
-                    <h2 class="font-bold">{{$totalOrders}}</h2>
+                    <span>Habitaciones disponibles</span>
+                    <h2 class="font-bold">12</h2>
                 </div>
             </div>
         </div>
